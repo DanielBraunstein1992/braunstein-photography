@@ -147,8 +147,8 @@ def baue():
     karten = '\n'.join(story_karte(s) for s in listen['storys'])
     inhalt = f'''<section class="seitenkopf">
   <span class="klein">Fotostorys</span>
-  <h1>Echte Hochzeiten aus dem Norden.</h1>
-  <p>Jede Hochzeit ist anders. Hier seht ihr, wie sich die Tage anderer Paare angefühlt haben.</p>
+  <h1>Diese Paare durfte ich begleiten.</h1>
+  <p>Jede Hochzeit ist anders. Hier findet ihr eine Auswahl der Tage, bei denen ich mittendrin war.</p>
 </section>
 <section class="raster raster--storys">
 {karten}

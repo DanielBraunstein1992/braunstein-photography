@@ -201,7 +201,8 @@ fieldset.feld{border:0;margin:0;padding:0}
 .schritte-danke li{counter-increment:s;display:grid;grid-template-columns:4rem 1fr;align-items:baseline;padding:1.3rem 0;border-bottom:1px solid var(--sand)}
 .schritte-danke li:first-child{border-top:1px solid var(--sand)}
 .schritte-danke li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:2rem;color:var(--gegenlicht);line-height:1}
-.schritte-danke strong{display:block;font-weight:500;font-size:1.2rem;margin-bottom:.2rem}
+.schritte-danke strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.45rem,1.2rem + .8vw,1.8rem);line-height:1.2;margin-bottom:.35rem}
+.schritte-danke span{font-size:1.05rem}
 .schritte-danke span{color:var(--schiefer)}
 .danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
 .knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
