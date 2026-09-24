@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danke für eure Anfrage | Braunstein Photography</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Eure Anfrage ist angekommen.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Italiana&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jura:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="unterseite">
+<header class="kopf">
+  <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
+  <nav id="hauptmenue" aria-label="Hauptnavigation">
+    <a href="/ueber-mich">Über mich</a>
+    <a href="/fotostorys">Fotostorys</a>
+    <a href="/blog">Blog</a>
+    <a class="knopf knopf--hell" href="/kontakt">Kennenlernen vereinbaren</a>
+  </nav>
+  <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue"><span>Menü</span></button>
+</header>
+<main>
+<section class="danke">
+  <span class="klein">Anfrage erhalten</span>
+  <h1>Danke für eure Anfrage!</h1>
+  <p class="unterzeile">Ich freue mich riesig, von euch zu hören.</p>
+  <h2>So geht es weiter</h2>
+  <ol class="schritte-danke">
+    <li><div><strong>Ich melde mich innerhalb von 48 Stunden</strong><span>per Telefon oder E-Mail, je nachdem, wie ich euch am besten erreiche.</span></div></li>
+    <li><div><strong>Ich sage euch, ob euer Termin noch frei ist</strong><span>Da ich nur rund 30 Hochzeiten im Jahr begleite, kläre ich das als Erstes.</span></div></li>
+    <li><div><strong>Ein kurzes Telefonat über eure Wünsche</strong><span>Ihr erzählt mir von eurem Tag, und ich beantworte eure ersten Fragen.</span></div></li>
+    <li><div><strong>Wir finden einen Termin zum Kennenlernen</strong><span>Ein entspanntes Gespräch mit euch beiden, damit wir sehen, ob die Chemie stimmt.</span></div></li>
+  </ol>
+  <p>Bis dahin könnt ihr gern schon in meinen Fotostorys stöbern.</p>
+  <div class="danke-knoepfe">
+    <a class="knopf knopf--dunkel" href="/fotostorys">Fotostorys ansehen</a>
+    <a class="knopf knopf--rahmen" href="https://www.instagram.com/braunstein_photography/">Instagram</a>
+  </div>
+</section>
+</main>
+<footer>
+  <div>
+    <a class="marke" href="/"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
+    <p class="klein" style="margin-top:.8rem">Hochzeitsfotograf für Lübeck, Hamburg und Schleswig-Holstein<br><a href="tel:+4917614362401">+49 176 14362401</a></p>
+  </div>
+  <ul class="klein">
+    <li><a href="/fotostorys">Fotostorys</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="https://www.braunstein-photography.de/hochzeitsfotografie-luebeck">Hochzeitsfotografie Lübeck</a></li>
+    <li><a href="https://www.braunstein-photography.de/hochzeitsfotografie-hamburg">Hochzeitsfotografie Hamburg</a></li>
+    <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
+    <li><a href="https://www.braunstein-photography.de/impressum">Impressum</a></li>
+    <li><a href="https://www.braunstein-photography.de/datenschutz">Datenschutz</a></li>
+  </ul>
+</footer>
+
+<script>
+(function(){var k=document.querySelector('.kopf'),b=k&&k.querySelector('.menue-knopf');if(!b)return;
+function s(o){k.classList.toggle('offen',o);document.documentElement.classList.toggle('menue-offen',o);b.setAttribute('aria-expanded',o?'true':'false');b.firstChild.textContent=o?'Schließen':'Menü';}
+b.addEventListener('click',function(){s(!k.classList.contains('offen'))});
+k.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){s(false)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')s(false)});})();
+</script>
+</body>
+</html>

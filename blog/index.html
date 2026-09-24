@@ -11,12 +11,13 @@
 <body class="unterseite">
 <header class="kopf">
   <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
-  <nav aria-label="Hauptnavigation">
+  <nav id="hauptmenue" aria-label="Hauptnavigation">
     <a href="/ueber-mich">Über mich</a>
     <a href="/fotostorys">Fotostorys</a>
     <a href="/blog" aria-current="page">Blog</a>
-    <a class="knopf knopf--hell" href="/#kontakt">Kennenlernen vereinbaren</a>
+    <a class="knopf knopf--hell" href="/kontakt">Kennenlernen vereinbaren</a>
   </nav>
+  <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue"><span>Menü</span></button>
 </header>
 <main>
 <section class="seitenkopf">
@@ -55,31 +56,31 @@
   <p>Natürliche und ungestellte Hochzeitsfotos sind so beliebt wie noch nie.</p>
   <span class="klein mehr">Artikel lesen</span>
 </a>
-<a class="karte" href="https://www.braunstein-photography.de/blog/auf-einer-wellenlaenge-mit-den-hochzeitsfotografen">
+<a class="karte" href="/blog/auf-einer-wellenlaenge-mit-den-hochzeitsfotografen">
   <img src="https://cdn.prod.website-files.com/68ef69d6601002710ef48956/695e52084d81d6b6fed0ee15_Hochzeit_Lisa_Dennis_13082022-119-Blog2x.jpg.webp" alt="Titelbild zum Artikel: Auf einer Wellenlänge mit den Hochzeitsfotografen" loading="lazy">
   <h3>Auf einer Wellenlänge mit den Hochzeitsfotografen</h3>
   <p>Warum es so wichtig ist, dass ihr euch mit eurem Hochzeitsfotografen richtig gut versteht.</p>
   <span class="klein mehr">Artikel lesen</span>
 </a>
-<a class="karte" href="https://www.braunstein-photography.de/blog/hochzeitsfotografie-beim-standesamt">
+<a class="karte" href="/blog/hochzeitsfotografie-beim-standesamt">
   <img src="https://cdn.prod.website-files.com/68ef69d6601002710ef48956/695e51d5419c4b0722961810_Standesamtliche-Hochzeit-Friederike-und-Fabian-57.jpg.webp" alt="Titelbild zum Artikel: Hochzeitsfotografie beim Standesamt" loading="lazy">
   <h3>Hochzeitsfotografie beim Standesamt</h3>
   <p>Die standesamtliche Trauung ist der Beginn eines neuen Lebensabschnitts – und verdient schöne Bilder.</p>
   <span class="klein mehr">Artikel lesen</span>
 </a>
-<a class="karte" href="https://www.braunstein-photography.de/blog/alles-ganz-nach-euren-wuenschen-mit-dem-richtigen-hochzeitsfotografen">
+<a class="karte" href="/blog/alles-ganz-nach-euren-wuenschen-mit-dem-richtigen-hochzeitsfotografen">
   <img src="https://cdn.prod.website-files.com/68ef69d6601002710ef48956/695e518d84ca808c6da63377_DSC04882-Blog.jpg.webp" alt="Titelbild zum Artikel: Alles ganz nach euren Wünschen – mit dem richtigen Hochzeitsfotografen" loading="lazy">
   <h3>Alles ganz nach euren Wünschen – mit dem richtigen Hochzeitsfotografen</h3>
   <p>Eure Hochzeit ist ein einzigartiger Moment – so findet ihr den Fotografen, der zu euch passt.</p>
   <span class="klein mehr">Artikel lesen</span>
 </a>
-<a class="karte" href="https://www.braunstein-photography.de/blog/traumhafter-sonnenuntergang-egal-zu-welcher-jahreszeit">
+<a class="karte" href="/blog/traumhafter-sonnenuntergang-egal-zu-welcher-jahreszeit">
   <img src="https://cdn.prod.website-files.com/68ef69d6601002710ef48956/695e514dd4d6eb8b3314511a_Hochzeit-Vanessa-Fabian-11092021-425-blog02-1.jpg.webp" alt="Titelbild zum Artikel: Traumhafter Sonnenuntergang – egal zu welcher Jahreszeit" loading="lazy">
   <h3>Traumhafter Sonnenuntergang – egal zu welcher Jahreszeit</h3>
   <p>Warum das Licht zum Sonnenuntergang eure Hochzeitsbilder so besonders macht.</p>
   <span class="klein mehr">Artikel lesen</span>
 </a>
-<a class="karte" href="https://www.braunstein-photography.de/blog/wie-man-die-besten-hochzeitsfotos-bekommt">
+<a class="karte" href="/blog/wie-man-die-besten-hochzeitsfotos-bekommt">
   <img src="https://cdn.prod.website-files.com/68ef69d6601002710ef48956/695e51070c0d963a23499127_Hochzeit_Melle_Marko_09092022-309.jpg.webp" alt="Titelbild zum Artikel: Wie man die besten Hochzeitsfotos bekommt" loading="lazy">
   <h3>Wie man die besten Hochzeitsfotos bekommt</h3>
   <p>Hochzeitsfotografie ist von unschätzbarem Wert – so holt ihr das Beste aus eurem Tag heraus.</p>
@@ -211,7 +212,7 @@
   <span class="klein">Nur rund 30 Hochzeiten im Jahr</span>
   <h2>Erzählt mir von eurem Tag.</h2>
   <p>Ich begleite bewusst nur eine begrenzte Zahl an Hochzeiten. So bleibt für jedes Paar genug Zeit.</p>
-  <a class="knopf knopf--gold" href="/#kontakt">Kennenlernen vereinbaren</a>
+  <a class="knopf knopf--gold" href="/kontakt">Kennenlernen vereinbaren</a>
 </section>
 <footer>
   <div>
@@ -229,5 +230,12 @@
   </ul>
 </footer>
 
+<script>
+(function(){var k=document.querySelector('.kopf'),b=k&&k.querySelector('.menue-knopf');if(!b)return;
+function s(o){k.classList.toggle('offen',o);document.documentElement.classList.toggle('menue-offen',o);b.setAttribute('aria-expanded',o?'true':'false');b.firstChild.textContent=o?'Schließen':'Menü';}
+b.addEventListener('click',function(){s(!k.classList.contains('offen'))});
+k.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){s(false)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')s(false)});})();
+</script>
 </body>
 </html>

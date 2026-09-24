@@ -28,6 +28,7 @@ p{margin:0 0 1.1em}
 .kopf nav a:not(.knopf):hover,.kopf nav a[aria-current]{opacity:1}
 .kopf nav a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--gegenlicht)}
 .kopf .knopf{padding:.65rem 1.1rem}
+.menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.8rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
 
 /* Seitenkopf */
 .seitenkopf{padding:clamp(4rem,10vw,7rem) var(--rand) clamp(2.5rem,5vw,4rem);max-width:60rem}
@@ -40,8 +41,8 @@ p{margin:0 0 1.1em}
 .raster--blog{grid-template-columns:repeat(3,minmax(0,1fr))}
 .raster--storys{grid-template-columns:repeat(3,minmax(0,1fr))}
 .karte{text-decoration:none;display:flex;flex-direction:column}
-.karte img{width:100%;aspect-ratio:3/2;object-fit:cover;transition:filter .4s}
-.karte--story img{aspect-ratio:4/5}
+.karte img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 28%;transition:filter .4s}
+.karte--story img{aspect-ratio:4/5;object-position:50% 30%}
 .karte:hover img{filter:brightness(1.06) saturate(1.05)}
 .karte h3{font-size:1.55rem;margin:1.1rem 0 .5rem}
 .karte p{font-size:1.05rem;color:var(--schiefer);margin-bottom:.9rem}
@@ -53,7 +54,7 @@ p{margin:0 0 1.1em}
 .zurueck::before{content:"‹ "}
 .artikel-seite h1{font-size:clamp(2.3rem,1.5rem + 3.2vw,4rem);margin-bottom:2.2rem}
 .artikel-titelbild{margin:0 0 2.8rem}
-.artikel-titelbild img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.artikel-titelbild img{width:auto;max-width:100%;height:auto;max-height:80vh;margin:0 auto}
 .fliesstext h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.4rem);margin:2.8rem 0 1rem}
 .fliesstext h3{font-size:1.6rem;margin:2.2rem 0 .8rem}
 .fliesstext figure{margin:2.4rem 0}
@@ -93,7 +94,13 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--weiss)}
 
 @media (max-width:900px){
-  .kopf nav a:not(.knopf){display:none}
+    .menue-knopf{display:inline-flex;align-items:center;position:relative;z-index:30}
+    .kopf nav{position:fixed;inset:0;z-index:20;background:var(--tiefsee);color:var(--weiss);flex-direction:column;justify-content:center;align-items:flex-start;gap:1.4rem;padding:6rem var(--rand) calc(3rem + env(safe-area-inset-bottom,0px));opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+    .kopf.offen nav{opacity:1;visibility:visible}
+    .kopf nav a:not(.knopf){display:block;font-family:var(--display);font-size:clamp(2rem,8vw,2.6rem);letter-spacing:.01em;opacity:1;text-decoration:none}
+    .kopf nav .knopf{margin-top:1.2rem;padding:1rem 1.6rem;font-size:.9rem}
+    .kopf .marke{position:relative;z-index:30}
+    html.menue-offen{overflow:hidden}
   .raster--blog,.raster--storys{grid-template-columns:1fr 1fr}
   .galerie{columns:2}
 }
@@ -152,3 +159,54 @@ footer a:hover{color:var(--weiss)}
   .persoenlich{grid-template-columns:1fr}
 }
 @media (max-width:560px){.anekdoten-raster{grid-template-columns:1fr}}
+
+/* Kontakt */
+.kontakt{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);max-width:84rem;margin:0 auto;padding:clamp(4rem,9vw,7rem) var(--rand) clamp(5rem,10vw,8rem)}
+.kontakt-intro .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.kontakt-intro h1{font-size:clamp(2.6rem,1.6rem + 4vw,4.6rem);margin-bottom:1.6rem}
+.kontakt-intro p{color:var(--schiefer)}
+.kontakt-intro .direkt{margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--sand)}
+.kontakt-intro .direkt a{color:var(--tiefsee)}
+.formular{background:var(--weiss);padding:clamp(1.6rem,4vw,3.2rem);display:grid;gap:1.6rem}
+.feldgruppe{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.feld{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.feld label,.feld legend{font-family:var(--klein);font-size:.82rem;letter-spacing:.06em;color:var(--schiefer);padding:0}
+.feld input,.feld textarea{font:inherit;font-size:1.1rem;color:var(--tiefsee);background:transparent;border:0;border-bottom:1px solid var(--sand);padding:.55rem 0;border-radius:0;width:100%}
+.feld textarea{min-height:7.5rem;resize:vertical;border:1px solid var(--sand);padding:.8rem}
+.feld input:focus,.feld textarea:focus{outline:none;border-color:var(--gegenlicht)}
+.feld input::placeholder,.feld textarea::placeholder{color:#9aa6a8;font-style:italic}
+fieldset.feld{border:0;margin:0;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:inline-block;font-family:var(--klein);font-size:.85rem;letter-spacing:.04em;padding:.65rem 1.1rem;border:1px solid var(--sand);color:var(--tiefsee);transition:background .2s,border-color .2s,color .2s}
+.chips input:checked + span{background:var(--tiefsee);border-color:var(--tiefsee);color:var(--weiss)}
+.chips input:focus-visible + span{outline:2px solid var(--gegenlicht);outline-offset:2px}
+.zustimmung{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--schiefer)}
+.zustimmung input{margin-top:.35rem;accent-color:var(--tiefsee);width:1.05rem;height:1.05rem;flex:none}
+.formular .knopf{justify-self:start;cursor:pointer;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee);font-size:.95rem}
+.formular .knopf:hover{background:var(--gegenlicht);border-color:var(--gegenlicht)}
+.formular .knopf[disabled]{opacity:.6;cursor:wait}
+.meldung{font-size:1rem;color:#9b3b2a;margin:0}
+.meldung:empty{display:none}
+.unsichtbar{display:none!important}
+
+/* Danke */
+.danke{max-width:52rem;margin:0 auto;padding:clamp(5rem,11vw,8rem) var(--rand) clamp(5rem,10vw,7rem)}
+.danke .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.danke h1{font-size:clamp(2.8rem,1.6rem + 4.5vw,5rem);margin-bottom:1rem}
+.danke .unterzeile{font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.2vw,2.2rem);color:var(--schiefer);margin-bottom:3.5rem}
+.danke h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem);margin-bottom:1.6rem}
+.schritte-danke{list-style:none;margin:0 0 3rem;padding:0;counter-reset:s}
+.schritte-danke li{counter-increment:s;display:grid;grid-template-columns:4rem 1fr;align-items:baseline;padding:1.3rem 0;border-bottom:1px solid var(--sand)}
+.schritte-danke li:first-child{border-top:1px solid var(--sand)}
+.schritte-danke li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:2rem;color:var(--gegenlicht);line-height:1}
+.schritte-danke strong{display:block;font-weight:500;font-size:1.2rem;margin-bottom:.2rem}
+.schritte-danke span{color:var(--schiefer)}
+.danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
+.knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
+.knopf--dunkel:hover{background:var(--gegenlicht);border-color:var(--gegenlicht)}
+.knopf--rahmen{color:var(--tiefsee)}
+.knopf--rahmen:hover{background:var(--tiefsee);color:var(--weiss)}
+@media (max-width:900px){.kontakt{grid-template-columns:1fr}}
+@media (max-width:560px){.feldgruppe{grid-template-columns:1fr}.schritte-danke li{grid-template-columns:3rem 1fr}}

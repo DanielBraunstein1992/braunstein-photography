@@ -11,12 +11,13 @@
 <body class="unterseite">
 <header class="kopf">
   <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
-  <nav aria-label="Hauptnavigation">
+  <nav id="hauptmenue" aria-label="Hauptnavigation">
     <a href="/ueber-mich">Über mich</a>
     <a href="/fotostorys" aria-current="page">Fotostorys</a>
     <a href="/blog">Blog</a>
-    <a class="knopf knopf--hell" href="/#kontakt">Kennenlernen vereinbaren</a>
+    <a class="knopf knopf--hell" href="/kontakt">Kennenlernen vereinbaren</a>
   </nav>
+  <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue"><span>Menü</span></button>
 </header>
 <main>
 <section class="story-kopf">
@@ -73,7 +74,7 @@
   <span class="klein">Nur rund 30 Hochzeiten im Jahr</span>
   <h2>Erzählt mir von eurem Tag.</h2>
   <p>Ich begleite bewusst nur eine begrenzte Zahl an Hochzeiten. So bleibt für jedes Paar genug Zeit.</p>
-  <a class="knopf knopf--gold" href="/#kontakt">Kennenlernen vereinbaren</a>
+  <a class="knopf knopf--gold" href="/kontakt">Kennenlernen vereinbaren</a>
 </section>
 <footer>
   <div>
@@ -103,6 +104,13 @@
   lb.addEventListener('click',function(ev){if(ev.target===lb)lb.hidden=true});
   document.addEventListener('keydown',function(ev){if(lb.hidden)return;if(ev.key==='Escape')lb.hidden=true;if(ev.key==='ArrowLeft')zeige(i-1);if(ev.key==='ArrowRight')zeige(i+1);});
 })();
+</script>
+<script>
+(function(){var k=document.querySelector('.kopf'),b=k&&k.querySelector('.menue-knopf');if(!b)return;
+function s(o){k.classList.toggle('offen',o);document.documentElement.classList.toggle('menue-offen',o);b.setAttribute('aria-expanded',o?'true':'false');b.firstChild.textContent=o?'Schließen':'Menü';}
+b.addEventListener('click',function(){s(!k.classList.contains('offen'))});
+k.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){s(false)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')s(false)});})();
 </script>
 </body>
 </html>

@@ -23,19 +23,20 @@ FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="p
 
 KOPF = '''<header class="kopf">
   <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
-  <nav aria-label="Hauptnavigation">
+  <nav id="hauptmenue" aria-label="Hauptnavigation">
     <a href="/ueber-mich"{a0}>Über mich</a>
     <a href="/fotostorys"{a1}>Fotostorys</a>
     <a href="/blog"{a2}>Blog</a>
-    <a class="knopf knopf--hell" href="/#kontakt">Kennenlernen vereinbaren</a>
+    <a class="knopf knopf--hell" href="/kontakt">Kennenlernen vereinbaren</a>
   </nav>
+  <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue"><span>Menü</span></button>
 </header>'''
 
 FUSS = '''<section class="cta">
   <span class="klein">Nur rund 30 Hochzeiten im Jahr</span>
   <h2>Erzählt mir von eurem Tag.</h2>
   <p>Ich begleite bewusst nur eine begrenzte Zahl an Hochzeiten. So bleibt für jedes Paar genug Zeit.</p>
-  <a class="knopf knopf--gold" href="/#kontakt">Kennenlernen vereinbaren</a>
+  <a class="knopf knopf--gold" href="/kontakt">Kennenlernen vereinbaren</a>
 </section>
 <footer>
   <div>
@@ -53,7 +54,7 @@ FUSS = '''<section class="cta">
   </ul>
 </footer>'''
 
-def seite(titel, beschreibung, inhalt, aktiv='', extra=''):
+def seite(titel, beschreibung, inhalt, aktiv='', extra='', cta=True):
     a1 = ' aria-current="page"' if aktiv == 'storys' else ''
     a2 = ' aria-current="page"' if aktiv == 'blog' else ''
     a0 = ' aria-current="page"' if aktiv == 'ueber' else ''
@@ -72,8 +73,15 @@ def seite(titel, beschreibung, inhalt, aktiv='', extra=''):
 <main>
 {inhalt}
 </main>
-{FUSS}
+{FUSS if cta else FUSS[FUSS.index('<footer>'):]}
 {extra}
+<script>
+(function(){{var k=document.querySelector('.kopf'),b=k&&k.querySelector('.menue-knopf');if(!b)return;
+function s(o){{k.classList.toggle('offen',o);document.documentElement.classList.toggle('menue-offen',o);b.setAttribute('aria-expanded',o?'true':'false');b.firstChild.textContent=o?'Schließen':'Menü';}}
+b.addEventListener('click',function(){{s(!k.classList.contains('offen'))}});
+k.querySelectorAll('nav a').forEach(function(a){{a.addEventListener('click',function(){{s(false)}})}});
+document.addEventListener('keydown',function(e){{if(e.key==='Escape')s(false)}});}})();
+</script>
 </body>
 </html>
 '''
@@ -227,11 +235,87 @@ def baue():
 </section>'''
     open(f'{OUT}/ueber-mich.html', 'w').write(seite('Über mich | Daniel Braunstein, Hochzeitsfotograf aus Lübeck', 'Was Brautpaare über Daniel Braunstein sagen: Hochzeitsfotograf aus Lübeck, seit 16 Jahren und mit über 500 Paaren.', inhalt, 'ueber'))
 
+    # Kontakt
+    schl = json.load(open(f'{SRC}/kontakt.json'))['web3forms_schluessel']
+    stunden = ['bis 4 Stunden','6 Stunden','8 Stunden','10 Stunden oder mehr','Wissen wir noch nicht']
+    chips = ''.join(f'<label><input type="radio" name="Begleitung" value="{s}"{" required" if i==0 else ""}><span>{s}</span></label>' for i, s in enumerate(stunden))
+    inhalt = f"""<section class="kontakt">
+  <div class="kontakt-intro">
+    <span class="klein">Kontakt</span>
+    <h1>Erzählt mir von eurem Tag.</h1>
+    <p>Ein paar Eckdaten reichen mir für den Anfang. Ich melde mich innerhalb von 48 Stunden bei euch und sage euch, ob euer Termin noch frei ist.</p>
+    <p>Ich begleite bewusst nur rund 30 Hochzeiten im Jahr. Fragt euer Datum also am besten frühzeitig an.</p>
+    <div class="direkt">
+      <p class="klein">Lieber direkt?</p>
+      <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
+    </div>
+  </div>
+  <form class="formular" id="anfrage" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="{schl}">
+    <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Website">
+    <input type="hidden" name="from_name" value="Braunstein Photography Website">
+    <input type="hidden" name="redirect" value="https://braunstein-photography.vercel.app/danke">
+    <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
+    <div class="feldgruppe">
+      <div class="feld"><label for="f-datum">Wann wollt ihr heiraten?</label><input id="f-datum" name="Hochzeitsdatum" type="text" placeholder="z. B. 12.06.2027 oder Sommer 2027" required></div>
+      <div class="feld"><label for="f-ort">Wo wollt ihr heiraten?</label><input id="f-ort" name="Ort / Location" type="text" placeholder="Location oder Ort" required></div>
+    </div>
+    <fieldset class="feld"><legend>An wie viele Stunden Begleitung habt ihr gedacht?</legend><div class="chips">{chips}</div></fieldset>
+    <div class="feld"><label for="f-nachricht">Was möchtet ihr mir noch erzählen?</label><textarea id="f-nachricht" name="Nachricht" placeholder="Freie Trauung, Standesamt, besondere Wünsche, eure Geschichte …"></textarea></div>
+    <div class="feld"><label for="f-name">Eure Namen</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="z. B. Lena & Niklas" required></div>
+    <div class="feldgruppe">
+      <div class="feld"><label for="f-tel">Telefonnummer</label><input id="f-tel" name="Telefon" type="tel" autocomplete="tel" required></div>
+      <div class="feld"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+    </div>
+    <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="{ALT}/datenschutz">Datenschutzerklärung</a>.</span></label>
+    <p class="meldung" role="alert"></p>
+    <button class="knopf" type="submit">Anfrage absenden</button>
+  </form>
+</section>
+<script>
+(function(){{
+  var f=document.getElementById('anfrage');if(!f)return;
+  f.querySelector('[name=redirect]').value=location.origin+'/danke';
+  f.addEventListener('submit',function(e){{
+    e.preventDefault();
+    var k=f.querySelector('button'),m=f.querySelector('.meldung');
+    k.disabled=true;k.textContent='Wird gesendet …';m.textContent='';
+    var d=Object.fromEntries(new FormData(f));delete d.redirect;
+    fetch('https://api.web3forms.com/submit',{{method:'POST',headers:{{'Content-Type':'application/json',Accept:'application/json'}},body:JSON.stringify(d)}})
+      .then(function(r){{return r.json()}})
+      .then(function(r){{if(r.success){{location.href='/danke'}}else{{throw new Error()}}}})
+      .catch(function(){{m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';k.disabled=false;k.textContent='Anfrage absenden'}});
+  }});
+}})();
+</script>"""
+    open(f'{OUT}/kontakt.html', 'w').write(seite('Kontakt | Braunstein Photography, Hochzeitsfotograf Lübeck', 'Fragt euren Hochzeitstermin an: Daniel Braunstein, Hochzeitsfotograf für Lübeck, Hamburg und Schleswig-Holstein.', inhalt, cta=False))
+
+    # Danke
+    inhalt = """<section class="danke">
+  <span class="klein">Anfrage erhalten</span>
+  <h1>Danke für eure Anfrage!</h1>
+  <p class="unterzeile">Ich freue mich riesig, von euch zu hören.</p>
+  <h2>So geht es weiter</h2>
+  <ol class="schritte-danke">
+    <li><div><strong>Ich melde mich innerhalb von 48 Stunden</strong><span>per Telefon oder E-Mail, je nachdem, wie ich euch am besten erreiche.</span></div></li>
+    <li><div><strong>Ich sage euch, ob euer Termin noch frei ist</strong><span>Da ich nur rund 30 Hochzeiten im Jahr begleite, kläre ich das als Erstes.</span></div></li>
+    <li><div><strong>Ein kurzes Telefonat über eure Wünsche</strong><span>Ihr erzählt mir von eurem Tag, und ich beantworte eure ersten Fragen.</span></div></li>
+    <li><div><strong>Wir finden einen Termin zum Kennenlernen</strong><span>Ein entspanntes Gespräch mit euch beiden, damit wir sehen, ob die Chemie stimmt.</span></div></li>
+  </ol>
+  <p>Bis dahin könnt ihr gern schon in meinen Fotostorys stöbern.</p>
+  <div class="danke-knoepfe">
+    <a class="knopf knopf--dunkel" href="/fotostorys">Fotostorys ansehen</a>
+    <a class="knopf knopf--rahmen" href="https://www.instagram.com/braunstein_photography/">Instagram</a>
+  </div>
+</section>"""
+    open(f'{OUT}/danke.html', 'w').write(seite('Danke für eure Anfrage | Braunstein Photography', 'Eure Anfrage ist angekommen.', inhalt, cta=False).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1))
+
     # Startseite: Links auf neue Unterseiten umstellen
     h = open(f'{SRC}/startseite.html').read()
     h = h.replace('<a href="#storys">Fotostorys</a>', '<a href="/fotostorys">Fotostorys</a>')
     h = h.replace('<a href="#blog">Blog</a>', '<a href="/blog">Blog</a>')
     h = h.replace('<a href="#ueber">Über mich</a>', '<a href="/ueber-mich">Über mich</a>')
+    h = h.replace('href="#kontakt"', 'href="/kontakt"').replace(f'href="{ALT}/kontakt"', 'href="/kontakt"')
     if 'href="/ueber-mich" class="mehr-link"' not in h:
         h = h.replace('<span class="klein">Hochzeiten im Jahr</span></div>\n        </div>', '<span class="klein">Hochzeiten im Jahr</span></div>\n        </div>\n        <a href="/ueber-mich" class="mehr-link klein" style="display:inline-block;margin-top:1.8rem;color:var(--gegenlicht);text-underline-offset:3px">Was meine Paare über mich sagen</a>', 1)
     h = h.replace(f'href="{ALT}/fotostorys"', 'href="/fotostorys"')
