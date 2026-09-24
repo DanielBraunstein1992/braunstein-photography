@@ -46,8 +46,6 @@ FUSS = '''<section class="cta">
   <ul class="klein">
     <li><a href="/fotostorys">Fotostorys</a></li>
     <li><a href="/blog">Blog</a></li>
-    <li><a href="''' + ALT + '''/hochzeitsfotografie-luebeck">Hochzeitsfotografie Lübeck</a></li>
-    <li><a href="''' + ALT + '''/hochzeitsfotografie-hamburg">Hochzeitsfotografie Hamburg</a></li>
     <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
     <li><a href="''' + ALT + '''/impressum">Impressum</a></li>
     <li><a href="''' + ALT + '''/datenschutz">Datenschutz</a></li>
