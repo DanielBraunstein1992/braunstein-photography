@@ -211,3 +211,9 @@ fieldset.feld{border:0;margin:0;padding:0}
 .knopf--rahmen:hover{background:var(--tiefsee);color:var(--weiss)}
 @media (max-width:900px){.kontakt{grid-template-columns:1fr}}
 @media (max-width:560px){.feldgruppe{grid-template-columns:1fr}.schritte-danke li{grid-template-columns:3rem 1fr}}
+
+.rechtstext{max-width:50rem}
+.rechtstext .fliesstext{font-size:1.05rem}
+.rechtstext .fliesstext h2{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem)}
+.rechtstext .fliesstext h3{font-size:1.35rem}
+.rechtstext a{word-break:break-all}

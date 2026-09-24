@@ -47,8 +47,8 @@ FUSS = '''<section class="cta">
     <li><a href="/fotostorys">Fotostorys</a></li>
     <li><a href="/blog">Blog</a></li>
     <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
-    <li><a href="''' + ALT + '''/impressum">Impressum</a></li>
-    <li><a href="''' + ALT + '''/datenschutz">Datenschutz</a></li>
+    <li><a href="/impressum">Impressum</a></li>
+    <li><a href="/datenschutz">Datenschutz</a></li>
   </ul>
 </footer>'''
 
@@ -265,7 +265,7 @@ def baue():
       <div class="feld"><label for="f-tel">Telefonnummer</label><input id="f-tel" name="Telefon" type="tel" autocomplete="tel" required></div>
       <div class="feld"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
     </div>
-    <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="{ALT}/datenschutz">Datenschutzerklärung</a>.</span></label>
+    <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
     <p class="meldung" role="alert"></p>
     <button class="knopf" type="submit">Anfrage absenden</button>
   </form>
@@ -308,11 +308,31 @@ def baue():
 </section>"""
     open(f'{OUT}/danke.html', 'w').write(seite('Danke für eure Anfrage | Braunstein Photography', 'Eure Anfrage ist angekommen.', inhalt, cta=False).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1))
 
+    # Rechtliches
+    def rtext(t):
+        t = e(t).replace('\n', '<br>')
+        return re.sub(r'(https?://[^\s<]+?)(?=[.,;)]?(\s|<|$))', r'<a href="\1" rel="noopener">\1</a>', t)
+    for name, titel in (('impressum', 'Impressum'), ('datenschutz', 'Datenschutz')):
+        d = json.load(open(f'{SRC}/recht/{name}.json'))
+        teile = []
+        for typ, wert in d['bloecke']:
+            if typ in ('h2', 'h3'): teile.append(f'<{typ}>{e(wert)}</{typ}>')
+            elif typ == 'li': teile.append('<ul>' + ''.join(f'<li>{rtext(x)}</li>' for x in wert) + '</ul>')
+            else: teile.append(f'<p>{rtext(wert)}</p>')
+        inhalt = f"""<article class="artikel-seite rechtstext">
+  <h1>{e(d['titel'])}</h1>
+  <div class="fliesstext">
+{chr(10).join(teile)}
+  </div>
+</article>"""
+        open(f'{OUT}/{name}.html', 'w').write(seite(f'{titel} | Braunstein Photography', f'{titel} von Braunstein Photography.', inhalt, cta=False))
+
     # Startseite: Links auf neue Unterseiten umstellen
     h = open(f'{SRC}/startseite.html').read()
     h = h.replace('<a href="#storys">Fotostorys</a>', '<a href="/fotostorys">Fotostorys</a>')
     h = h.replace('<a href="#blog">Blog</a>', '<a href="/blog">Blog</a>')
     h = h.replace('<a href="#ueber">Über mich</a>', '<a href="/ueber-mich">Über mich</a>')
+    h = h.replace(f'href="{ALT}/impressum"', 'href="/impressum"').replace(f'href="{ALT}/datenschutz"', 'href="/datenschutz"')
     h = h.replace('href="#kontakt"', 'href="/kontakt"').replace(f'href="{ALT}/kontakt"', 'href="/kontakt"')
     if 'href="/ueber-mich" class="mehr-link"' not in h:
         h = h.replace('<span class="klein">Hochzeiten im Jahr</span></div>\n        </div>', '<span class="klein">Hochzeiten im Jahr</span></div>\n        </div>\n        <a href="/ueber-mich" class="mehr-link klein" style="display:inline-block;margin-top:1.8rem;color:var(--gegenlicht);text-underline-offset:3px">Was meine Paare über mich sagen</a>', 1)
