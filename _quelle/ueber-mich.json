@@ -1,28 +1,96 @@
-{"bild":"https://cdn.prod.website-files.com/68ee3e51336d788ba1bf7a60/68ef7223db32fa46d119d521_70f66d790c2ebdbca2dd4dc131ff819084a3efe5.webp",
-"links":[
- ["einen Freund an unserer Seite","Leandra & Lars"],
- ["als würde man sich schon lange kennen","Saskia & Lukas"],
- ["fast unsichtbar","Franziska & Jannis"],
- ["auffällig unauffällig","Silja & Florian"],
- ["ultraschnell","Melanie & Marko"]
-],
-"rechts":[
- ["Herz am richtigen Fleck","Kathy & Dominik"],
- ["Beruhigungsfaktor","Corinna & Andreas"],
- ["hat uns die Aufregung genommen","Rita & Fabrizzio"],
- ["humorvoll und aufgeschlossen","Melina & Lennart"],
- ["viel Gespür für die Situation","Lisa & Sebastian"]
-],
-"herkunft":"Alle Begriffe stammen aus über 150 Google-Bewertungen.",
-"anekdoten":[
- ["Er ließ sich im Laufe des Abends auch gern zu einem Tanz mit der Braut überreden.","Jessica"],
- ["Als Krönung hat er uns sogar noch nach Hause gefahren.","Ta Sch"],
- ["Er hat sogar beim Anstecken der Blume an den Anzug geholfen.","Jeniffer"],
- ["Mit seinem Humor hat er aus jedem Regen Sonnenschein gemacht.","Lisa & Sebastian"]
-],
-"text":[
- "Ich habe selbst geheiratet, und es war der schönste Tag meines Lebens. Seitdem weiß ich, wie viel an diesem einen Tag zusammenkommt: Aufregung, Vorfreude und all die Menschen, die man liebt. Genau dieses Gefühl möchte ich anderen Paaren ermöglichen und so festhalten, dass ihr es Jahre später noch spürt.",
- "Zu Hause in Lübeck bin ich Ehemann, Vater von zwei Kindern und bekennender Hundefan. Ich bin gern unter Menschen, stehe gern am Grill und interessiere mich mehr für eure Persönlichkeit als für die perfekte Pose. Und am liebsten fotografiere ich gegen die Sonne, wenn der Tag langsam leiser wird."
-],
-"fakten":[["16","Jahre Hochzeitsfotografie"],["500+","Brautpaare begleitet"],["30","Hochzeiten pro Jahr, bewusst nicht mehr"],["7 Tage","bis zur fertigen Galerie, spätestens"]]
+{
+ "bild": "https://cdn.prod.website-files.com/68ee3e51336d788ba1bf7a60/68ef7223db32fa46d119d521_70f66d790c2ebdbca2dd4dc131ff819084a3efe5.webp",
+ "links": [
+  [
+   "einen Freund an unserer Seite",
+   "Leandra & Lars"
+  ],
+  [
+   "als würde man sich schon lange kennen",
+   "Saskia & Lukas"
+  ],
+  [
+   "fast unsichtbar",
+   "Franziska & Jannis"
+  ],
+  [
+   "auffällig unauffällig",
+   "Silja & Florian"
+  ],
+  [
+   "ultraschnell",
+   "Melanie & Marko"
+  ]
+ ],
+ "rechts": [
+  [
+   "Herz am richtigen Fleck",
+   "Kathy & Dominik"
+  ],
+  [
+   "Beruhigungsfaktor",
+   "Corinna & Andreas"
+  ],
+  [
+   "hat uns die Aufregung genommen",
+   "Rita & Fabrizzio"
+  ],
+  [
+   "humorvoll und aufgeschlossen",
+   "Melina & Lennart"
+  ],
+  [
+   "viel Gespür für die Situation",
+   "Lisa & Sebastian"
+  ]
+ ],
+ "herkunft": "Alle Begriffe stammen aus über 150 Google-Bewertungen.",
+ "anekdoten": [
+  [
+   "Er ließ sich im Laufe des Abends auch gern zu einem Tanz mit der Braut überreden.",
+   "Jessica"
+  ],
+  [
+   "Als Krönung hat er uns sogar noch nach Hause gefahren.",
+   "Ta Sch"
+  ],
+  [
+   "Er hat sogar beim Anstecken der Blume an den Anzug geholfen.",
+   "Jeniffer"
+  ],
+  [
+   "Mit seinem Humor hat er aus jedem Regen Sonnenschein gemacht.",
+   "Lisa & Sebastian"
+  ]
+ ],
+ "tag": [
+  [
+   "Am Vormittag",
+   "Oft bin ich schon beim Getting Ready dabei. Die Aufregung ist da, die Fliege sitzt noch nicht ganz, und die ersten ehrlichen Bilder entstehen."
+  ],
+  [
+   "Vor der Trauung",
+   "Ich schaue, ob die Ansteckblume richtig sitzt, und behalte den Ablauf im Blick, damit ihr es nicht müsst."
+  ],
+  [
+   "Während der Trauung",
+   "Ich bin nah dran und trotzdem kaum zu bemerken. Eure Gäste hören höchstens das Klicken."
+  ],
+  [
+   "Am Nachmittag",
+   "Zwischen Gratulationen und Kuchen gehen wir kurz zu zweit, also zu dritt, spazieren. Meistens merkt niemand, dass ihr weg wart."
+  ],
+  [
+   "Zur goldenen Stunde",
+   "Wenn die Sonne tief steht, entsteht beim Sunset-Shooting oft das Bild, das später bei euch an der Wand hängt."
+  ],
+  [
+   "Am Abend",
+   "Ich mische mich unter eure Gäste, achte darauf, dass Torte und Spiele im richtigen Moment kommen, und lasse mich auch mal zu einem Tanz überreden."
+  ],
+  [
+   "In der Nacht",
+   "Während ihr noch feiert oder längst schlaft, bearbeite ich die ersten Bilder. Innerhalb von 24 Stunden habt ihr eure Vorschau."
+  ]
+ ]
 }

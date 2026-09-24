@@ -217,3 +217,17 @@ fieldset.feld{border:0;margin:0;padding:0}
 .rechtstext .fliesstext h2{font-size:clamp(1.6rem,1.3rem + 1vw,2.1rem)}
 .rechtstext .fliesstext h3{font-size:1.35rem}
 .rechtstext a{word-break:break-all}
+
+/* Tagesablauf */
+.tagesablauf{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);max-width:84rem;margin:0 auto;padding:clamp(4rem,9vw,7rem) var(--rand)}
+.tagesablauf-kopf{align-self:start;position:sticky;top:7rem}
+.tagesablauf-kopf .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.tagesablauf-kopf h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem);margin-bottom:1.4rem}
+.tagesablauf-kopf p{color:var(--schiefer)}
+.zeitleiste{list-style:none;margin:0;padding:0 0 0 2rem;border-left:1px solid var(--sand)}
+.zeitleiste li{position:relative;padding:0 0 2.4rem}
+.zeitleiste li:last-child{padding-bottom:0}
+.zeitleiste li::before{content:"";position:absolute;left:calc(-2rem - 5px);top:.35rem;width:9px;height:9px;border-radius:50%;background:var(--gegenlicht)}
+.zeitleiste .zeit{display:block;color:var(--gegenlicht);margin-bottom:.4rem}
+.zeitleiste p{margin:0;font-size:1.15rem}
+@media (max-width:900px){.tagesablauf{grid-template-columns:1fr}.tagesablauf-kopf{position:static}}

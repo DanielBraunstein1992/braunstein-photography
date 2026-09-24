@@ -208,7 +208,7 @@ def baue():
     d = json.load(open(f'{SRC}/ueber-mich.json'))
     def begriff(b): return f'<figure class="begriff"><q>{e(b[0])}</q><cite class="klein">{e(b[1])}</cite></figure>'
     anek = ''.join(f'<figure class="anekdote"><p>„{e(a[0])}“</p><cite class="klein">{e(a[1])}</cite></figure>' for a in d['anekdoten'])
-    fakten = ''.join(f'<li><strong>{e(f[0])}</strong><span>{e(f[1])}</span></li>' for f in d['fakten'])
+    zeit = ''.join(f'<li><span class="klein zeit">{e(t[0])}</span><p>{e(t[1])}</p></li>' for t in d['tag'])
     inhalt = f'''<section class="um-kopf">
   <span class="klein">Über mich</span>
   <h1>Man kann viel über sich selbst schreiben.</h1>
@@ -224,12 +224,13 @@ def baue():
   <h2>Und manchmal auch das.</h2>
   <div class="anekdoten-raster">{anek}</div>
 </section>
-<section class="persoenlich">
-  <div>
-    <h2>Moin, ich bin Daniel.</h2>
-    {''.join(f'<p>{e(x)}</p>' for x in d['text'])}
+<section class="tagesablauf">
+  <div class="tagesablauf-kopf">
+    <span class="klein">Hinter der Kamera</span>
+    <h2>Ein Hochzeitstag, von der anderen Seite.</h2>
+    <p>So kann ein Tag mit mir aussehen. Jede Hochzeit ist anders, aber ein paar Dinge passieren fast immer.</p>
   </div>
-  <ul class="fakten-liste">{fakten}</ul>
+  <ol class="zeitleiste">{zeit}</ol>
 </section>'''
     open(f'{OUT}/ueber-mich.html', 'w').write(seite('Über mich | Daniel Braunstein, Hochzeitsfotograf aus Lübeck', 'Was Brautpaare über Daniel Braunstein sagen: Hochzeitsfotograf aus Lübeck, seit 16 Jahren und mit über 500 Paaren.', inhalt, 'ueber'))
 
