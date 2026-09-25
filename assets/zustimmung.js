@@ -23,7 +23,7 @@
   var stil = document.createElement('style');
   stil.textContent =
     '.zustimmung-box{position:fixed;left:clamp(.8rem,3vw,2rem);right:clamp(.8rem,3vw,2rem);bottom:calc(clamp(.8rem,3vw,2rem) + env(safe-area-inset-bottom,0px));z-index:60;max-width:30rem;background:#F9FAF8;color:#1E2C30;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);padding:1.5rem 1.6rem;font-family:"Crimson Pro",Georgia,serif;font-size:1.05rem;line-height:1.55}' +
-    '.zustimmung-box h2{font-family:"Italiana",Georgia,serif;font-weight:400;font-size:1.6rem;margin:0 0 .6rem;line-height:1.15}' +
+    '.zustimmung-box h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:1.6rem;margin:0 0 .6rem;line-height:1.15}' +
     '.zustimmung-box p{margin:0 0 1.2rem;color:#56666A}' +
     '.zustimmung-box a{color:#1E2C30}' +
     '.zustimmung-knoepfe{display:flex;gap:.7rem;flex-wrap:wrap}' +

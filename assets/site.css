@@ -1,11 +1,12 @@
 :root{
   --nebel:#E8ECE9;--weiss:#F9FAF8;--tiefsee:#1E2C30;--schiefer:#56666A;--sand:#D9CDB8;--gegenlicht:#C28A3A;
-  --display:"Italiana","Didot","Bodoni 72",Georgia,serif;
+  --display:"Cormorant Garamond","Garamond","Iowan Old Style",Georgia,serif;
   --text:"Crimson Pro","Iowan Old Style",Georgia,serif;
   --klein:"Jura","Avenir Next","Segoe UI",sans-serif;
   --rand:clamp(1.25rem,5vw,4.5rem);
 }
 *,*::before,*::after{box-sizing:border-box}
+html{font-variant-numeric:lining-nums}
 body{margin:0;background:var(--nebel);color:var(--tiefsee);font-family:var(--text);font-size:clamp(1.125rem,1.05rem + .3vw,1.3rem);line-height:1.65;font-weight:300;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
