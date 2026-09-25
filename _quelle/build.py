@@ -262,17 +262,18 @@ def baue():
     <input type="hidden" name="redirect" value="https://braunstein-photography.vercel.app/danke">
     <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
     <div class="feldgruppe">
-      <div class="feld"><label for="f-datum">Wann wollt ihr heiraten?</label><input id="f-datum" name="Hochzeitsdatum" type="text" placeholder="z. B. 12.06.2027 oder Sommer 2027" required></div>
+      <div class="feld"><label for="f-datum">Wann wollt ihr heiraten?</label><input id="f-datum" name="Hochzeitsdatum" type="date" required></div>
       <div class="feld"><label for="f-ort">Wo wollt ihr heiraten?</label><input id="f-ort" name="Ort / Location" type="text" placeholder="Location oder Ort" required></div>
     </div>
     <fieldset class="feld"><legend>An wie viele Stunden Begleitung habt ihr gedacht?</legend><div class="chips">{chips}</div></fieldset>
-    <div class="feld"><label for="f-nachricht">Was möchtet ihr mir noch erzählen?</label><textarea id="f-nachricht" name="Nachricht" placeholder="Freie Trauung, Standesamt, besondere Wünsche, eure Geschichte …"></textarea></div>
+    <div class="feld"><label for="f-nachricht">Was möchtet ihr mir noch erzählen?</label><textarea id="f-nachricht" name="Nachricht" placeholder="Freie Trauung, Standesamt, besondere Wünsche, eure Geschichte …" required></textarea></div>
     <div class="feld"><label for="f-name">Eure Namen</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="z. B. Lena & Niklas" required></div>
     <div class="feldgruppe">
       <div class="feld"><label for="f-tel">Telefonnummer</label><input id="f-tel" name="Telefon" type="tel" autocomplete="tel" required></div>
       <div class="feld"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
     </div>
     <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+    <p class="klein pflicht">Alle Felder sind Pflichtfelder.</p>
     <p class="meldung" role="alert"></p>
     <button class="knopf" type="submit">Anfrage absenden</button>
   </form>
@@ -281,11 +282,12 @@ def baue():
 (function(){{
   var f=document.getElementById('anfrage');if(!f)return;
   f.querySelector('[name=redirect]').value=location.origin+'/danke';
+  var dt=f.querySelector('#f-datum');if(dt){{dt.min=new Date().toISOString().slice(0,10);}}
   f.addEventListener('submit',function(e){{
     e.preventDefault();
     var k=f.querySelector('button'),m=f.querySelector('.meldung');
     k.disabled=true;k.textContent='Wird gesendet …';m.textContent='';
-    var d=Object.fromEntries(new FormData(f));delete d.redirect;
+    var d=Object.fromEntries(new FormData(f));delete d.redirect;if(d.Hochzeitsdatum){{var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}}
     fetch('https://api.web3forms.com/submit',{{method:'POST',headers:{{'Content-Type':'application/json',Accept:'application/json'}},body:JSON.stringify(d)}})
       .then(function(r){{return r.json()}})
       .then(function(r){{if(r.success){{location.href='/danke'}}else{{throw new Error()}}}})

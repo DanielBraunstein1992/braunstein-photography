@@ -13,7 +13,7 @@
     --nebel:#E8ECE9;
     --weiss:#F9FAF8;
     --tiefsee:#1E2C30;
-    --schiefer:#56666A;
+    --schiefer:#4A585C;--gold-text:#8F5F1C;
     --sand:#D9CDB8;
     --gegenlicht:#C28A3A;
     --display:"Cormorant Garamond", "Garamond", "Iowan Old Style", Georgia, serif;
@@ -31,12 +31,12 @@
   h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;letter-spacing:.01em}
   h2{font-size:clamp(2.1rem,1.4rem + 3vw,3.6rem)}
   p{margin:0 0 1.1em}
-  .klein{font-family:var(--klein);font-weight:300;font-size:.82rem;letter-spacing:.06em}
-  .knopf{display:inline-block;font-family:var(--klein);font-size:.9rem;letter-spacing:.05em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
+  .klein{font-family:var(--klein);font-weight:400;font-size:.92rem;letter-spacing:.04em}
+  .knopf{display:inline-block;font-family:var(--klein);font-weight:400;font-size:.95rem;letter-spacing:.04em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
   .knopf:hover{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
   .knopf--hell{color:var(--weiss)}
   .knopf--hell:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
-  .knopf--gold{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--weiss)}
+  .knopf--gold{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
   .knopf--gold:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
 
   /* Navigation */
@@ -45,10 +45,10 @@
   .marke img{height:40px;width:auto}
   footer .marke img{height:46px}
   .kopf nav{display:flex;gap:2rem;align-items:center}
-  .kopf nav a:not(.knopf){font-family:var(--klein);font-size:.85rem;letter-spacing:.05em;text-decoration:none;opacity:.85}
+  .kopf nav a:not(.knopf){font-family:var(--klein);font-size:.95rem;letter-spacing:.04em;text-decoration:none;opacity:.92}
   .kopf nav a:not(.knopf):hover{opacity:1}
   .kopf .knopf{padding:.7rem 1.2rem}
-  .menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.8rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
+  .menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.9rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
 
   /* Hero */
   .hero{padding:0;position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:var(--weiss);overflow:hidden;isolation:isolate}
@@ -88,7 +88,7 @@
   /* Freund */
   .freund{background:var(--weiss);text-align:center}
   .freund blockquote{margin:0 auto 3rem;max-width:52rem;font-family:var(--display);font-size:clamp(2.2rem,1.4rem + 3.6vw,4.4rem);line-height:1.12}
-  .freund blockquote::before,.freund blockquote::after{color:var(--gegenlicht)}
+  .freund blockquote::before,.freund blockquote::after{color:var(--gold-text)}
   .freund blockquote::before{content:"„"}
   .freund blockquote::after{content:"“"}
   .freund .einleitung{color:var(--schiefer);margin-bottom:1.2rem}
@@ -122,15 +122,15 @@
   .scheu img{width:100%;aspect-ratio:1/1;object-fit:cover}
   .scheu h2{margin-bottom:1.6rem}
   .zitat{border-left:2px solid var(--gegenlicht);padding-left:1.3rem;margin:2rem 0 0;font-style:italic;color:var(--schiefer)}
-  .zitat cite{display:block;font-style:normal;font-family:var(--klein);font-size:.8rem;letter-spacing:.05em;margin-top:.5rem}
+  .zitat cite{display:block;font-style:normal;font-family:var(--klein);font-size:.9rem;letter-spacing:.05em;margin-top:.5rem}
 
   /* Stimmen */
   .stimmen{background:var(--tiefsee);color:var(--weiss)}
   .stimmen-kopf{max-width:84rem;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap}
-  .sterne{font-family:var(--klein);font-size:.9rem;letter-spacing:.05em;color:var(--sand)}
+  .sterne{font-family:var(--klein);font-size:1rem;letter-spacing:.05em;color:var(--sand)}
   a.sterne{display:block;text-decoration:none;padding:1rem 1.4rem;border:1px solid rgba(217,205,184,.35);transition:border-color .25s,color .25s}
   a.sterne:hover{border-color:var(--gegenlicht);color:var(--weiss)}
-  .sterne-link{display:block;margin-top:.4rem;font-size:.8rem;color:var(--gegenlicht);text-decoration:underline;text-underline-offset:3px}
+  .sterne-link{display:block;margin-top:.4rem;font-size:.9rem;color:var(--gegenlicht);text-decoration:underline;text-underline-offset:3px}
   .sterne b{color:var(--gegenlicht);font-weight:400;font-size:1.1rem;letter-spacing:.15em;margin-right:.5rem}
   .stimmen-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);max-width:84rem;margin:0 auto}
   .stimme p{font-size:1.2rem;font-style:italic;line-height:1.55}
@@ -153,7 +153,7 @@
   .uhren{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--sand);border-bottom:1px solid var(--sand)}
   .uhr{padding:2.5rem 1.5rem}
   .uhr + .uhr{border-left:1px solid var(--sand)}
-  .uhr strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.5rem,2rem + 5vw,6rem);line-height:1;color:var(--gegenlicht)}
+  .uhr strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.5rem,2rem + 5vw,6rem);line-height:1;color:var(--gold-text)}
   .uhr span{display:block;margin-top:.8rem;color:var(--schiefer)}
 
   /* Ablauf */
@@ -161,7 +161,7 @@
   .ablauf h2{max-width:84rem;margin:0 auto 3.5rem}
   .schritte{list-style:none;margin:0 auto;padding:0;max-width:84rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem 3.5rem;counter-reset:schritt}
   .schritte li{counter-increment:schritt;border-top:1px solid var(--sand);padding-top:1.4rem}
-  .schritte li::before{content:counter(schritt, decimal-leading-zero);display:block;font-family:var(--display);font-size:2.2rem;color:var(--gegenlicht);line-height:1;margin-bottom:.9rem}
+  .schritte li::before{content:counter(schritt, decimal-leading-zero);display:block;font-family:var(--display);font-size:2.2rem;color:var(--gold-text);line-height:1;margin-bottom:.9rem}
   .schritte h3{font-size:1.55rem;margin-bottom:.6rem}
   .schritte p{color:var(--schiefer);font-size:1.08rem}
 
@@ -182,13 +182,13 @@
   .artikel:hover img{filter:brightness(1.06) saturate(1.05)}
   .artikel h3{font-size:1.45rem;margin:1.1rem 0 .6rem}
   .artikel p{font-size:1.05rem;color:var(--schiefer);margin-bottom:.9rem}
-  .artikel .klein{margin-top:auto;color:var(--gegenlicht);text-decoration:underline;text-underline-offset:3px}
+  .artikel .klein{margin-top:auto;color:var(--gold-text);text-decoration:underline;text-underline-offset:3px}
 
   /* Abschluss */
   .abschluss{position:relative;color:var(--weiss);text-align:center;overflow:hidden;isolation:isolate;padding-top:clamp(7rem,15vw,11rem);padding-bottom:clamp(7rem,15vw,11rem)}
   .abschluss img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
   .abschluss::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,44,48,.72),rgba(30,44,48,.86))}
-  .abschluss .klein{color:var(--sand);display:block;margin-bottom:1.4rem}
+  .abschluss .klein{color:var(--sand);display:block;margin-bottom:1.4rem;font-size:1rem;text-shadow:0 1px 12px rgba(0,0,0,.5)}
   .abschluss h2{font-size:clamp(2.6rem,1.6rem + 4.5vw,5rem);margin-bottom:1.6rem}
   .abschluss p{max-width:36rem;margin:0 auto 2.4rem}
 
@@ -232,7 +232,7 @@
     .uhren{grid-template-columns:1fr}
     .uhr + .uhr{border-left:0;border-top:1px solid var(--sand)}
     .ueber .fakten{gap:1.5rem}
-    .kopf .knopf{padding:.6rem .9rem;font-size:.8rem}
+    .kopf .knopf{padding:.6rem .9rem;font-size:.85rem}
     .kopf .marke img{height:30px}
     .screens img:nth-child(odd),.screens img:nth-child(even){margin-left:0}
   }
@@ -490,6 +490,9 @@
     <p class="klein" style="margin-top:.8rem">Hochzeitsfotograf für Lübeck, Hamburg und Schleswig-Holstein<br><a href="tel:+4917614362401">+49 176 14362401</a></p>
   </div>
   <ul class="klein">
+    <li><a href="https://www.braunstein-photography.de/fotostorys">Fotostorys</a></li>
+    <li><a href="https://www.braunstein-photography.de/blog">Blog</a></li>
+    <li><a href="/faq">FAQ</a></li>
     <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
     <li><a href="https://www.braunstein-photography.de/impressum">Impressum</a></li>
     <li><a href="https://www.braunstein-photography.de/datenschutz">Datenschutz</a></li>
