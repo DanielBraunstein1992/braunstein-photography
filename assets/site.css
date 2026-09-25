@@ -246,3 +246,8 @@ fieldset.feld{border:0;margin:0;padding:0}
 .antwort ol,.antwort ul{padding-left:1.3rem;margin:0 0 1.1em}
 .antwort li{margin-bottom:.6em}
 .antwort strong{font-weight:500}
+
+.feld input[type=date]{min-height:2.6rem;font-family:var(--text);color:var(--tiefsee);cursor:pointer}
+.feld input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6}
+.feld input[type=date]:invalid:not(:focus){color:#9aa6a8}
+.pflicht{margin:0;color:var(--schiefer)}
