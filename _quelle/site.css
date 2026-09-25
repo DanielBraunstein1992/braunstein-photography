@@ -231,3 +231,17 @@ fieldset.feld{border:0;margin:0;padding:0}
 .zeitleiste .zeit{display:block;color:var(--gegenlicht);margin-bottom:.4rem}
 .zeitleiste p{margin:0;font-size:1.15rem}
 @media (max-width:900px){.tagesablauf{grid-template-columns:1fr}.tagesablauf-kopf{position:static}}
+
+/* FAQ */
+.faq-liste{max-width:56rem;padding:0 var(--rand) clamp(5rem,10vw,8rem)}
+.frage{border-top:1px solid var(--sand)}
+.frage:last-child{border-bottom:1px solid var(--sand)}
+.frage summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1.5rem 0;font-family:var(--display);font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);line-height:1.25}
+.frage summary::-webkit-details-marker{display:none}
+.frage summary::after{content:"+";font-family:var(--klein);font-size:1.6rem;color:var(--gegenlicht);flex:none;transition:transform .25s}
+.frage[open] summary::after{transform:rotate(45deg)}
+.frage summary:hover{color:var(--gegenlicht)}
+.antwort{padding:0 0 1.8rem;max-width:46rem;color:var(--tiefsee)}
+.antwort ol,.antwort ul{padding-left:1.3rem;margin:0 0 1.1em}
+.antwort li{margin-bottom:.6em}
+.antwort strong{font-weight:500}

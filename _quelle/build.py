@@ -10,6 +10,7 @@ SRC = os.path.dirname(os.path.abspath(__file__))
 OUT = '/mnt/user-data/outputs/braunstein-website'
 CDN = 'https://cdn.prod.website-files.com/68ef69d6601002710ef48956/'
 ALT = 'https://www.braunstein-photography.de'
+BASIS = 'https://braunstein-photography.vercel.app'  # beim Domainwechsel auf https://www.braunstein-photography.de ändern
 e = html.escape
 
 listen = json.load(open(f'{SRC}/data_listen.json'))
@@ -27,6 +28,7 @@ KOPF = '''<header class="kopf">
     <a href="/ueber-mich"{a0}>Über mich</a>
     <a href="/fotostorys"{a1}>Fotostorys</a>
     <a href="/blog"{a2}>Blog</a>
+    <a href="/faq"{a3}>FAQ</a>
     <a class="knopf knopf--hell" href="/kontakt">Kennenlernen vereinbaren</a>
   </nav>
   <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="hauptmenue"><span>Menü</span></button>
@@ -46,6 +48,7 @@ FUSS = '''<section class="cta">
   <ul class="klein">
     <li><a href="/fotostorys">Fotostorys</a></li>
     <li><a href="/blog">Blog</a></li>
+    <li><a href="/faq">FAQ</a></li>
     <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
     <li><a href="/impressum">Impressum</a></li>
     <li><a href="/datenschutz">Datenschutz</a></li>
@@ -56,6 +59,7 @@ def seite(titel, beschreibung, inhalt, aktiv='', extra='', cta=True):
     a1 = ' aria-current="page"' if aktiv == 'storys' else ''
     a2 = ' aria-current="page"' if aktiv == 'blog' else ''
     a0 = ' aria-current="page"' if aktiv == 'ueber' else ''
+    a3 = ' aria-current="page"' if aktiv == 'faq' else ''
     return f'''<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -67,7 +71,7 @@ def seite(titel, beschreibung, inhalt, aktiv='', extra='', cta=True):
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body class="unterseite">
-{KOPF.format(a0=a0, a1=a1, a2=a2)}
+{KOPF.format(a0=a0, a1=a1, a2=a2, a3=a3)}
 <main>
 {inhalt}
 </main>
@@ -121,6 +125,8 @@ def baue():
     os.makedirs(f'{OUT}/fotostorys', exist_ok=True)
     os.makedirs(f'{OUT}/assets', exist_ok=True)
     shutil.copy(f'{SRC}/site.css', f'{OUT}/assets/site.css')
+    if os.path.exists(f'{OUT}/assets/bilder'): shutil.rmtree(f'{OUT}/assets/bilder')
+    shutil.copytree(f'{SRC}/bilder', f'{OUT}/assets/bilder')
     shutil.copy(f'{SRC}/logo-weiss.png', f'{OUT}/assets/logo-weiss.png')
     json.dump({"cleanUrls": True, "trailingSlash": False}, open(f'{OUT}/vercel.json', 'w'), indent=2)
     # Quelldateien mitliefern (werden von Vercel ignoriert)
@@ -309,6 +315,17 @@ def baue():
 </section>"""
     open(f'{OUT}/danke.html', 'w').write(seite('Danke für eure Anfrage | Braunstein Photography', 'Eure Anfrage ist angekommen.', inhalt, cta=False).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1))
 
+    # FAQ
+    fragen = json.load(open(f'{SRC}/faq.json'))
+    liste = ''.join(f'<details class="frage"><summary>{e(q)}</summary><div class="antwort">{a}</div></details>' for q, a in fragen)
+    inhalt = f"""<section class="seitenkopf">
+  <span class="klein">Häufige Fragen</span>
+  <h1>Was ihr euch vielleicht noch fragt.</h1>
+  <p>Die Fragen, die mir Paare im Kennenlerngespräch am häufigsten stellen. Wenn eure nicht dabei ist, ruft mich einfach an oder schreibt mir.</p>
+</section>
+<section class="faq-liste">{liste}</section>"""
+    open(f'{OUT}/faq.html', 'w').write(seite('Häufige Fragen | Braunstein Photography', 'Antworten auf die häufigsten Fragen rund um eure Hochzeitsfotografie: Ablauf, Wartezeit, Kosten und Posen.', inhalt, 'faq'))
+
     # Rechtliches
     def rtext(t):
         t = e(t).replace('\n', '<br>')
@@ -331,7 +348,7 @@ def baue():
     # Startseite: Links auf neue Unterseiten umstellen
     h = open(f'{SRC}/startseite.html').read()
     h = h.replace('<a href="#storys">Fotostorys</a>', '<a href="/fotostorys">Fotostorys</a>')
-    h = h.replace('<a href="#blog">Blog</a>', '<a href="/blog">Blog</a>')
+    h = h.replace('<a href="#blog">Blog</a>', '<a href="/blog">Blog</a>\n    <a href="/faq">FAQ</a>') if '<a href="/faq">FAQ</a>' not in h else h
     h = h.replace('<a href="#ueber">Über mich</a>', '<a href="/ueber-mich">Über mich</a>')
     h = h.replace(f'href="{ALT}/impressum"', 'href="/impressum"').replace(f'href="{ALT}/datenschutz"', 'href="/datenschutz"')
     h = h.replace('href="#kontakt"', 'href="/kontakt"').replace(f'href="{ALT}/kontakt"', 'href="/kontakt"')
@@ -342,6 +359,42 @@ def baue():
     h = re.sub(re.escape(ALT) + r'/fotostorys/([a-z0-9-]+)', lambda m: story_url(m.group(1)), h)
     h = re.sub(re.escape(ALT) + r'/blog/([a-z0-9-]+)', lambda m: blog_url(m.group(1)), h)
     open(f'{OUT}/index.html', 'w').write(h)
+
+    # Favicon, Vorschaubild, Canonical in alle Seiten
+    for f in ('favicon.ico', 'apple-touch-icon.png'): shutil.copy(f'{SRC}/{f}', f'{OUT}/{f}')
+    for f in ('favicon-32.png', 'og-bild.jpg'): shutil.copy(f'{SRC}/{f}', f'{OUT}/assets/{f}')
+    seiten = []
+    for wurzel, _, dateien in os.walk(OUT):
+        if '_quelle' in wurzel: continue
+        for d_ in dateien:
+            if not d_.endswith('.html'): continue
+            voll = os.path.join(wurzel, d_); rel = os.path.relpath(voll, OUT)[:-5]
+            pfad = '/' if rel == 'index' else '/' + (rel[:-6] if rel.endswith('/index') else rel)
+            h = open(voll).read()
+            if 'rel="icon"' not in h:
+                titel = re.search(r'<title>(.*?)</title>', h, re.S).group(1)
+                m = re.search(r'<meta name="description" content="([^"]*)"', h); beschr = m.group(1) if m else ''
+                kopf = f"""<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="{BASIS}{pfad}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Braunstein Photography">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="{BASIS}{pfad}">
+<meta property="og:title" content="{titel}">
+<meta property="og:description" content="{beschr}">
+<meta property="og:image" content="{BASIS}/assets/og-bild.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>"""
+                h = h.replace('</head>', kopf, 1)
+                open(voll, 'w').write(h)
+            if 'noindex' not in h: seiten.append(pfad)
+    seiten.sort(key=lambda p: (p != '/', p.count('/'), p))
+    open(f'{OUT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{BASIS}{p}</loc></url>\n' for p in seiten) + '</urlset>\n')
+    open(f'{OUT}/robots.txt', 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {BASIS}/sitemap.xml\n')
     print(f'Blog: {len(blog_fertig)}/{len(listen["blog"])} Artikel, Fotostorys: {len(story_fertig)}/{len(listen["storys"])}')
 
 if __name__ == '__main__':
