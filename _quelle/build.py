@@ -20,7 +20,7 @@ story_fertig = {f[:-5] for f in os.listdir(f'{SRC}/storys') if f.endswith('.json
 def blog_url(slug):  return f'/blog/{slug}' if slug in blog_fertig else f'{ALT}/blog/{slug}'
 def story_url(slug): return f'/fotostorys/{slug}' if slug in story_fertig else f'{ALT}/fotostorys/{slug}'
 
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Italiana&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jura:wght@300;400&display=swap" rel="stylesheet">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jura:wght@300;400&display=swap" rel="stylesheet">'
 
 KOPF = '''<header class="kopf">
   <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
@@ -362,7 +362,7 @@ def baue():
 
     # Favicon, Vorschaubild, Canonical in alle Seiten
     for f in ('favicon.ico', 'apple-touch-icon.png'): shutil.copy(f'{SRC}/{f}', f'{OUT}/{f}')
-    for f in ('favicon-32.png', 'og-bild.jpg'): shutil.copy(f'{SRC}/{f}', f'{OUT}/assets/{f}')
+    for f in ('favicon-32.png', 'og-bild.jpg', 'zustimmung.js'): shutil.copy(f'{SRC}/{f}', f'{OUT}/assets/{f}')
     seiten = []
     for wurzel, _, dateien in os.walk(OUT):
         if '_quelle' in wurzel: continue
@@ -390,7 +390,9 @@ def baue():
 <meta name="twitter:card" content="summary_large_image">
 </head>"""
                 h = h.replace('</head>', kopf, 1)
-                open(voll, 'w').write(h)
+            if 'zustimmung.js' not in h:
+                h = h.replace('</body>', '<script src="/assets/zustimmung.js" defer></script>\n</body>', 1)
+            open(voll, 'w').write(h)
             if 'noindex' not in h: seiten.append(pfad)
     seiten.sort(key=lambda p: (p != '/', p.count('/'), p))
     open(f'{OUT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{BASIS}{p}</loc></url>\n' for p in seiten) + '</urlset>\n')
