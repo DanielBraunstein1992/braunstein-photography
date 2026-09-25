@@ -1,5 +1,5 @@
 :root{
-  --nebel:#E8ECE9;--weiss:#F9FAF8;--tiefsee:#1E2C30;--schiefer:#56666A;--sand:#D9CDB8;--gegenlicht:#C28A3A;
+  --nebel:#E8ECE9;--weiss:#F9FAF8;--tiefsee:#1E2C30;--schiefer:#4A585C;--gold-text:#8F5F1C;--sand:#D9CDB8;--gegenlicht:#C28A3A;
   --display:"Cormorant Garamond","Garamond","Iowan Old Style",Georgia,serif;
   --text:"Crimson Pro","Iowan Old Style",Georgia,serif;
   --klein:"Jura","Avenir Next","Segoe UI",sans-serif;
@@ -13,11 +13,11 @@ a{color:inherit}
 :focus-visible{outline:2px solid var(--gegenlicht);outline-offset:3px}
 h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;margin:0;letter-spacing:.01em}
 p{margin:0 0 1.1em}
-.klein{font-family:var(--klein);font-weight:300;font-size:.82rem;letter-spacing:.06em}
-.knopf{display:inline-block;font-family:var(--klein);font-size:.9rem;letter-spacing:.05em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
+.klein{font-family:var(--klein);font-weight:400;font-size:.92rem;letter-spacing:.04em}
+.knopf{display:inline-block;font-family:var(--klein);font-weight:400;font-size:.95rem;letter-spacing:.04em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
 .knopf--hell{color:var(--weiss)}
 .knopf--hell:hover{background:var(--weiss);color:var(--tiefsee)}
-.knopf--gold{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--weiss)}
+.knopf--gold{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
 .knopf--gold:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
 
 /* Kopf */
@@ -25,15 +25,15 @@ p{margin:0 0 1.1em}
 .marke{display:block;line-height:0}
 .marke img{height:36px;width:auto}
 .kopf nav{display:flex;gap:2rem;align-items:center}
-.kopf nav a:not(.knopf){font-family:var(--klein);font-size:.85rem;letter-spacing:.05em;text-decoration:none;opacity:.8}
+.kopf nav a:not(.knopf){font-family:var(--klein);font-size:.95rem;letter-spacing:.04em;text-decoration:none;opacity:.92}
 .kopf nav a:not(.knopf):hover,.kopf nav a[aria-current]{opacity:1}
 .kopf nav a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--gegenlicht)}
 .kopf .knopf{padding:.65rem 1.1rem}
-.menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.8rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
+.menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.9rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
 
 /* Seitenkopf */
 .seitenkopf{padding:clamp(4rem,10vw,7rem) var(--rand) clamp(2.5rem,5vw,4rem);max-width:60rem}
-.seitenkopf .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.seitenkopf .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
 .seitenkopf h1{font-size:clamp(2.6rem,1.6rem + 4vw,4.8rem);margin-bottom:1.4rem}
 .seitenkopf p{color:var(--schiefer);max-width:38rem}
 
@@ -47,7 +47,7 @@ p{margin:0 0 1.1em}
 .karte:hover img{filter:brightness(1.06) saturate(1.05)}
 .karte h3{font-size:1.55rem;margin:1.1rem 0 .5rem}
 .karte p{font-size:1.05rem;color:var(--schiefer);margin-bottom:.9rem}
-.karte .mehr{margin-top:auto;color:var(--gegenlicht);text-decoration:underline;text-underline-offset:3px}
+.karte .mehr{margin-top:auto;color:var(--gold-text);text-decoration:underline;text-underline-offset:3px}
 
 /* Artikel */
 .artikel-seite{max-width:46rem;margin:0 auto;padding:clamp(3rem,8vw,6rem) var(--rand) 3rem}
@@ -65,7 +65,7 @@ p{margin:0 0 1.1em}
 
 /* Fotostory */
 .story-kopf{padding:clamp(3rem,8vw,6rem) var(--rand) clamp(2rem,4vw,3rem);max-width:60rem}
-.story-kopf .datum{display:block;color:var(--gegenlicht);margin-bottom:.8rem}
+.story-kopf .datum{display:block;color:var(--gold-text);margin-bottom:.8rem}
 .story-kopf h1{font-size:clamp(2.8rem,1.6rem + 4.5vw,5.2rem);margin-bottom:2rem}
 .paarstimme{margin:0;border-left:2px solid var(--gegenlicht);padding-left:1.4rem;max-width:44rem}
 .paarstimme p{font-style:italic;font-size:1.2rem;color:var(--schiefer)}
@@ -109,13 +109,13 @@ footer a:hover{color:var(--weiss)}
   .raster--blog,.raster--storys{grid-template-columns:1fr}
   .galerie{columns:1}
   .marke img{height:28px}
-  .kopf .knopf{padding:.55rem .8rem;font-size:.78rem}
+  .kopf .knopf{padding:.55rem .8rem;font-size:.85rem}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Über mich */
 .um-kopf{padding:clamp(4rem,10vw,7rem) var(--rand) 1rem;text-align:center;max-width:56rem;margin:0 auto}
-.um-kopf .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.um-kopf .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
 .um-kopf h1{font-size:clamp(2.4rem,1.5rem + 3.8vw,4.6rem);margin-bottom:.8rem}
 .um-kopf p{font-family:var(--display);font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem);color:var(--schiefer);margin:0}
 .stimmenbild{display:grid;grid-template-columns:1fr minmax(16rem,24rem) 1fr;gap:0 clamp(2rem,4vw,4rem);align-items:center;max-width:84rem;margin:0 auto;padding:clamp(3rem,6vw,5rem) var(--rand) 1.5rem}
@@ -149,7 +149,7 @@ footer a:hover{color:var(--weiss)}
 .fakten-liste{list-style:none;margin:0;padding:0;align-self:center}
 .fakten-liste li{display:flex;align-items:baseline;gap:1.2rem;padding:1.1rem 0;border-bottom:1px solid var(--sand)}
 .fakten-liste li:first-child{border-top:1px solid var(--sand)}
-.fakten-liste strong{font-family:var(--display);font-weight:400;font-size:2.2rem;line-height:1;min-width:5.5rem;color:var(--gegenlicht)}
+.fakten-liste strong{font-family:var(--display);font-weight:400;font-size:2.2rem;line-height:1;min-width:5.5rem;color:var(--gold-text)}
 @media (max-width:900px){
   .stimmenbild{grid-template-columns:1fr;gap:2.2rem}
   .stimmenbild .bogen{order:-1;max-width:20rem;margin:0 auto 1rem;width:100%}
@@ -163,7 +163,7 @@ footer a:hover{color:var(--weiss)}
 
 /* Kontakt */
 .kontakt{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);max-width:84rem;margin:0 auto;padding:clamp(4rem,9vw,7rem) var(--rand) clamp(5rem,10vw,8rem)}
-.kontakt-intro .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.kontakt-intro .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
 .kontakt-intro h1{font-size:clamp(2.6rem,1.6rem + 4vw,4.6rem);margin-bottom:1.6rem}
 .kontakt-intro p{color:var(--schiefer)}
 .kontakt-intro .direkt{margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--sand)}
@@ -171,22 +171,22 @@ footer a:hover{color:var(--weiss)}
 .formular{background:var(--weiss);padding:clamp(1.6rem,4vw,3.2rem);display:grid;gap:1.6rem}
 .feldgruppe{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
 .feld{display:flex;flex-direction:column;gap:.5rem;min-width:0}
-.feld label,.feld legend{font-family:var(--klein);font-size:.82rem;letter-spacing:.06em;color:var(--schiefer);padding:0}
+.feld label,.feld legend{font-family:var(--klein);font-size:.95rem;letter-spacing:.03em;color:var(--schiefer);padding:0}
 .feld input,.feld textarea{font:inherit;font-size:1.1rem;color:var(--tiefsee);background:transparent;border:0;border-bottom:1px solid var(--sand);padding:.55rem 0;border-radius:0;width:100%}
 .feld textarea{min-height:7.5rem;resize:vertical;border:1px solid var(--sand);padding:.8rem}
 .feld input:focus,.feld textarea:focus{outline:none;border-color:var(--gegenlicht)}
-.feld input::placeholder,.feld textarea::placeholder{color:#9aa6a8;font-style:italic}
+.feld input::placeholder,.feld textarea::placeholder{color:#7d8a8c;font-style:italic}
 fieldset.feld{border:0;margin:0;padding:0}
 .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem}
 .chips label{position:relative;cursor:pointer}
 .chips input{position:absolute;opacity:0;width:1px;height:1px}
-.chips span{display:inline-block;font-family:var(--klein);font-size:.85rem;letter-spacing:.04em;padding:.65rem 1.1rem;border:1px solid var(--sand);color:var(--tiefsee);transition:background .2s,border-color .2s,color .2s}
+.chips span{display:inline-block;font-family:var(--klein);font-size:.92rem;letter-spacing:.04em;padding:.65rem 1.1rem;border:1px solid var(--sand);color:var(--tiefsee);transition:background .2s,border-color .2s,color .2s}
 .chips input:checked + span{background:var(--tiefsee);border-color:var(--tiefsee);color:var(--weiss)}
 .chips input:focus-visible + span{outline:2px solid var(--gegenlicht);outline-offset:2px}
 .zustimmung{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--schiefer)}
 .zustimmung input{margin-top:.35rem;accent-color:var(--tiefsee);width:1.05rem;height:1.05rem;flex:none}
 .formular .knopf{justify-self:start;cursor:pointer;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee);font-size:.95rem}
-.formular .knopf:hover{background:var(--gegenlicht);border-color:var(--gegenlicht)}
+.formular .knopf:hover{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
 .formular .knopf[disabled]{opacity:.6;cursor:wait}
 .meldung{font-size:1rem;color:#9b3b2a;margin:0}
 .meldung:empty{display:none}
@@ -194,20 +194,20 @@ fieldset.feld{border:0;margin:0;padding:0}
 
 /* Danke */
 .danke{max-width:52rem;margin:0 auto;padding:clamp(5rem,11vw,8rem) var(--rand) clamp(5rem,10vw,7rem)}
-.danke .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.danke .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
 .danke h1{font-size:clamp(2.8rem,1.6rem + 4.5vw,5rem);margin-bottom:1rem}
 .danke .unterzeile{font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.2vw,2.2rem);color:var(--schiefer);margin-bottom:3.5rem}
 .danke h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem);margin-bottom:1.6rem}
 .schritte-danke{list-style:none;margin:0 0 3rem;padding:0;counter-reset:s}
 .schritte-danke li{counter-increment:s;display:grid;grid-template-columns:4rem 1fr;align-items:baseline;padding:1.3rem 0;border-bottom:1px solid var(--sand)}
 .schritte-danke li:first-child{border-top:1px solid var(--sand)}
-.schritte-danke li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:2rem;color:var(--gegenlicht);line-height:1}
+.schritte-danke li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:2rem;color:var(--gold-text);line-height:1}
 .schritte-danke strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.45rem,1.2rem + .8vw,1.8rem);line-height:1.2;margin-bottom:.35rem}
 .schritte-danke span{font-size:1.05rem}
 .schritte-danke span{color:var(--schiefer)}
 .danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
 .knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
-.knopf--dunkel:hover{background:var(--gegenlicht);border-color:var(--gegenlicht)}
+.knopf--dunkel:hover{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
 .knopf--rahmen{color:var(--tiefsee)}
 .knopf--rahmen:hover{background:var(--tiefsee);color:var(--weiss)}
 @media (max-width:900px){.kontakt{grid-template-columns:1fr}}
@@ -222,14 +222,14 @@ fieldset.feld{border:0;margin:0;padding:0}
 /* Tagesablauf */
 .tagesablauf{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);max-width:84rem;margin:0 auto;padding:clamp(4rem,9vw,7rem) var(--rand)}
 .tagesablauf-kopf{align-self:start;position:sticky;top:7rem}
-.tagesablauf-kopf .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+.tagesablauf-kopf .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
 .tagesablauf-kopf h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem);margin-bottom:1.4rem}
 .tagesablauf-kopf p{color:var(--schiefer)}
 .zeitleiste{list-style:none;margin:0;padding:0 0 0 2rem;border-left:1px solid var(--sand)}
 .zeitleiste li{position:relative;padding:0 0 2.4rem}
 .zeitleiste li:last-child{padding-bottom:0}
 .zeitleiste li::before{content:"";position:absolute;left:calc(-2rem - 5px);top:.35rem;width:9px;height:9px;border-radius:50%;background:var(--gegenlicht)}
-.zeitleiste .zeit{display:block;color:var(--gegenlicht);margin-bottom:.4rem}
+.zeitleiste .zeit{display:block;color:var(--gold-text);margin-bottom:.4rem}
 .zeitleiste p{margin:0;font-size:1.15rem}
 @media (max-width:900px){.tagesablauf{grid-template-columns:1fr}.tagesablauf-kopf{position:static}}
 
@@ -239,9 +239,9 @@ fieldset.feld{border:0;margin:0;padding:0}
 .frage:last-child{border-bottom:1px solid var(--sand)}
 .frage summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1.5rem 0;font-family:var(--display);font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);line-height:1.25}
 .frage summary::-webkit-details-marker{display:none}
-.frage summary::after{content:"+";font-family:var(--klein);font-size:1.6rem;color:var(--gegenlicht);flex:none;transition:transform .25s}
+.frage summary::after{content:"+";font-family:var(--klein);font-size:1.6rem;color:var(--gold-text);flex:none;transition:transform .25s}
 .frage[open] summary::after{transform:rotate(45deg)}
-.frage summary:hover{color:var(--gegenlicht)}
+.frage summary:hover{color:var(--gold-text)}
 .antwort{padding:0 0 1.8rem;max-width:46rem;color:var(--tiefsee)}
 .antwort ol,.antwort ul{padding-left:1.3rem;margin:0 0 1.1em}
 .antwort li{margin-bottom:.6em}
@@ -249,5 +249,5 @@ fieldset.feld{border:0;margin:0;padding:0}
 
 .feld input[type=date]{min-height:2.6rem;font-family:var(--text);color:var(--tiefsee);cursor:pointer}
 .feld input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6}
-.feld input[type=date]:invalid:not(:focus){color:#9aa6a8}
+.feld input[type=date]:invalid:not(:focus){color:#7d8a8c}
 .pflicht{margin:0;color:var(--schiefer)}
