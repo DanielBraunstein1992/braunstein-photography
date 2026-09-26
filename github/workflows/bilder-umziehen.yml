@@ -1,0 +1,70 @@
+name: Bilder von Webflow holen
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  umziehen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Bilder laden und Links umstellen
+        run: |
+          python - <<'EOF'
+          import io, os, re, time, urllib.parse, urllib.request
+          from PIL import Image, ImageOps
+          MUSTER = re.compile(r'src="(https://cdn\.prod\.website-files\.com/[0-9a-f]+/([^"]+))"')
+          def name(roh): return re.sub(r'[^A-Za-z0-9._-]', '-', urllib.parse.unquote(roh))
+          ZIEL = 'assets/fotos'; os.makedirs(ZIEL, exist_ok=True)
+          seiten = [os.path.join(w, d) for w, _, ds in os.walk('.') for d in ds
+                    if d.endswith('.html') and '_quelle' not in w and '.git' not in w]
+          urls = {}
+          for s in seiten:
+              for voll, roh in MUSTER.findall(open(s, encoding='utf-8').read()): urls[voll] = name(roh)
+          print(len(urls), 'Bilder gefunden')
+          ok, fehler = set(), []
+          for i, (url, n) in enumerate(sorted(urls.items()), 1):
+              pfad = os.path.join(ZIEL, n)
+              if os.path.exists(pfad): ok.add(url); continue
+              for versuch in range(4):
+                  try:
+                      req = urllib.request.Request(urllib.parse.quote(url, safe=':/%()@&=+$,;~-._'),
+                                                   headers={'User-Agent': 'Mozilla/5.0'})
+                      daten = urllib.request.urlopen(req, timeout=60).read()
+                      break
+                  except Exception as ex:
+                      daten = None; time.sleep(3 * (versuch + 1)); letzter = ex
+              if not daten: fehler.append((url, str(letzter))); continue
+              try:
+                  bild = Image.open(io.BytesIO(daten))
+                  if max(bild.size) > 2000:
+                      bild = ImageOps.exif_transpose(bild); bild.thumbnail((2000, 2000))
+                      puffer = io.BytesIO()
+                      if n.lower().endswith('.webp'): bild.save(puffer, 'WEBP', quality=82)
+                      else: bild.convert('RGB').save(puffer, 'JPEG', quality=85, optimize=True, progressive=True)
+                      daten = puffer.getvalue()
+              except Exception as ex:
+                  print('Nicht verkleinert:', n, ex)
+              open(pfad, 'wb').write(daten); ok.add(url)
+              if i % 50 == 0: print(i, 'von', len(urls))
+          for s in seiten:
+              h = open(s, encoding='utf-8').read()
+              neu = MUSTER.sub(lambda m: f'src="/assets/fotos/{name(m.group(2))}"' if m.group(1) in ok else m.group(0), h)
+              if neu != h: open(s, 'w', encoding='utf-8').write(neu)
+          print(len(ok), 'Bilder umgezogen,', len(fehler), 'Fehler')
+          for f in fehler: print('FEHLER', *f)
+          EOF
+      - name: Speichern
+        run: |
+          git config user.name "Bilder-Umzug"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Bilder von Webflow auf die eigene Seite umgezogen" || echo "Nichts zu speichern"
+          git push
