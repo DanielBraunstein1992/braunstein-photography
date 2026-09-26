@@ -1,4 +1,111 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/hochzeitsfotografie",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hochzeitsfotos-mit-kindern-ja-bitte",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/wie-licht-eure-hochzeitsfotos-magisch-macht",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/hochzeitsfotos-bei-schietwetter",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/der-magische-moment-den-perfekten-first-look-einfangen",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/warum-eine-hochzeitsreportage-fuer-euren-grossen-tag-perfekt-ist",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/hochzeitsfotos-im-freien-frische-luft-und-gute-laune",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/plane-den-ultimativen-hochzeitstrend-oder-ist-das-schon-hochzeitswahn",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/der-perfekte-junggeselleninnenabschied",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/green-wedding-nachhaltige-hochzeiten-ganz-glamouroes",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/wie-sieht-der-perfekte-hochzeitstag-aus",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/die-perfekte-location-fur-eine-hochzeit",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/der-unterschied-zwischen-traditioneller-und-moderner-hochzeitsfotografie",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/7-vorteile-vom-after-wedding-shooting",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/heiraten-in-der-lubecker-bucht",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/6-merkmale-an-denen-du-gute-hochzeitsfotografen-erkennst",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/hochzeit-am-see",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/keine-angst-vorm-brautpaarshooting",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/heiraten-im-herbst-eine-leuchtende-herbsthochzeit",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/hochzeitsfotograf-vs-diy-zu-wem-sagt-ihr-ja",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/perfekte-tageszeit-fuer-das-brautpaarshooting",
+      "destination": "/blog",
+      "permanent": false
+    }
+  ]
 }

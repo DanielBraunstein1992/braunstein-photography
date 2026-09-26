@@ -4,11 +4,15 @@ Startseite: /home/claude/site/startseite.html (Vorlage) -> index.html
 Blog:       blog/<slug>.json      -> blog/<slug>.html
 Fotostorys: storys/<slug>.json    -> fotostorys/<slug>.html
 """
-import json, os, re, shutil, html
+import json, os, re, shutil, html, urllib.parse
 
 SRC = os.path.dirname(os.path.abspath(__file__))
 OUT = '/mnt/user-data/outputs/braunstein-website'
 CDN = 'https://cdn.prod.website-files.com/68ef69d6601002710ef48956/'
+# Fotos liegen seit dem Umzug unter /assets/fotos (gleiche Regel wie .github/workflows/bilder-umziehen.yml)
+WEBFLOW_BILD = re.compile(r'src="https://cdn\.prod\.website-files\.com/[0-9a-f]+/([^"]+)"')
+def foto_name(roh): return re.sub(r'[^A-Za-z0-9._-]', '-', urllib.parse.unquote(roh))
+def fotos_lokal(h): return WEBFLOW_BILD.sub(lambda m: f'src="/assets/fotos/{foto_name(m.group(1))}"', h)
 ALT = 'https://www.braunstein-photography.de'
 BASIS = 'https://braunstein-photography.vercel.app'  # beim Domainwechsel auf https://www.braunstein-photography.de ändern
 e = html.escape
@@ -328,6 +332,66 @@ def baue():
 <section class="faq-liste">{liste}</section>"""
     open(f'{OUT}/faq.html', 'w').write(seite('Häufige Fragen | Braunstein Photography', 'Antworten auf die häufigsten Fragen rund um eure Hochzeitsfotografie: Ablauf, Wartezeit, Kosten und Posen.', inhalt, 'faq'))
 
+    # Stadtseiten (gleiche Adressen wie auf der alten Seite)
+    st = json.load(open(f'{SRC}/staedte.json'))
+    fragen_alle = json.load(open(f'{SRC}/faq.json'))
+    storys_idx = {x[0]: x for x in listen['storys']}
+    ablauf = ''.join(f'<li><span class="zeit klein">{e(t)}</span><p>{e(x)}</p></li>' for t, x in st['ablauf'])
+    fragen_html = ''.join(f'<details class="frage"><summary>{e(fragen_alle[i][0])}</summary><div class="antwort">{fragen_alle[i][1]}</div></details>' for i in st['fragen'])
+    for d in st['seiten']:
+        text = ''.join(f'<p>{e(t)}</p>' for t in d['text'])
+        orte = ''
+        if d['orte']:
+            orte = f"""<section class="orte">
+  <h2>{e(d['orte_titel'])}</h2>
+  <ul class="orte-liste">{''.join(f'<li><h3>{e(n)}</h3><span class="klein">{e(o)}</span><p>{e(t)}</p></li>' for n, o, t in d['orte'])}</ul>
+  <p class="orte-fuss">{e(d['orte_fuss'])}</p>
+</section>"""
+        karten = ''.join(story_karte(storys_idx[x]) for x in d['storys'] if x in storys_idx)
+        qv = d['querverweis']
+        inhalt = f"""<section class="seitenkopf">
+  <span class="klein">{e(d['oberzeile'])}</span>
+  <h1>{e(d['h1'])}</h1>
+  <p>{e(d['intro'])}</p>
+  <p><a class="knopf knopf--gold" href="/kontakt">Lasst uns kennenlernen</a></p>
+</section>
+<figure class="stadt-bild"><img src="/assets/fotos/{d['bild']}" alt="{e(d['bild_alt'])}" style="object-position:{d['bild_position']}"></figure>
+<section class="persoenlich">
+  <div>
+    <h2>{e(d['h2'])}</h2>
+    {text}
+  </div>
+  <ul class="fakten-liste">
+    <li><strong>16</strong><span>Jahre Erfahrung als Hochzeitsfotograf</span></li>
+    <li><strong>500+</strong><span>Paare, die ich begleiten durfte</span></li>
+    <li><strong>24 Std.</strong><span>bis zu euren ersten Bildern</span></li>
+    <li><strong>7 Tage</strong><span>bis ihr alle Bilder habt</span></li>
+  </ul>
+</section>
+{orte}
+<section class="tagesablauf">
+  <div class="tagesablauf-kopf">
+    <span class="klein">Ablauf</span>
+    <h2>So läuft es mit mir ab.</h2>
+    <p>Von der ersten Nachricht bis zu euren Bildern. Ohne Stress, ohne Kleingedrucktes.</p>
+  </div>
+  <ol class="zeitleiste">{ablauf}</ol>
+</section>
+<section class="weitere">
+  <h2>Diese Paare durfte ich begleiten.</h2>
+  <div class="raster raster--storys">{karten}</div>
+</section>
+<section class="seitenkopf stadt-fragen-kopf"><h2>Was ihr euch vielleicht noch fragt.</h2></section>
+<section class="faq-liste">{fragen_html}
+  <p class="querverweis">{e(qv[0])} <a href="{qv[1]}">{e(qv[2])}</a> · <a href="/faq">Alle Fragen</a></p>
+</section>"""
+        open(f"{OUT}/{d['slug']}.html", 'w').write(seite(d['titel'], d['beschreibung'], inhalt))
+
+    # Weiterleitungen (alte Adressen, noch nicht umgezogene Artikel)
+    weiter = [{'source': '/hochzeitsfotografie', 'destination': '/', 'permanent': True}]
+    weiter += [{'source': f'/blog/{b[0]}', 'destination': '/blog', 'permanent': False} for b in listen['blog'] if b[0] not in blog_fertig]
+    json.dump({'cleanUrls': True, 'trailingSlash': False, 'redirects': weiter}, open(f'{OUT}/vercel.json', 'w'), ensure_ascii=False, indent=2)
+
     # Rechtliches
     def rtext(t):
         t = e(t).replace('\n', '<br>')
@@ -392,6 +456,7 @@ def baue():
 <meta name="twitter:card" content="summary_large_image">
 </head>"""
                 h = h.replace('</head>', kopf, 1)
+            h = fotos_lokal(h)
             if 'zustimmung.js' not in h:
                 h = h.replace('</body>', '<script src="/assets/zustimmung.js" defer></script>\n</body>', 1)
             open(voll, 'w').write(h)

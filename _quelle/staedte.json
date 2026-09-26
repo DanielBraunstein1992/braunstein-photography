@@ -1,0 +1,61 @@
+{
+  "ablauf": [
+    ["Eure Anfrage", "Ihr schickt mir ein paar Eckdaten. Innerhalb von 48 Stunden sage ich euch, ob euer Termin noch frei ist."],
+    ["Kennenlernen", "Wir sprechen ganz entspannt per Google Meet. Ihr merkt schnell, ob die Chemie stimmt, und ich erfahre, was euch wichtig ist."],
+    ["Bis zur Hochzeit", "Ich bin für eure Fragen da, gebe Tipps zum Zeitplan und empfehle euch auf Wunsch Dienstleister aus meinem Netzwerk. Wer mag, macht vorher ein Kennenlern-Shooting, zum Beispiel für die Einladungskarten."],
+    ["In der Hochzeitswoche", "Ein letztes Gespräch per Google Meet. Wir gehen den Ablauf durch, damit ihr euch am Tag selbst um nichts kümmern müsst."],
+    ["Euer Tag", "Ich bin mittendrin, behalte den Tag für euch im Blick und halte fest, wie er sich angefühlt hat."],
+    ["Danach", "Nach 24 Stunden habt ihr die ersten Bilder, spätestens nach 7 Tagen alle."]
+  ],
+  "fragen": [0, 2, 3],
+  "seiten": [
+    {
+      "slug": "hochzeitsfotografie-luebeck",
+      "titel": "Hochzeitsfotograf Lübeck – natürliche Hochzeitsreportagen | Braunstein Photography",
+      "beschreibung": "Hochzeitsfotograf aus Lübeck: natürliche, warme Hochzeitsreportagen in Lübeck, Travemünde und an der Lübecker Bucht. Erste Bilder nach 24 Stunden, alle nach 7 Tagen.",
+      "oberzeile": "Hochzeitsfotografie Lübeck",
+      "h1": "Euer Hochzeitsfotograf in Lübeck.",
+      "intro": "Ich bin Daniel, Hochzeitsfotograf aus Lübeck. Seit 16 Jahren begleite ich Paare in der Hansestadt, an der Lübecker Bucht und in ganz Schleswig-Holstein: natürlich, warm und ohne steifes Posieren.",
+      "bild": "695e32214a7874244204dd39_imgi_30_Hochzeit_Loreen_Ricco_080062024-408-scaled.webp",
+      "bild_alt": "Brautpaar am Strand, im Hintergrund Strandkörbe unter dunklen Wolken",
+      "bild_position": "50% 60%",
+      "h2": "Kurze Wege, viel Ortskenntnis.",
+      "text": [
+        "Wer in und um Lübeck heiratet, hat die schöne Qual der Wahl: die Altstadt mit ihren Backsteingassen, die Ostsee in Travemünde und entlang der Lübecker Bucht, Gutshöfe und Herrenhäuser im Umland.",
+        "Viele Locations hier kenne ich von etlichen Hochzeiten. Das hilft euch schon bei der Planung: wann das Licht am schönsten ist, wie viel Zeit ihr für eure Paarbilder einplanen solltet und wie der Tag entspannt bleibt."
+      ],
+      "orte_titel": "Hier bin ich oft.",
+      "orte": [
+        ["Meine Küstenscheune", "Travemünde", "Rund 200 Jahre alte Fachwerkscheune auf einem Hof, nur drei Kilometer von der Ostsee."],
+        ["Mein Forsthaus Waldhusen", "Lübeck-Kücknitz", "Reetgedecktes Forsthaus von 1765 im Waldhusener Forst, mit freier Trauung im Park hinter dem Haus."],
+        ["Herrenhaus Stockelsdorf", "Stockelsdorf", "Direkt an der Lübecker Stadtgrenze. Das Trauzimmer des Standesamts liegt im Haus, dazu ein Park mit Teich und Holzbrücke."],
+        ["Romantik Hotel Fuchsbau", "Timmendorfer Strand", "Reetgedecktes Stammhaus mit Garten und Tenne, nah an der Ostsee."],
+        ["Gut Pronstorf", "am Wardersee", "Barockes Herrenhaus am See, ein großer Park und alte Stallgebäude zum Feiern."]
+      ],
+      "orte_fuss": "Eure Location ist nicht dabei? Kein Problem, ich komme gern überall hin und schaue sie mir vorher mit euch an.",
+      "storys": ["hochzeit-loreen-ricco", "hochzeit-silja-florian", "hochzeit-melina-lennart"],
+      "querverweis": ["Ihr feiert in Hamburg?", "/hochzeitsfotografie-hamburg", "Hochzeitsfotografie in Hamburg"]
+    },
+    {
+      "slug": "hochzeitsfotografie-hamburg",
+      "titel": "Hochzeitsfotograf Hamburg – natürliche Hochzeitsreportagen | Braunstein Photography",
+      "beschreibung": "Hochzeitsfotograf für Hamburg und Umgebung: natürliche, warme Hochzeitsreportagen ohne steifes Posieren. Erste Bilder nach 24 Stunden, alle nach 7 Tagen.",
+      "oberzeile": "Hochzeitsfotografie Hamburg",
+      "h1": "Euer Hochzeitsfotograf für Hamburg.",
+      "intro": "Ich bin Daniel, Hochzeitsfotograf aus Lübeck. Hamburg liegt nur rund eine Stunde entfernt, und so begleite ich Paare in der Stadt genauso wie im Umland: natürlich, warm und ohne steifes Posieren.",
+      "bild": "695e2eeee26f7c532d8512a4_imgi_5_Hochzeit_Natalie_Sven_09092023-62.webp",
+      "bild_alt": "Brautpaar auf einer Brücke zwischen Backstein-Speichern in Hamburg",
+      "bild_position": "50% 55%",
+      "h2": "Stadt, Elbe oder Gut im Umland.",
+      "text": [
+        "Hamburg hat für Hochzeiten alles: Standesämter mitten in der Stadt, Backstein und Wasser, Feiern an der Elbe oder auf einem Gut vor den Toren der Stadt.",
+        "Egal, wo ihr heiratet: Ich bin mittendrin, halte mich im Hintergrund, wenn es darauf ankommt, und sorge dafür, dass ihr euren Tag zweimal erlebt. Einmal live und einmal in euren Bildern."
+      ],
+      "orte_titel": "",
+      "orte": [],
+      "orte_fuss": "",
+      "storys": ["hochzeit-nathalie-sven", "hochzeit-deike-matti", "hochzeit-saskia-lukas"],
+      "querverweis": ["Ihr feiert in Lübeck oder an der Ostsee?", "/hochzeitsfotografie-luebeck", "Hochzeitsfotografie in Lübeck"]
+    }
+  ]
+}

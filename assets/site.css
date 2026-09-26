@@ -251,3 +251,21 @@ fieldset.feld{border:0;margin:0;padding:0}
 .feld input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6}
 .feld input[type=date]:invalid:not(:focus){color:#7d8a8c}
 .pflicht{margin:0;color:var(--schiefer)}
+/* Stadtseiten */
+.stadt-bild{margin:0 0 clamp(1rem,3vw,2rem)}
+.stadt-bild img{width:100%;aspect-ratio:21/9;object-fit:cover}
+.stadt-bild ~ .persoenlich .fakten-liste strong{min-width:7.2rem}
+.persoenlich p{color:var(--schiefer)}
+.orte{background:var(--nebel);padding:clamp(4rem,9vw,7rem) var(--rand)}
+.orte h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem);max-width:84rem;margin:0 auto 2.5rem}
+.orte-liste{list-style:none;margin:0 auto;padding:0;max-width:84rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+.orte-liste li{border-top:1px solid var(--sand);padding-top:1.2rem}
+.orte-liste h3{font-size:1.55rem;margin:0 0 .3rem}
+.orte-liste .klein{color:var(--gold-text);display:block;margin-bottom:.7rem}
+.orte-liste p{margin:0;font-size:1.05rem;color:var(--schiefer)}
+.orte-fuss{max-width:84rem;margin:2.5rem auto 0;color:var(--schiefer);font-style:italic}
+.stadt-fragen-kopf{padding-bottom:1.5rem}
+.stadt-fragen-kopf h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem)}
+.querverweis{margin-top:2.5rem;color:var(--schiefer)}
+.querverweis a{color:var(--gold-text)}
+@media (max-width:700px){.stadt-bild img{aspect-ratio:4/3}}

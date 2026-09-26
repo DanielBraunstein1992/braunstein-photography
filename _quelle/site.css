@@ -1,5 +1,5 @@
 :root{
-  --nebel:#E8ECE9;--weiss:#F9FAF8;--tiefsee:#1E2C30;--schiefer:#4A585C;--gold-text:#8F5F1C;--sand:#D9CDB8;--gegenlicht:#C28A3A;
+  --nebel:#E8ECE9;--weiss:#F9FAF8;--tiefsee:#1E2C30;--schiefer:#4A585C;--gold-text:#8F5F1C;--gold-knopf:#9A6620;--sand:#D9CDB8;--gegenlicht:#C28A3A;
   --display:"Cormorant Garamond","Garamond","Iowan Old Style",Georgia,serif;
   --text:"Crimson Pro","Iowan Old Style",Georgia,serif;
   --klein:"Jura","Avenir Next","Segoe UI",sans-serif;
@@ -17,7 +17,7 @@ p{margin:0 0 1.1em}
 .knopf{display:inline-block;font-family:var(--klein);font-weight:400;font-size:.95rem;letter-spacing:.04em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
 .knopf--hell{color:var(--weiss)}
 .knopf--hell:hover{background:var(--weiss);color:var(--tiefsee)}
-.knopf--gold{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
+.knopf--gold{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
 .knopf--gold:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
 
 /* Kopf */
@@ -186,7 +186,7 @@ fieldset.feld{border:0;margin:0;padding:0}
 .zustimmung{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--schiefer)}
 .zustimmung input{margin-top:.35rem;accent-color:var(--tiefsee);width:1.05rem;height:1.05rem;flex:none}
 .formular .knopf{justify-self:start;cursor:pointer;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee);font-size:.95rem}
-.formular .knopf:hover{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
+.formular .knopf:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
 .formular .knopf[disabled]{opacity:.6;cursor:wait}
 .meldung{font-size:1rem;color:#9b3b2a;margin:0}
 .meldung:empty{display:none}
@@ -207,7 +207,7 @@ fieldset.feld{border:0;margin:0;padding:0}
 .schritte-danke span{color:var(--schiefer)}
 .danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
 .knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
-.knopf--dunkel:hover{background:var(--gegenlicht);border-color:var(--gegenlicht);color:var(--tiefsee)}
+.knopf--dunkel:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
 .knopf--rahmen{color:var(--tiefsee)}
 .knopf--rahmen:hover{background:var(--tiefsee);color:var(--weiss)}
 @media (max-width:900px){.kontakt{grid-template-columns:1fr}}
@@ -251,3 +251,21 @@ fieldset.feld{border:0;margin:0;padding:0}
 .feld input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6}
 .feld input[type=date]:invalid:not(:focus){color:#7d8a8c}
 .pflicht{margin:0;color:var(--schiefer)}
+/* Stadtseiten */
+.stadt-bild{margin:0 0 clamp(1rem,3vw,2rem)}
+.stadt-bild img{width:100%;aspect-ratio:21/9;object-fit:cover}
+.stadt-bild ~ .persoenlich .fakten-liste strong{min-width:7.2rem}
+.persoenlich p{color:var(--schiefer)}
+.orte{background:var(--nebel);padding:clamp(4rem,9vw,7rem) var(--rand)}
+.orte h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem);max-width:84rem;margin:0 auto 2.5rem}
+.orte-liste{list-style:none;margin:0 auto;padding:0;max-width:84rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+.orte-liste li{border-top:1px solid var(--sand);padding-top:1.2rem}
+.orte-liste h3{font-size:1.55rem;margin:0 0 .3rem}
+.orte-liste .klein{color:var(--gold-text);display:block;margin-bottom:.7rem}
+.orte-liste p{margin:0;font-size:1.05rem;color:var(--schiefer)}
+.orte-fuss{max-width:84rem;margin:2.5rem auto 0;color:var(--schiefer);font-style:italic}
+.stadt-fragen-kopf{padding-bottom:1.5rem}
+.stadt-fragen-kopf h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem)}
+.querverweis{margin-top:2.5rem;color:var(--schiefer)}
+.querverweis a{color:var(--gold-text)}
+@media (max-width:700px){.stadt-bild img{aspect-ratio:4/3}}
