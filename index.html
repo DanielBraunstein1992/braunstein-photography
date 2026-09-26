@@ -202,9 +202,12 @@
     .band{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:38vw;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
     .band::-webkit-scrollbar{display:none}
     .band img{scroll-snap-align:start}
-    .hero{display:block;min-height:0;background:var(--tiefsee)}
-    .hero img{position:relative;height:auto;aspect-ratio:4/5;max-height:85vh;object-position:39% 30%}
-    .hero-inhalt{padding-top:1.8rem}
+    .hero img{object-position:46% 30%}
+    .hero::before{background:
+      radial-gradient(ellipse 60% 25% at 50% 6%, rgba(226,170,90,.2), transparent 70%),
+      linear-gradient(180deg, rgba(30,44,48,.5) 0%, rgba(30,44,48,0) 18%, rgba(30,44,48,0) 38%, rgba(30,44,48,.7) 58%, rgba(30,44,48,.95) 100%)}
+    .hero-inhalt{padding-bottom:calc(2.2rem + env(safe-area-inset-bottom,0px))}
+    .hero-zeile{gap:1.4rem}
     .menue-knopf{display:inline-flex;align-items:center;position:relative;z-index:30}
     .kopf nav{position:fixed;inset:0;z-index:20;background:var(--tiefsee);color:var(--weiss);flex-direction:column;justify-content:center;align-items:flex-start;gap:1.4rem;padding:6rem var(--rand) calc(3rem + env(safe-area-inset-bottom,0px));opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
     .kopf.offen nav{opacity:1;visibility:visible}
