@@ -21,6 +21,18 @@ listen = json.load(open(f'{SRC}/data_listen.json'))
 blog_fertig = {f[:-5] for f in os.listdir(f'{SRC}/blog') if f.endswith('.json')}
 story_fertig = {f[:-5] for f in os.listdir(f'{SRC}/storys') if f.endswith('.json')}
 
+UNTERNEHMEN = {
+    '@type': 'ProfessionalService', '@id': f'{BASIS}/#unternehmen', 'name': 'Braunstein Photography',
+    'description': 'Hochzeitsfotograf aus Lübeck für Lübeck, Hamburg und Schleswig-Holstein. Natürliche, warme Hochzeitsreportagen.',
+    'url': f'{BASIS}/', 'telephone': '+49 176 14362401', 'image': f'{BASIS}/assets/og-bild.jpg', 'logo': f'{BASIS}/apple-touch-icon.png',
+    'priceRange': 'ab 900 €',
+    'address': {'@type': 'PostalAddress', 'streetAddress': 'Albert-Einstein-Straße 9', 'postalCode': '23617',
+                'addressLocality': 'Stockelsdorf', 'addressRegion': 'Schleswig-Holstein', 'addressCountry': 'DE'},
+    'areaServed': [{'@type': 'City', 'name': 'Lübeck'}, {'@type': 'City', 'name': 'Hamburg'}, {'@type': 'State', 'name': 'Schleswig-Holstein'}],
+    'founder': {'@type': 'Person', 'name': 'Daniel Braunstein', 'jobTitle': 'Hochzeitsfotograf'},
+    'sameAs': ['https://www.instagram.com/braunstein_photography/', 'https://www.facebook.com/braunsteinphotography/']}
+def json_ld(d): return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + '</script>'
+
 def blog_url(slug):  return f'/blog/{slug}' if slug in blog_fertig else f'{ALT}/blog/{slug}'
 def story_url(slug): return f'/fotostorys/{slug}' if slug in story_fertig else f'{ALT}/fotostorys/{slug}'
 
@@ -357,7 +369,7 @@ def baue():
   <p>{e(d['intro'])}</p>
   <p><a class="knopf knopf--gold" href="/kontakt">Lasst uns kennenlernen</a></p>
 </section>
-<figure class="stadt-bild"><img src="/assets/fotos/{d['bild']}" alt="{e(d['bild_alt'])}" style="object-position:{d['bild_position']}"></figure>
+<figure class="stadt-bild"><img src="/assets/bilder/{d['bild']}" alt="{e(d['bild_alt'])}" width="2000" height="1333" fetchpriority="high" style="object-position:{d['bild_position']}"></figure>
 <section class="persoenlich">
   <div>
     <h2>{e(d['h2'])}</h2>
@@ -387,7 +399,14 @@ def baue():
 <section class="faq-liste">{fragen_html}
   <p class="querverweis">{e(qv[0])} <a href="{qv[1]}">{e(qv[2])}</a> · <a href="/faq">Alle Fragen</a></p>
 </section>"""
-        open(f"{OUT}/{d['slug']}.html", 'w').write(seite(d['titel'], d['beschreibung'], inhalt))
+        url = f"{BASIS}/{d['slug']}"
+        ld = {'@context': 'https://schema.org', '@graph': [UNTERNEHMEN,
+              {'@type': 'WebPage', '@id': url, 'url': url, 'name': d['titel'], 'description': d['beschreibung'], 'inLanguage': 'de-DE',
+               'about': {'@id': UNTERNEHMEN['@id']}, 'primaryImageOfPage': f"{BASIS}/assets/bilder/{d['bild']}"},
+              {'@type': 'BreadcrumbList', 'itemListElement': [
+                  {'@type': 'ListItem', 'position': 1, 'name': 'Startseite', 'item': f'{BASIS}/'},
+                  {'@type': 'ListItem', 'position': 2, 'name': d['kurzname'], 'item': url}]}]}
+        open(f"{OUT}/{d['slug']}.html", 'w').write(seite(d['titel'], d['beschreibung'], inhalt, extra=json_ld(ld)))
 
     # Weiterleitungen (alte Adressen, noch nicht umgezogene Artikel)
     weiter = [{'source': '/hochzeitsfotografie', 'destination': '/', 'permanent': True}]
@@ -426,6 +445,8 @@ def baue():
     h = h.replace(f'href="{ALT}/blog"', 'href="/blog"')
     h = re.sub(re.escape(ALT) + r'/fotostorys/([a-z0-9-]+)', lambda m: story_url(m.group(1)), h)
     h = re.sub(re.escape(ALT) + r'/blog/([a-z0-9-]+)', lambda m: blog_url(m.group(1)), h)
+    ld = {'@context': 'https://schema.org', '@graph': [UNTERNEHMEN, {'@type': 'WebSite', '@id': f'{BASIS}/#website', 'url': f'{BASIS}/', 'name': 'Braunstein Photography', 'inLanguage': 'de-DE', 'publisher': {'@id': UNTERNEHMEN['@id']}}]}
+    if 'application/ld+json' not in h: h = h.replace('</body>', json_ld(ld) + '\n</body>', 1)
     open(f'{OUT}/index.html', 'w').write(h)
 
     # Favicon, Vorschaubild, Canonical in alle Seiten
