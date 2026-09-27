@@ -107,9 +107,10 @@ document.addEventListener('keydown',function(e){{if(e.key==='Escape')s(false)}})
 '''
 
 def blog_karte(b):
-    slug, titel, bild, text = b
+    slug, titel, bild, text = b[:4]
+    pos = f' style="object-position:{b[4]}"' if len(b) > 4 and b[4] else ''
     return f'''<a class="karte" href="{blog_url(slug)}">
-  <img src="{CDN}{bild}" alt="Titelbild zum Artikel: {e(titel)}" loading="lazy">
+  <img src="{CDN}{bild}" alt="Titelbild zum Artikel: {e(titel)}" loading="lazy"{pos}>
   <h3>{e(titel)}</h3>
   <p>{e(text)}</p>
   <span class="klein mehr">Artikel lesen</span>
