@@ -28,7 +28,7 @@
     '.zustimmung-box a{color:#1E2C30}' +
     '.zustimmung-knoepfe{display:flex;gap:.7rem;flex-wrap:wrap}' +
     '.zustimmung-knoepfe button{flex:1 1 8rem;font-family:"Jura","Segoe UI",sans-serif;font-size:.88rem;letter-spacing:.05em;padding:.85rem 1rem;border:1px solid #1E2C30;background:#1E2C30;color:#F9FAF8;cursor:pointer}' +
-    '.zustimmung-knoepfe button:hover{background:#C28A3A;border-color:#C28A3A;color:#1E2C30}' +
+    '.zustimmung-knoepfe button:hover{background:#9A6620;border-color:#9A6620;color:#F9FAF8}' +
     '.zustimmung-link{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;letter-spacing:inherit}' +
     '.zustimmung-link:hover{color:#F9FAF8}';
   document.head.appendChild(stil);
