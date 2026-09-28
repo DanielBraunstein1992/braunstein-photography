@@ -42,55 +42,68 @@ def seite(c, doc):
     c.restoreState()
 
 doc = BaseDocTemplate(ZIEL, pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=22 * mm,
-                      title='Zeitplan-Vorlage für euren Hochzeitstag', author='Daniel Braunstein')
+                      title='Mein Zeitplan für euren Hochzeitstag', author='Daniel Braunstein')
 doc.addPageTemplates([PageTemplate(frames=[Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id='f')], onPage=seite)])
 
 def punkte(liste):
     return [Paragraph(p, s['punkt'], bulletText='·') for p in liste]
 
 inhalt = [
-    Paragraph('Zeitplan-Vorlage für euren Hochzeitstag', s['titel']),
-    Paragraph('VON DANIEL BRAUNSTEIN, HOCHZEITSFOTOGRAF AUS LÜBECK', s['unter']),
-    Paragraph('Den eigenen Hochzeitstag stellt man sich gut strukturiert und entspannt vor. Damit das gelingt, hilft ein '
-              'Tagesablauf, der eure Wünsche abdeckt und trotzdem Luft lässt. Hier findet ihr ein Beispiel, die wichtigsten '
-              'Fragen für euren eigenen Plan und ganz am Ende eine Vorlage zum Ausfüllen.', s['text']),
-    Paragraph('Ein Beispiel: Standesamt und Trauung an einem Tag', s['h2']),
-    Paragraph('Die Königsdisziplin. Natürlich ist das nur eine Empfehlung, aber so funktionieren zwei Trauungen an einem Tag:', s['text']),
+    Paragraph('Mein Zeitplan für euren Hochzeitstag', s['titel']),
+    Paragraph('VON DANIEL BRAUNSTEIN, HOCHZEITSFOTOGRAF AUS LÜBECK · AUS ÜBER 500 HOCHZEITEN', s['unter']),
+    Paragraph('So plane ich einen ganzen Tag mit standesamtlicher und kirchlicher Trauung. Natürlich ist jede Hochzeit anders, '
+              'aber dieser Ablauf hat sich bei mir immer wieder bewährt. Ganz am Ende findet ihr eine Vorlage für euren eigenen Plan.', s['text']),
+    Paragraph('Ein Tag mit Standesamt und Kirche', s['h2']),
 ]
-beispiel = [('7 Uhr', 'Getting Ready'), ('9 Uhr', 'Paarshooting'), ('10 Uhr', 'Standesamtliche Trauung'),
-            ('11 Uhr', 'Brunch oder Mittagessen'), ('14 Uhr', 'Kirchliche oder freie Trauung'), ('15 Uhr', 'Sektempfang an der Location'),
-            ('16.30 Uhr', 'Hochzeitstorte, Kuchen und Nachmittagsaktivitäten'), ('19 Uhr', 'Abendessen mit Musik'),
-            ('21 Uhr', 'Hochzeitstanz und Eröffnung der Tanzfläche'), ('23 Uhr', 'Snacks und Erfrischungen')]
-t = Table([[Paragraph(z, s['zeit']), Paragraph(w, s['zelle'])] for z, w in beispiel], colWidths=[28 * mm, doc.width - 28 * mm])
-t.setStyle(TableStyle([('LINEBELOW', (0, 0), (-1, -1), 0.5, SAND), ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                       ('TOPPADDING', (0, 0), (-1, -1), 4), ('BOTTOMPADDING', (0, 0), (-1, -1), 4)]))
-inhalt += [t, Spacer(1, 4)]
-inhalt += [
+ablauf = [
+    ('8 Uhr', 'Getting Ready', ''),
+    ('9.50 Uhr', 'First Look (optional)', 'Nur ihr zwei. Eure Gäste warten schon im Standesamt oder um die Ecke. Ein intimer Moment zu zweit, bevor es losgeht.'),
+    ('10 Uhr', 'Standesamtliche Trauung', 'Danach können wir eure Gäste Spalier stehen lassen.'),
+    ('11 Uhr', 'Brautpaarshooting, 30 Minuten', 'Kurz und knackig.'),
+    ('12 Uhr', 'Mittagessen', ''),
+    ('14 Uhr', 'Kirchliche Trauung', 'Danach nehmt ihr draußen die Glückwünsche entgegen. Bei 100 Gästen dauert das bei mir etwa 20 Minuten.'),
+    ('15 Uhr', 'Sektempfang', ''),
+    ('15.30 Uhr', 'Großes Gruppenbild und weitere Gruppenbilder', ''),
+    ('16.30 Uhr', 'Hochzeitstorte', ''),
+    ('16.45 Uhr', 'Brautpaarshooting, 20 bis 30 Minuten', ''),
+    ('19 Uhr', 'Abendessen', ''),
+    ('20.30 Uhr', 'Sonnenuntergangs-Shooting bis 21 Uhr', ''),
+    ('21 Uhr', 'Hochzeitstanz', 'Danach wird nur noch gefeiert.'),
+    ('24 Uhr', 'Mitternachtssnack', ''),
+]
+zeilen = []
+for z, w, n in ablauf:
+    txt = f'<font name="TextB">{w}</font>' + (f'<br/><font name="TextI" color="#4A585C">{n}</font>' if n else '')
+    zeilen.append([Paragraph(z, s['zeit']), Paragraph(txt, s['zelle'])])
+t = Table(zeilen, colWidths=[24 * mm, doc.width - 24 * mm])
+t.setStyle(TableStyle([('LINEBELOW', (0, 0), (-1, -1), 0.5, SAND), ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                       ('TOPPADDING', (0, 0), (-1, -1), 3.2), ('BOTTOMPADDING', (0, 0), (-1, -1), 3.2)]))
+inhalt += [t, Spacer(1, 8)]
+hinweis = Table([[Paragraph('<font name="Display" size="15" color="#1E2C30">Warum ich die Paarbilder aufteile</font><br/>'
+                            'Ich teile die Brautpaarshootings bewusst in kurze Sequenzen. Ihr sollt mit euren Gästen feiern '
+                            'und nicht drei Stunden mit mir Hochzeitsbilder machen.', s['text'])]], colWidths=[doc.width])
+hinweis.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, -1), NEBEL), ('LEFTPADDING', (0, 0), (-1, -1), 12),
+                             ('RIGHTPADDING', (0, 0), (-1, -1), 12), ('TOPPADDING', (0, 0), (-1, -1), 9), ('BOTTOMPADDING', (0, 0), (-1, -1), 5)]))
+inhalt += [KeepTogether(hinweis), PageBreak(),
+    Paragraph('Meine Tipps aus Erfahrung', s['h2']),
+    Paragraph('<font name="TextB">Die Torte am Nachmittag.</font> Aus Erfahrung passt die Hochzeitstorte am besten um 16.30 Uhr. '
+              'Den Rest könnt ihr abends wunderbar noch einmal zum Dessert dazustellen.', s['text']),
+    Paragraph('<font name="TextB">Der Hochzeitstanz um 21 Uhr.</font> Eure Gäste und ihr wollt irgendwann einfach feiern. '
+              'Schaut, dass bis dahin alle Programmpunkte erledigt sind, damit ihr danach nur noch Party machen könnt.', s['text']),
+    Paragraph('<font name="TextB">Spalier und Glückwünsche.</font> Nach dem Standesamt können eure Gäste Spalier stehen. '
+              'Nach der kirchlichen Trauung nehmt ihr die Glückwünsche draußen entgegen, bei 100 Gästen sind das etwa 20 Minuten.', s['text']),
+    Paragraph('<font name="TextB">Sagt es euren Gästen.</font> Wenn alle wissen, wann die Gruppenbilder stattfinden, '
+              'wartet niemand, und ihr könnt den Tag genießen.', s['text']),
     Paragraph('So plant ihr euren eigenen Ablauf', s['h2']),
 ] + punkte([
-    'Schreibt auf, wann die Trauung stattfindet und wann ihr gern zu Abend essen würdet.',
-    'Bedenkt die Anfahrtszeiten zur Trauung und zur Location. Wann müsst ihr euch morgens fertig machen, wann losfahren, und wo wird geparkt?',
-    'Direkt nach der Trauung braucht ihr Zeit für die Glückwünsche. Je nach Anzahl der Gäste sind 60 bis 90 Minuten sinnvoll.',
-    'Wann sollen eure Paarbilder entstehen? Vor der Trauung ganz für euch, nach der Trauung voller Emotionen oder im Abendlicht?',
-    'Plant am Nachmittag Zeitpuffer ein, eure Gäste haben bestimmt Überraschungen für euch. Legt ein paar Fixpunkte fest, zum Beispiel für die Gruppenfotos.',
-    'Für das Abendessen braucht ihr mindestens 90 Minuten, damit alle entspannt essen und reden können.',
-    'Überlegt, wann die Torte angeschnitten wird und wann der Hochzeitstanz folgt.',
-])
-inhalt += [PageBreak(),
-    Paragraph('Wann ist die beste Zeit für eure Paarbilder?', s['h2']),
-    Paragraph('<font name="TextB">Vor der Trauung, intim und ruhig.</font> Ihr habt Zeit und einen Moment nur für euch, und Frisur, Make-up und Outfits sitzen noch perfekt. '
-              'Dafür seht ihr euch schon vor der Trauung, das solltet ihr vorher entscheiden.', s['text']),
-    Paragraph('<font name="TextB">Nach der Trauung, voller Emotionen.</font> Am besten dann, wenn ohnehin ein Ortswechsel ansteht. '
-              'Eure Gäste können in Ruhe ankommen, und ihr habt einen Moment für euch.', s['text']),
-    Paragraph('<font name="TextB">In den Abendstunden.</font> Das goldene Licht verzaubert jedes Bild. Zwischen Empfang und Abendprogramm reichen '
-              'manchmal schon 20 Minuten für wunderschöne Bilder im Sonnenuntergang.', s['text']),
-    Spacer(1, 4),
-    Paragraph('Mein Tipp: Sagt euren Gästen, wann die Gruppenfotos stattfinden, und gebt ihnen eine grobe Orientierung im Tagesablauf. '
-              'Dann wartet niemand, und ihr könnt den Tag genießen.', s['tipp']),
-    Paragraph('Euer Zeitplan', s['h2']),
-]
-leer = [[Paragraph('UHRZEIT', s['klein']), Paragraph('WAS PASSIERT', s['klein']), Paragraph('WO', s['klein']), Paragraph('NOTIZ', s['klein'])]] + [['', '', '', ''] for _ in range(15)]
-lt = Table(leer, colWidths=[24 * mm, 70 * mm, 38 * mm, doc.width - 132 * mm], rowHeights=[7 * mm] + [8.2 * mm] * 15)
+    'Schreibt auf, wann die Trauung stattfindet und wann ihr zu Abend essen wollt.',
+    'Bedenkt die Anfahrtszeiten zur Trauung und zur Location, und wo geparkt wird.',
+    'Plant am Nachmittag Zeitpuffer ein, eure Gäste haben bestimmt Überraschungen für euch.',
+    'Für das Abendessen braucht ihr mindestens 90 Minuten.',
+    'Schaut, wann bei euch die Sonne untergeht, und plant das Sonnenuntergangs-Shooting davor ein.',
+]) + [Paragraph('Euer Zeitplan', s['h2'])]
+leer = [[Paragraph('UHRZEIT', s['klein']), Paragraph('WAS PASSIERT', s['klein']), Paragraph('WO', s['klein']), Paragraph('NOTIZ', s['klein'])]] + [['', '', '', ''] for _ in range(11)]
+lt = Table(leer, colWidths=[24 * mm, 70 * mm, 38 * mm, doc.width - 132 * mm], rowHeights=[7 * mm] + [8 * mm] * 11)
 lt.setStyle(TableStyle([('LINEBELOW', (0, 0), (-1, -1), 0.5, SAND), ('LINEBELOW', (0, 0), (-1, 0), 0.8, GOLD),
                         ('VALIGN', (0, 0), (-1, -1), 'BOTTOM')]))
 inhalt += [lt, Spacer(1, 10)]

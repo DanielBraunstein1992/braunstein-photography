@@ -313,8 +313,8 @@
     <div class="vorlage-innen">
       <div>
         <span class="klein">Noch mitten in der Planung?</span>
-        <h2>Meine Zeitplan-Vorlage für euren Hochzeitstag.</h2>
-        <p>Ein Beispiel-Ablauf, die wichtigsten Fragen für euren eigenen Plan, die beste Zeit für eure Paarbilder und eine Vorlage zum Ausfüllen. Kostenlos als PDF, direkt zum Herunterladen.</p>
+        <h2>Mein Zeitplan für euren Hochzeitstag.</h2>
+        <p>So plane ich einen ganzen Tag mit Standesamt und Kirche, von 8 Uhr bis zum Mitternachtssnack. Dazu meine Tipps aus über 500 Hochzeiten und eine Vorlage für euren eigenen Plan. Kostenlos als PDF, direkt zum Herunterladen.</p>
       </div>
       <form class="formular" id="vorlage-formular">
         <input type="hidden" name="access_key" value="{{SCHLUESSEL}}">
@@ -330,7 +330,7 @@
         <div class="feld"><label for="v-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="v-datum" name="Hochzeitsdatum" type="date"></div>
         <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass Daniel mich zu meiner Hochzeitsfotografie kontaktieren darf. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
         <p class="meldung" role="alert"></p>
-        <button class="knopf" type="submit">Vorlage herunterladen</button>
+        <button class="knopf" type="submit">Zeitplan herunterladen</button>
       </form>
     </div>
   </section>
@@ -364,7 +364,7 @@
     });
   }
   senden(document.getElementById('anfrage-formular'),'/danke','Termin prüfen lassen',false);
-  senden(document.getElementById('vorlage-formular'),'/zeitplan-vorlage','Vorlage herunterladen',true);
+  senden(document.getElementById('vorlage-formular'),'/zeitplan-vorlage','Zeitplan herunterladen',true);
   var kk=document.querySelector('.klebeknopf'),ziele=[document.querySelector('.hero'),document.getElementById('anfrage'),document.getElementById('vorlage')].filter(Boolean);
   if(kk&&'IntersectionObserver' in window){
     var sicht=new Map();kk.classList.add('versteckt');

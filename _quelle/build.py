@@ -439,9 +439,9 @@ def baue():
     inhalt = f'''<section class="danke">
   <span class="klein">Eure Vorlage ist bereit</span>
   <h1>Viel Freude beim Planen!</h1>
-  <p class="unterzeile">Hier ist eure Zeitplan-Vorlage für den Hochzeitstag.</p>
+  <p class="unterzeile">Hier ist mein Zeitplan für euren Hochzeitstag, mit Vorlage für euren eigenen Plan.</p>
   <div class="danke-knoepfe">
-    <a class="knopf knopf--dunkel" href="/downloads/zeitplan-vorlage-hochzeitstag.pdf" download>Vorlage herunterladen (PDF)</a>
+    <a class="knopf knopf--dunkel" href="/downloads/zeitplan-vorlage-hochzeitstag.pdf" download>Zeitplan herunterladen (PDF)</a>
   </div>
   <h2>Und wenn ihr noch einen Fotografen sucht</h2>
   <p>Ich begleite rund 30 Hochzeiten im Jahr, erste Bilder gibt es nach 24 Stunden, alle nach spätestens 7 Tagen. Fragt euer Datum einfach unverbindlich an.</p>
