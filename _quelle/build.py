@@ -416,8 +416,41 @@ def baue():
     formular_stil = '\n'.join('  ' + z for z in css if re.match(r'\s*(\.formular|\.feld|fieldset\.feld|\.chips|\.zustimmung|\.meldung|\.unsichtbar|\.frage|\.antwort|\.pflicht)', z))
     fr = json.load(open(f'{SRC}/faq.json'))
     faq_l = ''.join(f'<details class="frage"><summary>{e(fr[i][0])}</summary><div class="antwort">{fr[i][1]}</div></details>' for i in (0, 4, 5))
-    lp = open(f'{SRC}/landing.html').read().replace('{{STIL}}', stil).replace('{{FORMULAR_STIL}}', formular_stil).replace('{{FAQ}}', faq_l).replace('{{SCHLUESSEL}}', schl)
+    wa = 'https://wa.me/4917614362401?text=' + urllib.parse.quote('Hallo Daniel, wir heiraten am … in … und würden gern wissen, ob du an dem Tag noch frei bist.')
+    tag_bilder = [('16082025-45', 'Getting Ready'), ('16082025-58', ''), ('16082025-63', ''), ('16082025-99', ''),
+                  ('16082025-238', 'Trauung am Strand'), ('16082025-334', 'Glückwünsche'), ('16082025-420', ''),
+                  ('16082025-484-1', 'Paarbilder'), ('16082025-651', ''), ('16082025-714', 'Abendlicht'),
+                  ('16082025-760', 'Party'), ('16082025-822', '')]
+    sf = json.load(open(f'{SRC}/storys/hochzeit-silja-florian.json'))['bilder']
+    tag = []
+    for kenn, text in tag_bilder:
+        datei = next(b for b in sf if b.endswith(f'_Silja_Florian_{kenn}.jpeg.webp'))
+        cap = f'<figcaption>{text}</figcaption>' if text else ''
+        tag.append(f'      <figure><img src="{CDN}{datei}" alt="Hochzeit von Silja und Florian auf Fehmarn{": " + text if text else ""}" loading="lazy">{cap}</figure>')
+    lp = (open(f'{SRC}/landing.html').read().replace('{{STIL}}', stil).replace('{{FORMULAR_STIL}}', formular_stil)
+          .replace('{{FAQ}}', faq_l).replace('{{SCHLUESSEL}}', schl).replace('{{WA}}', e(wa)).replace('{{TAG}}', '\n'.join(tag)))
+    assert '{{' not in lp
     open(f'{OUT}/anfrage.html', 'w').write(lp)
+
+    # Zeitplan-Vorlage: Download-Seite nach dem Eintragen
+    if os.path.exists(f'{SRC}/downloads'):
+        if os.path.exists(f'{OUT}/downloads'): shutil.rmtree(f'{OUT}/downloads')
+        shutil.copytree(f'{SRC}/downloads', f'{OUT}/downloads')
+    inhalt = f'''<section class="danke">
+  <span class="klein">Eure Vorlage ist bereit</span>
+  <h1>Viel Freude beim Planen!</h1>
+  <p class="unterzeile">Hier ist eure Zeitplan-Vorlage für den Hochzeitstag.</p>
+  <div class="danke-knoepfe">
+    <a class="knopf knopf--dunkel" href="/downloads/zeitplan-vorlage-hochzeitstag.pdf" download>Vorlage herunterladen (PDF)</a>
+  </div>
+  <h2>Und wenn ihr noch einen Fotografen sucht</h2>
+  <p>Ich begleite rund 30 Hochzeiten im Jahr, erste Bilder gibt es nach 24 Stunden, alle nach spätestens 7 Tagen. Fragt euer Datum einfach unverbindlich an.</p>
+  <div class="danke-knoepfe">
+    <a class="knopf knopf--dunkel" href="/anfrage#anfrage">Ist unser Datum noch frei?</a>
+    <a class="knopf knopf--rahmen" href="{e(wa)}" target="_blank" rel="noopener">Per WhatsApp schreiben</a>
+  </div>
+</section>'''
+    open(f'{OUT}/zeitplan-vorlage.html', 'w').write(seite('Eure Zeitplan-Vorlage | Braunstein Photography', 'Zeitplan-Vorlage für euren Hochzeitstag.', inhalt, cta=False).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1))
 
     # Weiterleitungen (alte Adressen, noch nicht umgezogene Artikel)
     weiter = [{'source': '/hochzeitsfotografie', 'destination': '/', 'permanent': True}]

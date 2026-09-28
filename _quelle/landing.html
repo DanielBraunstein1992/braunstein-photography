@@ -40,13 +40,57 @@
   .fuss-klein a{text-decoration:none;margin-left:1.5rem}
   .fuss-klein a:first-child{margin-left:0}
   .klebeknopf{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;padding:.7rem var(--rand) calc(.7rem + env(safe-area-inset-bottom,0px));background:rgba(30,44,48,.96);backdrop-filter:blur(6px)}
-  .klebeknopf .knopf{display:block;text-align:center;width:100%}
+  .klebeknopf .knopf{display:block;text-align:center}
+  .hero-knoepfe{display:flex;flex-direction:column;align-items:flex-start;gap:.8rem}
+  .wa-link{font-family:var(--klein);font-size:.92rem;letter-spacing:.04em;color:var(--sand);text-underline-offset:4px;opacity:0;animation:aufsteigen 1.4s 1.2s ease forwards}
+  .wa-link:hover{color:var(--weiss)}
+  .scheu-bereich{background:var(--weiss)}
+  .tag-kopf{max-width:84rem;margin:0 auto 3rem}
+  .tag-kopf .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
+  .tag-kopf h2{margin-bottom:1.2rem}
+  .tag-kopf p{max-width:40rem;color:var(--schiefer)}
+  .tag-galerie{max-width:84rem;margin:0 auto;column-count:3;column-gap:10px}
+  .tag-galerie figure{margin:0 0 10px;break-inside:avoid;position:relative}
+  .tag-galerie img{width:100%;height:auto}
+  .tag-galerie figcaption{position:absolute;left:.7rem;bottom:.6rem;font-family:var(--klein);font-size:.8rem;letter-spacing:.06em;color:var(--weiss);background:rgba(30,44,48,.55);padding:.25rem .55rem}
+  .tag-zitat{max-width:52rem;margin:3.5rem auto 0;text-align:center}
+  .tag-zitat p{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,1.1rem + 1.6vw,2.2rem);line-height:1.3;margin-bottom:1rem}
+  .tag-zitat cite{font-style:normal;color:var(--schiefer)}
+  .karten-stimmen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,2.5vw,2.5rem);max-width:84rem;margin:0 auto}
+  .stimm-karte{margin:0;background:rgba(249,250,248,.05);border:1px solid rgba(217,205,184,.2);display:flex;flex-direction:column}
+  .stimm-karte img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%}
+  .stimm-karte blockquote{margin:0;padding:1.4rem 1.5rem .6rem}
+  .stimm-karte p{font-size:1.12rem;font-style:italic;line-height:1.55;margin:0}
+  .stimm-karte figcaption{padding:0 1.5rem 1.4rem;color:var(--sand);margin-top:auto}
+  .enthalten{background:var(--weiss)}
+  .enthalten-innen{max-width:60rem;margin:0 auto}
+  .enthalten h2{margin-bottom:2rem}
+  .enthalten ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 2.5rem}
+  .enthalten li{position:relative;padding:1rem 0 1rem 2.1rem;border-top:1px solid var(--sand);font-size:1.12rem}
+  .enthalten li::before{content:"";position:absolute;left:.2rem;top:1.45rem;width:.9rem;height:.5rem;border-left:2px solid var(--gold-text);border-bottom:2px solid var(--gold-text);transform:rotate(-45deg)}
+  .anfrage-text .direkt a.wa-knopf{display:inline-block;margin-top:1.2rem;font-family:var(--klein);font-size:.95rem;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
+  .anfrage-text .direkt a.wa-knopf:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
+  .unter-knopf{margin:-.6rem 0 0;color:var(--schiefer)}
+  .vorlage{background:var(--tiefsee);color:var(--weiss)}
+  .vorlage-innen{max-width:84rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
+  .vorlage .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
+  .vorlage h2{margin-bottom:1.4rem}
+  .vorlage p{color:var(--sand)}
+  .vorlage .formular{color:var(--tiefsee)}
+  .fuss-klein ul{list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex-wrap:wrap}
+  .klebeknopf{gap:.6rem}
+  .klebeknopf .knopf{flex:1}
+  .klebeknopf .klebe-wa{flex:0 0 auto;color:var(--weiss);border-color:rgba(249,250,248,.5)}
 {{FORMULAR_STIL}}
   @media (max-width:900px){
     .belege ul{grid-template-columns:1fr 1fr}
     .anfrage-innen{grid-template-columns:1fr}
     .kopf .knopf{display:none}
-    .klebeknopf{display:block}
+    .klebeknopf{display:flex}
+    .tag-galerie{column-count:2;column-gap:6px}
+    .tag-galerie figure{margin-bottom:6px}
+    .karten-stimmen,.vorlage-innen{grid-template-columns:1fr}
+    .enthalten ul{grid-template-columns:1fr}
     .klebeknopf.versteckt{display:none}
   }
   @media (max-width:560px){
@@ -69,7 +113,10 @@
       <h1>Damit ihr euren Tag zweimal erlebt.</h1>
       <div class="hero-zeile">
         <p>Natürliche Hochzeitsreportagen aus Lübeck. Ich bin mittendrin, behalte den Tag für euch im Blick, und nach 24 Stunden habt ihr die ersten Bilder.</p>
-        <a class="knopf knopf--hell" href="#anfrage">Ist euer Datum noch frei?</a>
+        <div class="hero-knoepfe">
+          <a class="knopf knopf--hell" href="#anfrage">Ist euer Datum noch frei?</a>
+          <a class="wa-link" href="{{WA}}" target="_blank" rel="noopener">oder schreibt mir per WhatsApp</a>
+        </div>
       </div>
     </div>
   </section>
@@ -93,6 +140,25 @@
   </div>
 
   <section>
+    <div class="ueber">
+      <figure>
+        <div class="portrait"><img src="/assets/bilder/landing-daniel.webp" alt="Porträt von Daniel Braunstein im weißen T-Shirt, lächelnd" loading="lazy"></div>
+        <figcaption class="klein">Daniel Braunstein, Hochzeitsfotograf aus Lübeck</figcaption>
+      </figure>
+      <div>
+        <h2>Moin, ich bin Daniel.</h2>
+        <p>Ich habe selbst geheiratet, und es war der schönste Tag meines Lebens. Seitdem weiß ich, wie viel an diesem einen Tag zusammenkommt: Aufregung, Vorfreude und all die Menschen, die man liebt. Genau dieses Gefühl möchte ich festhalten, so dass ihr es Jahre später noch spürt.</p>
+        <p>Zu Hause bin ich Ehemann, Vater von zwei Kindern und bekennender Hundefan. Ich bin gern unter Menschen, stehe gern am Grill und interessiere mich mehr für eure Persönlichkeit als für die perfekte Pose.</p>
+        <div class="fakten">
+          <div><strong>16</strong><span class="klein">Jahre Erfahrung</span></div>
+          <div><strong>500+</strong><span class="klein">Brautpaare begleitet</span></div>
+          <div><strong>30</strong><span class="klein">Hochzeiten im Jahr</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scheu-bereich">
     <div class="scheu">
       <img src="/assets/bilder/landing-melina-lennart-gras.webp" alt="Melina und Lennart tanzen lachend im hohen Gras, hinter ihnen geht die Sonne unter." loading="lazy">
       <div>
@@ -103,23 +169,41 @@
     </div>
   </section>
 
+  <section class="tag">
+    <div class="tag-kopf">
+      <span class="klein">Eine Hochzeit von Anfang bis Ende</span>
+      <h2>Silja &amp; Florian, ein Tag auf Fehmarn.</h2>
+      <p>Standesamt, Strand und eine Party, die bis tief in die Nacht ging. So sieht ein Tag aus, wenn ich euch vom ersten Knopf bis zur Tanzfläche begleite.</p>
+    </div>
+    <div class="tag-galerie">
+{{TAG}}
+    </div>
+    <blockquote class="tag-zitat">
+      <p>„Mit seiner auffällig unauffälligen Art und seinem perfekten Gefühl, Emotionen und Sonne einzufangen, hat er uns und unsere Gäste zu Tränen gerührt!“</p>
+      <cite class="klein">Silja &amp; Florian, August 2025</cite>
+    </blockquote>
+  </section>
+
   <section class="stimmen">
     <div class="stimmen-kopf">
       <h2>Was Paare mir danach schreiben.</h2>
       <a class="sterne" href="https://www.google.com/maps/search/?api=1&amp;query=Braunstein+Photography+L%C3%BCbeck" target="_blank" rel="noopener"><b aria-hidden="true">★★★★★</b>5,0 bei Google aus über 150 Bewertungen<span class="sterne-link">Alle Bewertungen lesen</span></a>
     </div>
-    <div class="stimmen-raster">
-      <figure class="stimme" style="margin:0">
-        <p>„Es fühlte sich so an, als würde ein Freund unseren Tag begleiten.“</p>
-        <cite class="klein">Sophie &amp; Marc</cite>
+    <div class="karten-stimmen">
+      <figure class="stimm-karte">
+        <img src="/assets/bilder/streifen-melina-lennart.webp" alt="Melina und Lennart" width="600" height="900" loading="lazy">
+        <blockquote><p>„Für uns die beste Dienstleister-Entscheidung der gesamten Hochzeit! […] Ich als Braut habe mich durchgehend pudelwohl gefühlt – auf jedem Foto – und das hat schon was zu heißen. […] Wir konnten es kaum erwarten und hatten die Fotos schon nach 2–3 Tagen.“</p></blockquote>
+        <figcaption class="klein">Melina &amp; Lennart, Juni 2023</figcaption>
       </figure>
-      <figure class="stimme" style="margin:0">
-        <p>„Die Bilder sind insgesamt sehr natürlich und aus dem Moment heraus entstanden.“</p>
-        <cite class="klein">Jessica Hoffmann</cite>
+      <figure class="stimm-karte">
+        <img src="/assets/bilder/streifen-janine-hauke.webp" alt="Janine und Hauke" width="600" height="900" loading="lazy">
+        <blockquote><p>„Während der Trauung hat er alle wichtigen Momente eingefangen, ohne dass man sich fotografiert gefühlt hat. […] Unser Highlight war das Sunset-Shooting. […] Für uns war Daniel der perfekte Hochzeitsfotograf.“</p></blockquote>
+        <figcaption class="klein">Janine &amp; Hauke, Mai 2024</figcaption>
       </figure>
-      <figure class="stimme" style="margin:0">
-        <p>„Ganz toller, lieber Mensch, solche Menschen gibt es leider viel zu selten!“</p>
-        <cite class="klein">Ta Sch</cite>
+      <figure class="stimm-karte">
+        <img src="/assets/bilder/streifen-nadine-christian.webp" alt="Nadine und Chris" width="600" height="900" loading="lazy">
+        <blockquote><p>„Wenn ihr noch einen Fotografen sucht mit Humor, Liebe zum Detail und Perfektion, dann meldet euch bei Daniel! Vom ersten Telefonat an wussten wir, dass es passt, und Daniel hat uns nicht enttäuscht. Die Bilder unserer Hochzeit sind ein Traum!“</p></blockquote>
+        <figcaption class="klein">Nadine &amp; Chris, September 2025</figcaption>
       </figure>
     </div>
     <div class="screens">
@@ -143,14 +227,21 @@
     </div>
   </section>
 
-  <div class="band">
-    <img src="/assets/bilder/streifen-marleen-jendrik.webp" alt="Marleen und Jendrik" width="600" height="900" loading="lazy">
-    <img src="/assets/bilder/streifen-charlyn-ben.webp" alt="Charlyn und Ben" width="600" height="900" loading="lazy">
-    <img src="/assets/bilder/streifen-jocelyn-tom.webp" alt="Jocelyn und Tom" width="600" height="900" loading="lazy">
-    <img src="/assets/bilder/streifen-lena-niklas.webp" alt="Lena und Niklas" width="600" height="900" loading="lazy">
-    <img src="/assets/bilder/streifen-franzi-tim.webp" alt="Franzi und Tim" width="600" height="900" loading="lazy">
-    <img src="/assets/bilder/streifen-janine-hauke.webp" alt="Janine und Hauke" width="600" height="900" loading="lazy">
-  </div>
+  <section class="enthalten">
+    <div class="enthalten-innen">
+      <h2>Das bekommt ihr bei mir.</h2>
+      <ul>
+        <li>Ein persönliches Kennenlernen per Video, bevor ihr bucht</li>
+        <li>Tipps für euren Zeitplan und auf Wunsch Empfehlungen aus meinem Netzwerk, vom DJ bis zur Floristik</li>
+        <li>Ein finales Gespräch in eurer Hochzeitswoche, damit ihr euch am Tag um nichts kümmern müsst</li>
+        <li>Eine Vorschau mit 20 bis 40 Bildern innerhalb von 24 Stunden</li>
+        <li>Alle gelungenen Bilder, professionell bearbeitet und in voller Auflösung, spätestens nach 7 Tagen</li>
+        <li>Eure private Online-Galerie</li>
+        <li>Keine Extragebühren, wenn ihr die Bilder auf Social Media oder eurer Website zeigt</li>
+        <li>Auf Wunsch ein Kennenlern-Shooting vorab, zum Beispiel für eure Einladungskarten</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="ablauf">
     <h2>So einfach geht es los.</h2>
@@ -183,6 +274,7 @@
         <div class="direkt">
           <p class="klein">Lieber direkt?</p>
           <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
+          <a class="knopf wa-knopf" href="{{WA}}" target="_blank" rel="noopener">Per WhatsApp schreiben</a>
         </div>
       </div>
       <form class="formular" id="anfrage-formular" action="https://api.web3forms.com/submit" method="POST">
@@ -205,6 +297,7 @@
         <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
         <p class="meldung" role="alert"></p>
         <button class="knopf" type="submit">Termin prüfen lassen</button>
+        <p class="klein unter-knopf">Antwort innerhalb von 48 Stunden · unverbindlich</p>
       </form>
     </div>
   </section>
@@ -215,38 +308,68 @@
       {{FAQ}}
     </div>
   </section>
+
+  <section class="vorlage" id="vorlage">
+    <div class="vorlage-innen">
+      <div>
+        <span class="klein">Noch mitten in der Planung?</span>
+        <h2>Meine Zeitplan-Vorlage für euren Hochzeitstag.</h2>
+        <p>Ein Beispiel-Ablauf, die wichtigsten Fragen für euren eigenen Plan, die beste Zeit für eure Paarbilder und eine Vorlage zum Ausfüllen. Kostenlos als PDF, direkt zum Herunterladen.</p>
+      </div>
+      <form class="formular" id="vorlage-formular">
+        <input type="hidden" name="access_key" value="{{SCHLUESSEL}}">
+        <input type="hidden" name="subject" value="Zeitplan-Vorlage angefordert">
+        <input type="hidden" name="from_name" value="Braunstein Photography Website">
+        <input type="hidden" name="Quelle" value="Landingpage – Zeitplan-Vorlage">
+        <input type="hidden" name="Kampagne" value="">
+        <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
+        <div class="feldgruppe">
+          <div class="feld"><label for="v-name">Eure Vornamen</label><input id="v-name" name="name" type="text" autocomplete="given-name" required></div>
+          <div class="feld"><label for="v-mail">E-Mail</label><input id="v-mail" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="feld"><label for="v-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="v-datum" name="Hochzeitsdatum" type="date"></div>
+        <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass Daniel mich zu meiner Hochzeitsfotografie kontaktieren darf. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+        <p class="meldung" role="alert"></p>
+        <button class="knopf" type="submit">Vorlage herunterladen</button>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer class="fuss-klein">
   <span class="klein">© Braunstein Photography · Hochzeitsfotograf aus Lübeck</span>
-  <span class="klein"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></span>
+  <ul class="klein"><li><a href="/impressum">Impressum</a></li><li><a href="/datenschutz">Datenschutz</a></li></ul>
 </footer>
 
-<div class="klebeknopf"><a class="knopf knopf--gold" href="#anfrage">Ist euer Datum noch frei?</a></div>
+<div class="klebeknopf"><a class="knopf knopf--gold" href="#anfrage">Datum prüfen</a><a class="knopf klebe-wa" href="{{WA}}" target="_blank" rel="noopener" aria-label="Per WhatsApp schreiben">WhatsApp</a></div>
 
 <script>
 (function(){
-  var f=document.getElementById('anfrage-formular');if(!f)return;
   var q=new URLSearchParams(location.search),k=[];
   ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(n){if(q.get(n))k.push(n.replace('utm_','')+': '+q.get(n))});
-  f.querySelector('[name=Kampagne]').value=k.join(', ')||'direkt';
-  var dt=f.querySelector('#l-datum');if(dt){dt.min=new Date().toISOString().slice(0,10);}
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var b=f.querySelector('button'),m=f.querySelector('.meldung');
-    b.disabled=true;b.textContent='Wird gesendet …';m.textContent='';
-    var d=Object.fromEntries(new FormData(f));if(d.Hochzeitsdatum){var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}
-    if(!d.Nachricht)d.Nachricht='–';
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
-      .then(function(r){return r.json()})
-      .then(function(r){if(r.success){location.href='/danke'}else{throw new Error()}})
-      .catch(function(){m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';b.disabled=false;b.textContent='Termin prüfen lassen'});
-  });
-  var kk=document.querySelector('.klebeknopf'),ziel=document.getElementById('anfrage'),held=document.querySelector('.hero');
-  if(kk&&ziel&&held&&'IntersectionObserver' in window){
-    var sicht={};kk.classList.add('versteckt');
-    var io=new IntersectionObserver(function(es){es.forEach(function(x){sicht[x.target===held?'h':'z']=x.isIntersecting});kk.classList.toggle('versteckt',!!(sicht.h||sicht.z))},{threshold:.05});
-    io.observe(held);io.observe(ziel);
+  function datum(d){if(d.Hochzeitsdatum){var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}}
+  function senden(f,ziel,text,immerWeiter){
+    if(!f)return;
+    f.querySelector('[name=Kampagne]').value=k.join(', ')||'direkt';
+    var dt=f.querySelector('input[type=date]');if(dt){dt.min=new Date().toISOString().slice(0,10);}
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var b=f.querySelector('button'),m=f.querySelector('.meldung');
+      b.disabled=true;b.textContent='Wird gesendet …';m.textContent='';
+      var d=Object.fromEntries(new FormData(f));datum(d);if(!d.Nachricht)d.Nachricht='–';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+        .then(function(r){return r.json()})
+        .then(function(r){if(r.success){location.href=ziel}else{throw new Error()}})
+        .catch(function(){if(immerWeiter){location.href=ziel;return}m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';b.disabled=false;b.textContent=text});
+    });
+  }
+  senden(document.getElementById('anfrage-formular'),'/danke','Termin prüfen lassen',false);
+  senden(document.getElementById('vorlage-formular'),'/zeitplan-vorlage','Vorlage herunterladen',true);
+  var kk=document.querySelector('.klebeknopf'),ziele=[document.querySelector('.hero'),document.getElementById('anfrage'),document.getElementById('vorlage')].filter(Boolean);
+  if(kk&&'IntersectionObserver' in window){
+    var sicht=new Map();kk.classList.add('versteckt');
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){sicht.set(x.target,x.isIntersecting)});var an=false;sicht.forEach(function(v){if(v)an=true});kk.classList.toggle('versteckt',an)},{threshold:.05});
+    ziele.forEach(function(z){io.observe(z)});
   }
 })();
 </script>

@@ -13,10 +13,11 @@
     window.fbq('init', PIXEL_ID);
     window.fbq('track', 'PageView');
     if (/^\/danke(\.html)?\/?$/.test(location.pathname)) window.fbq('track', 'Lead');
+    if (/^\/zeitplan-vorlage(\.html)?\/?$/.test(location.pathname)) window.fbq('track', 'CompleteRegistration');
   }
 
   document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="https://wa.me/"]');
     if (a && geladen && window.fbq) window.fbq('track', 'Contact');
   });
 
