@@ -409,6 +409,16 @@ def baue():
                   {'@type': 'ListItem', 'position': 2, 'name': d['kurzname'], 'item': url}]}]}
         open(f"{OUT}/{d['slug']}.html", 'w').write(seite(d['titel'], d['beschreibung'], inhalt, extra=json_ld(ld)))
 
+    # Landingpage für Werbeanzeigen (noindex, eigenes Layout)
+    start = open(f'{SRC}/startseite.html').read()
+    stil = start[start.index('<style>') + 7:start.index('</style>')]
+    css = open(f'{SRC}/site.css').read().split('\n')
+    formular_stil = '\n'.join('  ' + z for z in css if re.match(r'\s*(\.formular|\.feld|fieldset\.feld|\.chips|\.zustimmung|\.meldung|\.unsichtbar|\.frage|\.antwort|\.pflicht)', z))
+    fr = json.load(open(f'{SRC}/faq.json'))
+    faq_l = ''.join(f'<details class="frage"><summary>{e(fr[i][0])}</summary><div class="antwort">{fr[i][1]}</div></details>' for i in (0, 4, 5))
+    lp = open(f'{SRC}/landing.html').read().replace('{{STIL}}', stil).replace('{{FORMULAR_STIL}}', formular_stil).replace('{{FAQ}}', faq_l).replace('{{SCHLUESSEL}}', schl)
+    open(f'{OUT}/anfrage.html', 'w').write(lp)
+
     # Weiterleitungen (alte Adressen, noch nicht umgezogene Artikel)
     weiter = [{'source': '/hochzeitsfotografie', 'destination': '/', 'permanent': True}]
     weiter += [{'source': f'/blog/{b[0]}', 'destination': '/blog', 'permanent': False} for b in listen['blog'] if b[0] not in blog_fertig]

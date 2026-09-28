@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hochzeitsfotograf aus Lübeck – ist euer Datum noch frei? | Braunstein Photography</title>
+<meta name="description" content="Natürliche, warme Hochzeitsreportagen aus Lübeck. Erste Bilder nach 24 Stunden, alle nach 7 Tagen. Jetzt unverbindlich euren Termin prüfen.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jura:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --nebel:#E8ECE9;
+    --weiss:#F9FAF8;
+    --tiefsee:#1E2C30;
+    --schiefer:#4A585C;--gold-text:#8F5F1C;--gold-knopf:#9A6620;
+    --sand:#D9CDB8;
+    --gegenlicht:#C28A3A;
+    --display:"Cormorant Garamond", "Garamond", "Iowan Old Style", Georgia, serif;
+    --text:"Crimson Pro", "Iowan Old Style", Georgia, serif;
+    --klein:"Jura", "Avenir Next", "Segoe UI", sans-serif;
+    --rand:clamp(1.25rem, 5vw, 4.5rem);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{font-variant-numeric:lining-nums}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--nebel);color:var(--tiefsee);font-family:var(--text);font-size:clamp(1.125rem,1.05rem + .3vw,1.3rem);line-height:1.65;font-weight:300;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--gegenlicht);outline-offset:3px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;letter-spacing:.01em}
+  h2{font-size:clamp(2.1rem,1.4rem + 3vw,3.6rem)}
+  p{margin:0 0 1.1em}
+  .klein{font-family:var(--klein);font-weight:400;font-size:.92rem;letter-spacing:.04em}
+  .knopf{display:inline-block;font-family:var(--klein);font-weight:400;font-size:.95rem;letter-spacing:.04em;text-decoration:none;padding:1rem 1.8rem;border:1px solid currentColor;transition:background .25s,color .25s}
+  .knopf:hover{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
+  .knopf--hell{color:var(--weiss)}
+  .knopf--hell:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
+  .knopf--gold{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
+  .knopf--gold:hover{background:var(--weiss);color:var(--tiefsee);border-color:var(--weiss)}
+
+  /* Navigation */
+  .kopf{position:absolute;inset:0 0 auto 0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.5rem var(--rand);color:var(--weiss)}
+  .marke{display:block;line-height:0}
+  .marke img{height:40px;width:auto}
+  footer .marke img{height:46px}
+  .kopf nav{display:flex;gap:2rem;align-items:center}
+  .kopf nav a:not(.knopf){font-family:var(--klein);font-size:.95rem;letter-spacing:.04em;text-decoration:none;opacity:.92}
+  .kopf nav a:not(.knopf):hover{opacity:1}
+  .kopf .knopf{padding:.7rem 1.2rem}
+  .menue-knopf{display:none;background:none;border:1px solid currentColor;color:inherit;font-family:var(--klein);font-size:.9rem;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer}
+
+  /* Hero */
+  .hero{padding:0;position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:var(--weiss);overflow:hidden;isolation:isolate}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;z-index:-2;transform:scale(1.06);animation:einblenden 2.4s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+      radial-gradient(ellipse 40% 30% at 50% 8%, rgba(226,170,90,.22), transparent 70%),
+      linear-gradient(180deg, rgba(30,44,48,.45) 0%, rgba(30,44,48,0) 22%, rgba(30,44,48,0) 45%, rgba(30,44,48,.6) 65%, rgba(30,44,48,.92) 100%)}
+  .hero-inhalt{padding:0 var(--rand) clamp(2rem,6vh,4rem);width:100%;max-width:72rem}
+  .hero-zeile{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+  .hero-zeile p{margin:0}
+  .hero h1{font-size:clamp(2.2rem,1.2rem + 2.9vw,4rem);margin-bottom:1.1rem;max-width:18ch;opacity:0;animation:aufsteigen 1.4s .5s ease forwards}
+  .hero p{max-width:34rem;font-size:clamp(1.1rem,1rem + .35vw,1.3rem);font-style:italic;opacity:0;animation:aufsteigen 1.4s .8s ease forwards}
+  .hero .knopf{opacity:0;animation:aufsteigen 1.4s 1.05s ease forwards}
+  @keyframes einblenden{to{transform:scale(1)}}
+  @keyframes aufsteigen{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  section{padding:clamp(5rem,12vw,9rem) var(--rand)}
+
+
+  /* Bildstreifen */
+  .band{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;background:var(--nebel)}
+  .band img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover}
+
+  /* Über mich */
+  .ueber{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,7vw,7rem);align-items:center;max-width:78rem;margin:0 auto}
+  .ueber figure{margin:0;position:relative}
+  .portrait{position:relative;aspect-ratio:4/5;isolation:isolate}
+  .portrait::before{content:"";position:absolute;inset:14% 4% 0;z-index:-1;border-radius:999px 999px 0 0;background:
+      radial-gradient(ellipse 70% 50% at 50% 20%, rgba(194,138,58,.28), transparent 70%), var(--sand)}
+  .portrait img{width:100%;height:100%;object-fit:contain;object-position:50% 100%}
+  .ueber figcaption{margin-top:.9rem;color:var(--schiefer)}
+  .ueber h2{margin-bottom:1.8rem}
+  .ueber .fakten{display:flex;gap:2.5rem;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--sand)}
+  .ueber .fakten strong{display:block;font-family:var(--display);font-weight:400;font-size:2.4rem;line-height:1}
+  .ueber .fakten span{color:var(--schiefer)}
+
+  /* Freund */
+  .freund{background:var(--weiss);text-align:center}
+  .freund blockquote{margin:0 auto 3rem;max-width:52rem;font-family:var(--display);font-size:clamp(2.2rem,1.4rem + 3.6vw,4.4rem);line-height:1.12}
+  .freund blockquote::before,.freund blockquote::after{color:var(--gold-text)}
+  .freund blockquote::before{content:"„"}
+  .freund blockquote::after{content:"“"}
+  .freund .einleitung{color:var(--schiefer);margin-bottom:1.2rem}
+  .freund .text{max-width:40rem;margin:0 auto;text-align:left}
+  .freund h2{font-size:clamp(1.8rem,1.3rem + 2vw,2.6rem);margin:0 0 1.4rem;text-align:center}
+
+  /* Licht */
+  .licht{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(.8rem,1.6vw,1.4rem);max-width:84rem;margin:0 auto;align-items:end}
+  .licht .text{grid-column:1 / span 5;align-self:center;padding-right:2rem}
+  .licht .text h2{margin-bottom:1.6rem}
+  .licht .b1{grid-column:6 / span 4}
+  .licht .b2{grid-column:10 / span 3;margin-bottom:5rem}
+  .licht img{width:100%;object-fit:cover}
+  .licht .b1 img{aspect-ratio:3/4}
+  .licht .b2 img{aspect-ratio:2/3}
+
+  /* Fotostorys */
+  .storys{background:var(--sand)}
+  .storys-kopf{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;max-width:84rem;margin:0 auto 3rem}
+  .storys-text{margin:1rem 0 0;max-width:34rem;color:var(--schiefer)}
+  .storys-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,2rem);max-width:84rem;margin:0 auto}
+  .story{text-decoration:none;display:block}
+  .story img{aspect-ratio:4/5;object-fit:cover;width:100%;transition:filter .4s}
+  .story:hover img{filter:brightness(1.06) saturate(1.05)}
+  .story h3{font-size:1.7rem;margin-top:1rem}
+  .story .klein{color:var(--schiefer)}
+  .storys-raster .story:nth-child(2){margin-top:3.5rem}
+
+  /* Kamerascheu */
+  .scheu{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:84rem;margin:0 auto;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+  .scheu img{width:100%;aspect-ratio:1/1;object-fit:cover}
+  .scheu h2{margin-bottom:1.6rem}
+  .zitat{border-left:2px solid var(--gegenlicht);padding-left:1.3rem;margin:2rem 0 0;font-style:italic;color:var(--schiefer)}
+  .zitat cite{display:block;font-style:normal;font-family:var(--klein);font-size:.9rem;letter-spacing:.05em;margin-top:.5rem}
+
+  /* Stimmen */
+  .stimmen{background:var(--tiefsee);color:var(--weiss)}
+  .stimmen-kopf{max-width:84rem;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap}
+  .sterne{font-family:var(--klein);font-size:1rem;letter-spacing:.05em;color:var(--sand)}
+  a.sterne{display:block;text-decoration:none;padding:1rem 1.4rem;border:1px solid rgba(217,205,184,.35);transition:border-color .25s,color .25s}
+  a.sterne:hover{border-color:var(--gegenlicht);color:var(--weiss)}
+  .sterne-link{display:block;margin-top:.4rem;font-size:.9rem;color:var(--gegenlicht);text-decoration:underline;text-underline-offset:3px}
+  .sterne b{color:var(--gegenlicht);font-weight:400;font-size:1.1rem;letter-spacing:.15em;margin-right:.5rem}
+  .stimmen-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);max-width:84rem;margin:0 auto}
+  .stimme p{font-size:1.2rem;font-style:italic;line-height:1.55}
+  .stimme cite{font-style:normal;color:var(--sand)}
+  .screens{max-width:70rem;margin:4.5rem auto 0;display:flex;flex-wrap:wrap;justify-content:center;padding:0 0 3rem}
+  .screens img{width:min(31rem,47%);height:auto;margin:0 -1.1rem -1.4rem;border-radius:12px;box-shadow:0 24px 50px -18px rgba(0,0,0,.8);position:relative;z-index:1;transform:translateY(var(--y,0)) rotate(var(--r,0deg));transition:transform .35s ease,box-shadow .35s ease;cursor:pointer;outline:none}
+  .screens img:hover,.screens img:focus{z-index:20;transform:translateY(var(--y,0)) rotate(0deg) scale(1.05);box-shadow:0 34px 70px -20px rgba(0,0,0,.9)}
+  .screens img:nth-child(1){--r:-3deg}
+  .screens img:nth-child(2){--r:2.5deg;--y:2rem}
+  .screens img:nth-child(3){--r:1.8deg;--y:0}
+  .screens img:nth-child(4){--r:-2.2deg;--y:2rem}
+  .screens img:nth-child(5){--r:-1.5deg}
+  .screens img:nth-child(6){--r:2.8deg;--y:2rem}
+  .screens img:nth-child(7){--r:-1.2deg;--y:.5rem}
+
+  /* Tempo */
+  .tempo{max-width:84rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);align-items:center}
+  .tempo h2{margin-bottom:1.6rem}
+  .uhren{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--sand);border-bottom:1px solid var(--sand)}
+  .uhr{padding:2.5rem 1.5rem}
+  .uhr + .uhr{border-left:1px solid var(--sand)}
+  .uhr strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(3.5rem,2rem + 5vw,6rem);line-height:1;color:var(--gold-text)}
+  .uhr span{display:block;margin-top:.8rem;color:var(--schiefer)}
+
+  /* Ablauf */
+  .ablauf{background:var(--weiss)}
+  .ablauf h2{max-width:84rem;margin:0 auto 3.5rem}
+  .schritte{list-style:none;margin:0 auto;padding:0;max-width:84rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem 3.5rem;counter-reset:schritt}
+  .schritte li{counter-increment:schritt;border-top:1px solid var(--sand);padding-top:1.4rem}
+  .schritte li::before{content:counter(schritt, decimal-leading-zero);display:block;font-family:var(--display);font-size:2.2rem;color:var(--gold-text);line-height:1;margin-bottom:.9rem}
+  .schritte h3{font-size:1.55rem;margin-bottom:.6rem}
+  .schritte p{color:var(--schiefer);font-size:1.08rem}
+
+  /* Passen */
+  .passen{max-width:60rem;margin:0 auto}
+  .passen h2{margin-bottom:2.4rem;text-align:center}
+  .passen ul{list-style:none;margin:0;padding:0}
+  .passen li{font-size:clamp(1.3rem,1.1rem + .8vw,1.75rem);font-style:italic;padding:1.3rem 0;border-bottom:1px solid var(--sand)}
+  .passen li:first-child{border-top:1px solid var(--sand)}
+
+
+  /* Blog */
+  .blog{background:var(--weiss)}
+  .blog-kopf{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;max-width:84rem;margin:0 auto 3rem}
+  .blog-raster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.2rem,2.2vw,2.2rem);max-width:84rem;margin:0 auto}
+  .artikel{text-decoration:none;display:flex;flex-direction:column}
+  .artikel img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 28%;transition:filter .4s}
+  .artikel:hover img{filter:brightness(1.06) saturate(1.05)}
+  .artikel h3{font-size:1.45rem;margin:1.1rem 0 .6rem}
+  .artikel p{font-size:1.05rem;color:var(--schiefer);margin-bottom:.9rem}
+  .artikel .klein{margin-top:auto;color:var(--gold-text);text-decoration:underline;text-underline-offset:3px}
+
+  /* Abschluss */
+  .abschluss{position:relative;color:var(--weiss);text-align:center;overflow:hidden;isolation:isolate;padding-top:clamp(7rem,15vw,11rem);padding-bottom:clamp(7rem,15vw,11rem)}
+  .abschluss img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+  .abschluss::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,44,48,.72),rgba(30,44,48,.86))}
+  .abschluss .klein{color:var(--sand);display:block;margin-bottom:1.4rem;font-size:1rem;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+  .abschluss h2{font-size:clamp(2.6rem,1.6rem + 4.5vw,5rem);margin-bottom:1.6rem}
+  .abschluss p{max-width:36rem;margin:0 auto 2.4rem}
+
+  footer{background:var(--tiefsee);color:var(--sand);padding:3.5rem var(--rand) calc(2.5rem + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+  footer .marke{color:var(--weiss)}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem 1.8rem}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--weiss)}
+
+  @media (max-width:900px){
+    .blog-raster{grid-template-columns:1fr 1fr}
+    .band{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:38vw;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+    .band::-webkit-scrollbar{display:none}
+    .band img{scroll-snap-align:start}
+    .hero img{object-position:46% 30%}
+    .hero::before{background:
+      radial-gradient(ellipse 60% 25% at 50% 6%, rgba(226,170,90,.2), transparent 70%),
+      linear-gradient(180deg, rgba(30,44,48,.5) 0%, rgba(30,44,48,0) 18%, rgba(30,44,48,0) 38%, rgba(30,44,48,.7) 58%, rgba(30,44,48,.95) 100%)}
+    .hero-inhalt{padding-bottom:calc(2.2rem + env(safe-area-inset-bottom,0px))}
+    .hero-zeile{gap:1.4rem}
+    .menue-knopf{display:inline-flex;align-items:center;position:relative;z-index:30}
+    .kopf nav{position:fixed;inset:0;z-index:20;background:var(--tiefsee);color:var(--weiss);flex-direction:column;justify-content:center;align-items:flex-start;gap:1.4rem;padding:6rem var(--rand) calc(3rem + env(safe-area-inset-bottom,0px));opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+    .kopf.offen nav{opacity:1;visibility:visible}
+    .kopf nav a:not(.knopf){display:block;font-family:var(--display);font-size:clamp(2rem,8vw,2.6rem);letter-spacing:.01em;opacity:1;text-decoration:none}
+    .kopf nav .knopf{margin-top:1.2rem;padding:1rem 1.6rem;font-size:.9rem}
+    .kopf .marke{position:relative;z-index:30}
+    html.menue-offen{overflow:hidden}
+    .ueber,.scheu,.tempo{grid-template-columns:1fr}
+    .licht .text{grid-column:1 / -1;padding:0 0 1rem}
+    .licht .b1{grid-column:1 / span 7}
+    .licht .b2{grid-column:8 / span 5;margin-bottom:3rem}
+    .storys-raster,.stimmen-raster{grid-template-columns:1fr}
+    .storys-raster .story:nth-child(2){margin-top:0}
+    .schritte{grid-template-columns:1fr 1fr}
+    .screens img{width:84%;margin:0 0 -1rem}
+    .screens img:nth-child(n){--y:0}
+    .screens img:nth-child(odd){margin-right:12%;--r:-1.5deg}
+    .screens img:nth-child(even){margin-left:12%;--r:1.5deg}
+  }
+  @media (max-width:560px){
+    .blog-raster{grid-template-columns:1fr}
+    .artikel img{aspect-ratio:3/2}
+    .schritte{grid-template-columns:1fr}
+    .uhren{grid-template-columns:1fr}
+    .uhr + .uhr{border-left:0;border-top:1px solid var(--sand)}
+    .ueber .fakten{gap:1.5rem}
+    .kopf .knopf{padding:.6rem .9rem;font-size:.85rem}
+    .kopf .marke img{height:30px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .hero h1,.hero p,.hero .knopf{opacity:1}
+    .hero img{transform:none}
+  }
+
+  /* Landingpage */
+  .kopf .knopf{padding:.8rem 1.3rem;font-size:.9rem}
+  .kopf .marke{pointer-events:none}
+  .belege{background:var(--tiefsee);color:var(--weiss);padding:1.6rem var(--rand)}
+  .belege ul{list-style:none;margin:0 auto;padding:0;max-width:84rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem 2rem}
+  .belege li{display:flex;flex-direction:column;gap:.25rem;border-left:1px solid rgba(217,205,184,.3);padding-left:1rem}
+  .belege strong{font-family:var(--display);font-weight:500;font-size:1.7rem;line-height:1.1;color:var(--gegenlicht)}
+  .belege span{font-family:var(--klein);font-size:.92rem;letter-spacing:.03em;color:var(--sand)}
+  .belege a{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:.25rem}
+  .preis{max-width:60rem;margin:0 auto;text-align:center}
+  .preis h2{margin-bottom:1.2rem}
+  .preis-karten{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2.5rem 0 2rem;text-align:left}
+  .preis-karte{border:1px solid var(--sand);padding:1.8rem 1.6rem;background:var(--weiss)}
+  .preis-karte .klein{color:var(--gold-text);display:block;margin-bottom:.6rem}
+  .preis-karte strong{display:block;font-family:var(--display);font-weight:500;font-size:clamp(2.2rem,1.6rem + 2vw,3rem);line-height:1;margin-bottom:.8rem}
+  .preis-karte p{margin:0;color:var(--schiefer);font-size:1.08rem}
+  .preis-fuss{color:var(--schiefer);max-width:40rem;margin:0 auto}
+  .anfrage{background:var(--sand);padding:clamp(4rem,9vw,7rem) var(--rand)}
+  .anfrage-innen{max-width:84rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
+  .anfrage h2{margin-bottom:1.4rem}
+  .anfrage-text p{color:var(--tiefsee)}
+  .anfrage-text .direkt{margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(30,44,48,.2)}
+  .anfrage-text .direkt a{font-family:var(--display);font-size:1.7rem;color:var(--tiefsee);text-decoration:none}
+  .fragen-kurz{max-width:56rem;margin:0 auto}
+  .fragen-kurz h2{margin-bottom:1.5rem}
+  .fuss-klein{background:var(--tiefsee);color:var(--sand);padding:2rem var(--rand) calc(5.5rem + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+  .fuss-klein a{text-decoration:none;margin-left:1.5rem}
+  .fuss-klein a:first-child{margin-left:0}
+  .klebeknopf{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;padding:.7rem var(--rand) calc(.7rem + env(safe-area-inset-bottom,0px));background:rgba(30,44,48,.96);backdrop-filter:blur(6px)}
+  .klebeknopf .knopf{display:block;text-align:center;width:100%}
+  .formular{background:var(--weiss);padding:clamp(1.6rem,4vw,3.2rem);display:grid;gap:1.6rem}
+  .feldgruppe{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+  .feld{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+  .feld label,.feld legend{font-family:var(--klein);font-size:.95rem;letter-spacing:.03em;color:var(--schiefer);padding:0}
+  .feld input,.feld textarea{font:inherit;font-size:1.1rem;color:var(--tiefsee);background:transparent;border:0;border-bottom:1px solid var(--sand);padding:.55rem 0;border-radius:0;width:100%}
+  .feld textarea{min-height:7.5rem;resize:vertical;border:1px solid var(--sand);padding:.8rem}
+  .feld input:focus,.feld textarea:focus{outline:none;border-color:var(--gegenlicht)}
+  .feld input::placeholder,.feld textarea::placeholder{color:#7d8a8c;font-style:italic}
+  fieldset.feld{border:0;margin:0;padding:0}
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem}
+  .chips label{position:relative;cursor:pointer}
+  .chips input{position:absolute;opacity:0;width:1px;height:1px}
+  .chips span{display:inline-block;font-family:var(--klein);font-size:.92rem;letter-spacing:.04em;padding:.65rem 1.1rem;border:1px solid var(--sand);color:var(--tiefsee);transition:background .2s,border-color .2s,color .2s}
+  .chips input:checked + span{background:var(--tiefsee);border-color:var(--tiefsee);color:var(--weiss)}
+  .chips input:focus-visible + span{outline:2px solid var(--gegenlicht);outline-offset:2px}
+  .zustimmung{display:flex;gap:.8rem;align-items:flex-start;font-size:1rem;color:var(--schiefer)}
+  .zustimmung input{margin-top:.35rem;accent-color:var(--tiefsee);width:1.05rem;height:1.05rem;flex:none}
+  .formular .knopf{justify-self:start;cursor:pointer;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee);font-size:.95rem}
+  .formular .knopf:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
+  .formular .knopf[disabled]{opacity:.6;cursor:wait}
+  .meldung{font-size:1rem;color:#9b3b2a;margin:0}
+  .meldung:empty{display:none}
+  .unsichtbar{display:none!important}
+  .frage{border-top:1px solid var(--sand)}
+  .frage:last-child{border-bottom:1px solid var(--sand)}
+  .frage summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1.5rem 0;font-family:var(--display);font-size:clamp(1.35rem,1.1rem + .9vw,1.8rem);line-height:1.25}
+  .frage summary::-webkit-details-marker{display:none}
+  .frage summary::after{content:"+";font-family:var(--klein);font-size:1.6rem;color:var(--gold-text);flex:none;transition:transform .25s}
+  .frage[open] summary::after{transform:rotate(45deg)}
+  .frage summary:hover{color:var(--gold-text)}
+  .antwort{padding:0 0 1.8rem;max-width:46rem;color:var(--tiefsee)}
+  .antwort ol,.antwort ul{padding-left:1.3rem;margin:0 0 1.1em}
+  .antwort li{margin-bottom:.6em}
+  .antwort strong{font-weight:500}
+  .feld input[type=date]{min-height:2.6rem;font-family:var(--text);color:var(--tiefsee);cursor:pointer}
+  .feld input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.6}
+  .feld input[type=date]:invalid:not(:focus){color:#7d8a8c}
+  .pflicht{margin:0;color:var(--schiefer)}
+  @media (max-width:900px){
+    .belege ul{grid-template-columns:1fr 1fr}
+    .anfrage-innen{grid-template-columns:1fr}
+    .kopf .knopf{display:none}
+    .klebeknopf{display:block}
+    .klebeknopf.versteckt{display:none}
+  }
+  @media (max-width:560px){
+    .preis-karten{grid-template-columns:1fr}
+    .feldgruppe{grid-template-columns:1fr}
+    .belege strong{font-size:1.45rem}
+  }
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://braunstein-photography.vercel.app/anfrage">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Braunstein Photography">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://braunstein-photography.vercel.app/anfrage">
+<meta property="og:title" content="Hochzeitsfotograf aus Lübeck – ist euer Datum noch frei? | Braunstein Photography">
+<meta property="og:description" content="Natürliche, warme Hochzeitsreportagen aus Lübeck. Erste Bilder nach 24 Stunden, alle nach 7 Tagen. Jetzt unverbindlich euren Termin prüfen.">
+<meta property="og:image" content="https://braunstein-photography.vercel.app/assets/og-bild.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<header class="kopf">
+  <span class="marke"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></span>
+  <a class="knopf knopf--hell" href="#anfrage">Termin prüfen</a>
+</header>
+
+<main>
+  <section class="hero" aria-label="Einstieg">
+    <img src="/assets/bilder/landing-hero.webp" alt="Marleen und Jendrik sitzen Hand in Hand bei ihrer Trauung, umgeben von ihren Gästen." fetchpriority="high">
+    <div class="hero-inhalt">
+      <h1>Damit ihr euren Tag zweimal erlebt.</h1>
+      <div class="hero-zeile">
+        <p>Natürliche Hochzeitsreportagen aus Lübeck. Ich bin mittendrin, behalte den Tag für euch im Blick, und nach 24 Stunden habt ihr die ersten Bilder.</p>
+        <a class="knopf knopf--hell" href="#anfrage">Ist euer Datum noch frei?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="belege" aria-label="Auf einen Blick">
+    <ul>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Braunstein+Photography+L%C3%BCbeck" target="_blank" rel="noopener"><strong>★ 5,0</strong><span>über 150 Google-Bewertungen</span></a></li>
+      <li><strong>24 Std.</strong><span>bis zu euren ersten Bildern</span></li>
+      <li><strong>7 Tage</strong><span>bis ihr alle Bilder habt</span></li>
+      <li><strong>500+</strong><span>Paare in 16 Jahren begleitet</span></li>
+    </ul>
+  </section>
+
+  <div class="band">
+    <img src="/assets/bilder/streifen-melina-lennart.webp" alt="Melina und Lennart" width="600" height="900">
+    <img src="/assets/bilder/streifen-alexandra-andreas.webp" alt="Alexandra und Andreas" width="600" height="900">
+    <img src="/assets/bilder/streifen-silja-florian.webp" alt="Silja und Florian am Strand" width="600" height="900">
+    <img src="/assets/bilder/streifen-anna-joost.webp" alt="Anna und Joost" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-loreen-ricco.webp" alt="Loreen und Ricco" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-lisa-dennis.webp" alt="Lisa und Dennis" width="600" height="900" loading="lazy">
+  </div>
+
+  <section>
+    <div class="scheu">
+      <img src="/assets/bilder/landing-melina-lennart-gras.webp" alt="Melina und Lennart tanzen lachend im hohen Gras, hinter ihnen geht die Sonne unter." loading="lazy">
+      <div>
+        <h2>Bleibt, wie ihr seid. Den Rest mache ich.</h2>
+        <p>Ihr müsst nicht posen können und vorher nichts üben. Statt euch hinzustellen und auf Kommando zu lächeln, gehen wir ein Stück spazieren. Ihr unterhaltet euch, lacht miteinander, und ich halte fest, was dabei zwischen euch passiert.</p>
+        <p>Braucht ihr mal eine Idee, bekommt ihr sie von mir. Und zwischendurch zeige ich euch schon die ersten Bilder auf der Kamera. Spätestens dann merkt ihr, wie leicht es sich anfühlt, einfach ihr selbst zu sein.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stimmen">
+    <div class="stimmen-kopf">
+      <h2>Was Paare mir danach schreiben.</h2>
+      <a class="sterne" href="https://www.google.com/maps/search/?api=1&amp;query=Braunstein+Photography+L%C3%BCbeck" target="_blank" rel="noopener"><b aria-hidden="true">★★★★★</b>5,0 bei Google aus über 150 Bewertungen<span class="sterne-link">Alle Bewertungen lesen</span></a>
+    </div>
+    <div class="stimmen-raster">
+      <figure class="stimme" style="margin:0">
+        <p>„Es fühlte sich so an, als würde ein Freund unseren Tag begleiten.“</p>
+        <cite class="klein">Sophie &amp; Marc</cite>
+      </figure>
+      <figure class="stimme" style="margin:0">
+        <p>„Die Bilder sind insgesamt sehr natürlich und aus dem Moment heraus entstanden.“</p>
+        <cite class="klein">Jessica Hoffmann</cite>
+      </figure>
+      <figure class="stimme" style="margin:0">
+        <p>„Ganz toller, lieber Mensch, solche Menschen gibt es leider viel zu selten!“</p>
+        <cite class="klein">Ta Sch</cite>
+      </figure>
+    </div>
+    <div class="screens">
+      <img src="/assets/bilder/nachricht-joost.webp" alt="WhatsApp-Nachricht: beim Durchschauen den ganzen Tag noch einmal erlebt." width="900" height="942" loading="lazy" tabindex="0">
+      <img src="/assets/bilder/nachricht-tempo.webp" alt="WhatsApp-Nachricht: beeindruckt vom Tempo und noch mehr von der Qualität der Bilder." width="900" height="644" loading="lazy" tabindex="0">
+      <img src="/assets/bilder/nachricht-marleen.webp" alt="WhatsApp-Nachricht: Dank für Geduld, lockere Art und die tolle Arbeit." width="900" height="830" loading="lazy" tabindex="0">
+      <img src="/assets/bilder/nachricht-johannes.webp" alt="WhatsApp-Nachricht: die Bilder sind unfassbar schön, jetzt haben sie die Qual der Wahl beim Ausdrucken." width="900" height="869" loading="lazy" tabindex="0">
+    </div>
+  </section>
+
+  <section>
+    <div class="tempo">
+      <div>
+        <h2>Die ersten Bilder, bevor ihr richtig ausgeschlafen habt.</h2>
+        <p>Kein wochenlanges Warten, kein Nachfragen, sondern Bilder, solange sich der Tag noch ganz frisch anfühlt.</p>
+      </div>
+      <div class="uhren">
+        <div class="uhr"><strong>24 Std.</strong><span>bis zu eurer ersten Vorschau, oft schon nach wenigen Stunden</span></div>
+        <div class="uhr"><strong>7 Tage</strong><span>bis zur vollständigen Galerie, spätestens</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <img src="/assets/bilder/streifen-marleen-jendrik.webp" alt="Marleen und Jendrik" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-charlyn-ben.webp" alt="Charlyn und Ben" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-jocelyn-tom.webp" alt="Jocelyn und Tom" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-lena-niklas.webp" alt="Lena und Niklas" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-franzi-tim.webp" alt="Franzi und Tim" width="600" height="900" loading="lazy">
+    <img src="/assets/bilder/streifen-janine-hauke.webp" alt="Janine und Hauke" width="600" height="900" loading="lazy">
+  </div>
+
+  <section class="ablauf">
+    <h2>So einfach geht es los.</h2>
+    <ol class="schritte">
+      <li><h3>Ihr fragt euer Datum an</h3><p>Ein paar Eckdaten reichen. Innerhalb von 48 Stunden sage ich euch, ob euer Termin noch frei ist.</p></li>
+      <li><h3>Wir lernen uns kennen</h3><p>Ganz entspannt per Video. Ihr erzählt mir, was euch wichtig ist, und wir schauen, ob die Chemie stimmt.</p></li>
+      <li><h3>Ihr feiert, ich bin mittendrin</h3><p>Am Tag selbst behalte ich den Ablauf mit im Blick. Nach 24 Stunden kommt die Vorschau, nach spätestens 7 Tagen die ganze Galerie.</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="preis">
+      <h2>Womit ihr rechnen könnt.</h2>
+      <p>Jede Hochzeit ist anders, deshalb bekommt ihr nach dem Kennenlernen ein Angebot, das genau zu eurem Tag passt. Zur Orientierung:</p>
+      <div class="preis-karten">
+        <div class="preis-karte"><span class="klein">Standesamt, ab 2 Stunden</span><strong>ab 900 €</strong><p>Für kleine standesamtliche Hochzeiten: Trauung, Glückwünsche und Gruppenbilder.</p></div>
+        <div class="preis-karte"><span class="klein">Hochzeitsreportage, ab 6 Stunden</span><strong>ab 2.250 €</strong><p>Von der Trauung über den Sektempfang bis zu den ersten Highlights eurer Feier.</p></div>
+      </div>
+      <p class="preis-fuss klein">Dazu kommen nur die Fahrtkosten, die ich euch vorher nenne. Alle gelungenen Bilder bekommt ihr bearbeitet und in voller Auflösung.</p>
+    </div>
+  </section>
+
+  <section class="anfrage" id="anfrage">
+    <div class="anfrage-innen">
+      <div class="anfrage-text">
+        <span class="klein">Nur rund 30 Hochzeiten im Jahr</span>
+        <h2>Ist euer Datum noch frei?</h2>
+        <p>Schickt mir ein paar Eckdaten. Ich melde mich innerhalb von 48 Stunden und sage euch, ob ich an eurem Tag dabei sein kann.</p>
+        <p>Unverbindlich und ohne Kleingedrucktes.</p>
+        <div class="direkt">
+          <p class="klein">Lieber direkt?</p>
+          <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
+        </div>
+      </div>
+      <form class="formular" id="anfrage-formular" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="HIER-DEN-WEB3FORMS-SCHLUESSEL-EINTRAGEN">
+        <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Landingpage">
+        <input type="hidden" name="from_name" value="Braunstein Photography Website">
+        <input type="hidden" name="Quelle" value="Landingpage">
+        <input type="hidden" name="Kampagne" value="">
+        <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
+        <div class="feldgruppe">
+          <div class="feld"><label for="l-datum">Euer Hochzeitsdatum</label><input id="l-datum" name="Hochzeitsdatum" type="date" required></div>
+          <div class="feld"><label for="l-ort">Ort oder Location</label><input id="l-ort" name="Ort / Location" type="text" placeholder="z. B. Lübeck, Gut Pronstorf" required></div>
+        </div>
+        <div class="feld"><label for="l-name">Eure Namen</label><input id="l-name" name="name" type="text" autocomplete="name" placeholder="z. B. Lena & Niklas" required></div>
+        <div class="feldgruppe">
+          <div class="feld"><label for="l-tel">Telefonnummer</label><input id="l-tel" name="Telefon" type="tel" autocomplete="tel" required></div>
+          <div class="feld"><label for="l-mail">E-Mail</label><input id="l-mail" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="feld"><label for="l-nachricht">Was möchtet ihr mir noch erzählen? (freiwillig)</label><textarea id="l-nachricht" name="Nachricht" placeholder="Standesamt, freie Trauung, besondere Wünsche …"></textarea></div>
+        <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+        <p class="meldung" role="alert"></p>
+        <button class="knopf" type="submit">Termin prüfen lassen</button>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <div class="fragen-kurz">
+      <h2>Was ihr euch vielleicht noch fragt.</h2>
+      <details class="frage"><summary>Wir standen noch nie vor der Kamera und kennen keine Posen – ist das schlimm?</summary><div class="antwort"><p>Nein, überhaupt nicht.</p>
+<p>Tatsächlich sind rund <strong>95 % meiner Paare keine „Kamera-Profis“</strong>. Im Kennenlerngespräch höre ich ganz oft Sätze wie „Wir lassen uns eigentlich nie fotografieren“ oder „Wir sind total unsicher vor der Kamera“. Genau dafür bin ich da.</p>
+<p>Ihr müsst keine Posen kennen und nichts einstudieren. Ich nehme euch Schritt für Schritt an die Hand, gebe euch leichte, natürliche Anleitungen und achte darauf, dass sich alles locker und echt anfühlt, niemals gestellt.</p>
+<p>Wenn ihr möchtet, können wir vorab auch ein <strong>Kennenlern- bzw. Verlobungsshooting</strong> machen. Das hilft vielen Paaren, sich sicherer vor der Kamera zu fühlen, und die Bilder könnt ihr prima für eure Einladungskarten nutzen.</p>
+<p>Am Hochzeitstag selbst zeige ich euch zwischendurch schon erste Ergebnisse auf der Kamera. Aus Erfahrung löst das sofort die Anspannung, weil ihr seht, wie natürlich und schön ihr wirkt. Am Ende entstehen Bilder, die sich nicht nach Posen anfühlen, sondern nach euch.</p></div></details><details class="frage"><summary>Kommen noch zusätzliche Kosten auf uns zu?</summary><div class="antwort"><p>Nein. Ich arbeite ausschließlich mit <strong>transparenten Festpreisen</strong>. Der Preis, den wir vorab vereinbaren, ist genau der Preis, den ihr am Ende bezahlt.</p>
+<p>Bei mir gibt es keine Technikpauschalen, keine Gebühren für die Nutzung eurer Fotos auf Website oder Social Media, keine Kosten für die Online-Galerie, keine Nachkäufe einzelner Bilder und keine versteckten Gebühren nach der Hochzeit.</p>
+<p>Immer enthalten sind die komplette Begleitung laut Paket, die professionelle Bildbearbeitung, alle gelungenen Bilder in voller Auflösung und die Übergabe in einer privaten Online-Galerie.</p>
+<p>Einzig die <strong>Fahrtkosten</strong> kommen je nach Hochzeitsort hinzu. Die nenne ich euch selbstverständlich vorab.</p></div></details><details class="frage"><summary>Bekommen wir alle Bilder von unserer Hochzeit?</summary><div class="antwort"><p>Ja. <strong>Ihr bekommt alle gelungenen Bilder</strong>, die euren Tag vollständig und ehrlich erzählen. Ich arbeite nicht mit Bildlimits und nicht mit einer Auswahl, bei der ihr später Bilder freikaufen müsst.</p>
+<p>Vom ersten Lächeln beim Getting Ready über die emotionalen Augenblicke bis zur ausgelassenen Party am Abend: Alles, was eure Geschichte erzählt, gehört euch. Professionell bearbeitet, in hoher Auflösung und digital in eurer privaten Online-Galerie.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="fuss-klein">
+  <span class="klein">© Braunstein Photography · Hochzeitsfotograf aus Lübeck</span>
+  <span class="klein"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></span>
+</footer>
+
+<div class="klebeknopf"><a class="knopf knopf--gold" href="#anfrage">Ist euer Datum noch frei?</a></div>
+
+<script>
+(function(){
+  var f=document.getElementById('anfrage-formular');if(!f)return;
+  var q=new URLSearchParams(location.search),k=[];
+  ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(n){if(q.get(n))k.push(n.replace('utm_','')+': '+q.get(n))});
+  f.querySelector('[name=Kampagne]').value=k.join(', ')||'direkt';
+  var dt=f.querySelector('#l-datum');if(dt){dt.min=new Date().toISOString().slice(0,10);}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var b=f.querySelector('button'),m=f.querySelector('.meldung');
+    b.disabled=true;b.textContent='Wird gesendet …';m.textContent='';
+    var d=Object.fromEntries(new FormData(f));if(d.Hochzeitsdatum){var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}
+    if(!d.Nachricht)d.Nachricht='–';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json()})
+      .then(function(r){if(r.success){location.href='/danke'}else{throw new Error()}})
+      .catch(function(){m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';b.disabled=false;b.textContent='Termin prüfen lassen'});
+  });
+  var kk=document.querySelector('.klebeknopf'),ziel=document.getElementById('anfrage'),held=document.querySelector('.hero');
+  if(kk&&ziel&&held&&'IntersectionObserver' in window){
+    var sicht={};kk.classList.add('versteckt');
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){sicht[x.target===held?'h':'z']=x.isIntersecting});kk.classList.toggle('versteckt',!!(sicht.h||sicht.z))},{threshold:.05});
+    io.observe(held);io.observe(ziel);
+  }
+})();
+</script>
+<script src="/assets/zustimmung.js" defer></script>
+</body>
+</html>
