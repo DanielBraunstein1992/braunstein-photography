@@ -118,8 +118,9 @@ def blog_karte(b):
 
 def story_karte(s):
     slug, titel, bild = s
+    src = bild if bild.startswith('/') else CDN + bild
     return f'''<a class="karte karte--story" href="{story_url(slug)}">
-  <img src="{CDN}{bild}" alt="Hochzeit von {e(titel)}" loading="lazy">
+  <img src="{src}" alt="Hochzeit von {e(titel)}" loading="lazy">
   <h3>{e(titel)}</h3>
   <span class="klein mehr">Fotostory ansehen</span>
 </a>'''
@@ -211,12 +212,17 @@ def baue():
         slug = s[0]
         if slug not in story_fertig: continue
         d = json.load(open(f'{SRC}/storys/{slug}.json'))
-        bilder = '\n'.join(f'<img src="{CDN}{x}" alt="Hochzeit {e(d["titel"])}, Bild {n+1}" loading="lazy">' for n, x in enumerate(d['bilder']))
+        ort = d.get('ort', '')
+        def story_bild(n, x):
+            if isinstance(x, list):
+                return f'<img src="{x[0]}" alt="{e(x[1])} – Hochzeit {e(d["titel"])}{", " + e(ort) if ort else ""}" loading="lazy">'
+            return f'<img src="{CDN}{x}" alt="Hochzeit {e(d["titel"])}, Bild {n+1}" loading="lazy">'
+        bilder = '\n'.join(story_bild(n, x) for n, x in enumerate(d['bilder']))
         stimme = f'<blockquote class="paarstimme"><p>„{e(d["stimme"])}“</p><cite class="klein">{e(d["titel"])}</cite></blockquote>' if d.get('stimme') else ''
         weitere = [listen['storys'][(i + k) % len(listen['storys'])] for k in (1, 2, 3)]
         inhalt = f'''<section class="story-kopf">
   <a class="zurueck klein" href="/fotostorys">Alle Fotostorys</a>
-  <span class="klein datum">{e(d.get('datum', ''))}</span>
+  <span class="klein datum">{e(d.get('datum', ''))}{' · ' + e(ort) if ort else ''}</span>
   <h1>{e(d['titel'])}</h1>
   {stimme}
 </section>
@@ -227,7 +233,7 @@ def baue():
   <h2>Weitere Fotostorys</h2>
   <div class="raster raster--storys">{''.join(story_karte(w) for w in weitere)}</div>
 </section>'''
-        open(f'{OUT}/fotostorys/{slug}.html', 'w').write(seite(f"Hochzeit {d['titel']} | Braunstein Photography", f"Fotostory: die Hochzeit von {d['titel']}, festgehalten von Daniel Braunstein.", inhalt, 'storys', LIGHTBOX))
+        open(f'{OUT}/fotostorys/{slug}.html', 'w').write(seite(f"Hochzeit {d['titel']}{' – ' + ort if ort else ''} | Braunstein Photography", f"Fotostory: die Hochzeit von {d['titel']}{' im ' + ort if ort else ''}, festgehalten von Daniel Braunstein, Hochzeitsfotograf aus Lübeck.", inhalt, 'storys', LIGHTBOX))
 
     # Über mich
     d = json.load(open(f'{SRC}/ueber-mich.json'))
@@ -359,7 +365,7 @@ def baue():
         if d['orte']:
             orte = f"""<section class="orte">
   <h2>{e(d['orte_titel'])}</h2>
-  <ul class="orte-liste">{''.join(f'<li><h3>{e(n)}</h3><span class="klein">{e(o)}</span><p>{e(t)}</p></li>' for n, o, t in d['orte'])}</ul>
+  <ul class="orte-liste">{''.join(f'<li><h3>{e(x[0])}</h3><span class="klein">{e(x[1])}</span><p>{e(x[2])}</p>' + (f'<a class="ort-story" href="{x[3][1]}">{e(x[3][0])}</a>' if len(x) > 3 else '') + '</li>' for x in d['orte'])}</ul>
   <p class="orte-fuss">{e(d['orte_fuss'])}</p>
 </section>"""
         karten = ''.join(story_karte(storys_idx[x]) for x in d['storys'] if x in storys_idx)

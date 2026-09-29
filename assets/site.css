@@ -269,3 +269,5 @@ fieldset.feld{border:0;margin:0;padding:0}
 .querverweis{margin-top:2.5rem;color:var(--schiefer)}
 .querverweis a{color:var(--gold-text)}
 @media (max-width:700px){.stadt-bild img{aspect-ratio:4/3}}
+
+.ort-story{display:inline-block;margin-top:.7rem;font-family:var(--klein);font-size:.9rem;letter-spacing:.03em;color:var(--gold-text);text-underline-offset:3px}
