@@ -59,7 +59,7 @@ p{margin:0 0 1.1em}
 .fliesstext h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.4rem);margin:2.8rem 0 1rem}
 .fliesstext h3{font-size:1.6rem;margin:2.2rem 0 .8rem}
 .fliesstext figure{margin:2.4rem 0}
-.fliesstext figure img{width:100%}
+.fliesstext figure img{width:100%;height:auto}
 .fliesstext ul{padding-left:1.2rem;margin:0 0 1.2em}
 .fliesstext li{margin-bottom:.4em}
 
@@ -71,7 +71,7 @@ p{margin:0 0 1.1em}
 .paarstimme p{font-style:italic;font-size:1.2rem;color:var(--schiefer)}
 .paarstimme cite{font-style:normal}
 .galerie{columns:3;column-gap:.9rem;padding:0 var(--rand) clamp(4rem,8vw,6rem);max-width:100rem;margin:0 auto}
-.galerie img{width:100%;margin-bottom:.9rem;break-inside:avoid;cursor:zoom-in}
+.galerie img{width:100%;height:auto;margin-bottom:.9rem;break-inside:avoid;cursor:zoom-in}
 
 .lightbox{position:fixed;inset:0;z-index:50;background:rgba(20,28,31,.94);display:flex;align-items:center;justify-content:center;padding:2rem}
 .lightbox[hidden]{display:none}

@@ -7,14 +7,34 @@ Fotostorys: storys/<slug>.json    -> fotostorys/<slug>.html
 import json, os, re, shutil, html, urllib.parse
 
 SRC = os.path.dirname(os.path.abspath(__file__))
-OUT = '/mnt/user-data/outputs/braunstein-website'
+OUT = os.environ.get('BUILD_OUT', '/mnt/user-data/outputs/braunstein-website')
 CDN = 'https://cdn.prod.website-files.com/68ef69d6601002710ef48956/'
 # Fotos liegen seit dem Umzug unter /assets/fotos (gleiche Regel wie .github/workflows/bilder-umziehen.yml)
 WEBFLOW_BILD = re.compile(r'src="https://cdn\.prod\.website-files\.com/[0-9a-f]+/([^"]+)"')
 def foto_name(roh): return re.sub(r'[^A-Za-z0-9._-]', '-', urllib.parse.unquote(roh))
 def fotos_lokal(h): return WEBFLOW_BILD.sub(lambda m: f'src="/assets/fotos/{foto_name(m.group(1))}"', h)
 ALT = 'https://www.braunstein-photography.de'
-BASIS = 'https://braunstein-photography.vercel.app'  # beim Domainwechsel auf https://www.braunstein-photography.de ändern
+WURZEL = os.path.dirname(SRC)
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+_masse = {}
+def masse(src):
+    """width/height-Attribute gegen Layoutverschiebung. Leer, wenn Pillow fehlt oder die Datei nicht im Repo liegt."""
+    if Image is None: return ''
+    m = WEBFLOW_BILD.match(f'src="{src}"')
+    pfad = f'{WURZEL}/assets/fotos/{foto_name(m.group(1))}' if m else WURZEL + src
+    if pfad not in _masse:
+        try:
+            with Image.open(pfad) as b:
+                w, h_ = b.size
+                if b.getexif().get(274) in (5, 6, 7, 8): w, h_ = h_, w
+            _masse[pfad] = f' width="{w}" height="{h_}"'
+        except OSError:
+            _masse[pfad] = ''
+    return _masse[pfad]
+BASIS = 'https://www.braunstein-photography.de'  # Hauptdomain: Canonical, Sitemap, Vorschaubild, strukturierte Daten
 e = html.escape
 
 listen = json.load(open(f'{SRC}/data_listen.json'))
@@ -31,12 +51,15 @@ UNTERNEHMEN = {
     'areaServed': [{'@type': 'City', 'name': 'Lübeck'}, {'@type': 'City', 'name': 'Hamburg'}, {'@type': 'State', 'name': 'Schleswig-Holstein'}],
     'founder': {'@type': 'Person', 'name': 'Daniel Braunstein', 'jobTitle': 'Hochzeitsfotograf'},
     'sameAs': ['https://www.instagram.com/braunstein_photography/', 'https://www.facebook.com/braunsteinphotography/']}
+def brotkrumen(*stufen):
+    stufen = (('Startseite', f'{BASIS}/'),) + stufen
+    return {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': i, 'name': n, 'item': u} for i, (n, u) in enumerate(stufen, 1)]}
 def json_ld(d): return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + '</script>'
 
 def blog_url(slug):  return f'/blog/{slug}' if slug in blog_fertig else f'{ALT}/blog/{slug}'
 def story_url(slug): return f'/fotostorys/{slug}' if slug in story_fertig else f'{ALT}/fotostorys/{slug}'
 
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jura:wght@300;400&display=swap" rel="stylesheet">'
+FONTS = '<link rel="stylesheet" href="/assets/schriften.css">'
 
 KOPF = '''<header class="kopf">
   <a class="marke" href="/" aria-label="Braunstein Photography, zur Startseite"><img src="/assets/logo-weiss.png" alt="Braunstein Photography"></a>
@@ -145,6 +168,9 @@ def baue():
     os.makedirs(f'{OUT}/fotostorys', exist_ok=True)
     os.makedirs(f'{OUT}/assets', exist_ok=True)
     shutil.copy(f'{SRC}/site.css', f'{OUT}/assets/site.css')
+    shutil.copy(f'{SRC}/schriften.css', f'{OUT}/assets/schriften.css')
+    if os.path.exists(f'{OUT}/assets/schriften'): shutil.rmtree(f'{OUT}/assets/schriften')
+    shutil.copytree(f'{SRC}/schriften', f'{OUT}/assets/schriften')
     if os.path.exists(f'{OUT}/assets/bilder'): shutil.rmtree(f'{OUT}/assets/bilder')
     shutil.copytree(f'{SRC}/bilder', f'{OUT}/assets/bilder')
     shutil.copy(f'{SRC}/logo-weiss.png', f'{OUT}/assets/logo-weiss.png')
@@ -153,7 +179,7 @@ def baue():
     q = f'{OUT}/_quelle'
     if os.path.exists(q): shutil.rmtree(q)
     shutil.copytree(SRC, q, ignore=shutil.ignore_patterns('__pycache__'))
-    open(f'{OUT}/.vercelignore', 'w').write('_quelle\n')
+    open(f'{OUT}/.vercelignore', 'w').write('_quelle\n.github\n')
 
     # Blog-Übersicht
     karten = '\n'.join(blog_karte(b) for b in listen['blog'])
@@ -187,7 +213,7 @@ def baue():
         teile = []
         for typ, wert in d['bloecke']:
             if typ == 'img' and wert == b[2]: continue
-            if typ == 'img': teile.append(f'<figure><img src="{CDN}{wert}" alt="Bild zum Artikel {e(d["titel"])}" loading="lazy"></figure>')
+            if typ == 'img': teile.append(f'<figure><img src="{CDN}{wert}"{masse(CDN + wert)} alt="Bild zum Artikel {e(d["titel"])}" loading="lazy"></figure>')
             elif typ in ('h2', 'h3'): teile.append(f'<{typ}>{e(wert)}</{typ}>')
             elif typ == 'li': teile.append('<ul>' + ''.join(f'<li>{e(x)}</li>' for x in wert) + '</ul>')
             else: teile.append(f'<p>{e(wert)}</p>')
@@ -195,7 +221,7 @@ def baue():
         inhalt = f'''<article class="artikel-seite">
   <a class="zurueck klein" href="/blog">Zurück zum Blog</a>
   <h1>{e(d['titel'])}</h1>
-  <figure class="artikel-titelbild"><img src="{CDN}{b[2]}" alt="Titelbild: {e(d['titel'])}"></figure>
+  <figure class="artikel-titelbild"><img src="{CDN}{b[2]}"{masse(CDN + b[2])} alt="Titelbild: {e(d['titel'])}" fetchpriority="high"></figure>
   <div class="fliesstext">
 {chr(10).join(teile)}
   </div>
@@ -205,7 +231,16 @@ def baue():
   <div class="raster raster--blog">{''.join(blog_karte(w) for w in weitere)}</div>
 </section>'''
         beschr = b[3]
-        open(f'{OUT}/blog/{slug}.html', 'w').write(seite(f"{d['titel']} | Braunstein Photography", beschr, inhalt, 'blog'))
+        titel = f"{d['titel']} | Braunstein Photography"
+        if len(titel) > 65: titel = d['titel']
+        url = f'{BASIS}/blog/{slug}'
+        ld = {'@context': 'https://schema.org', '@graph': [
+              {'@type': 'BlogPosting', '@id': f'{url}#artikel', 'headline': d['titel'], 'description': beschr, 'inLanguage': 'de-DE',
+               'mainEntityOfPage': url, 'image': f'{BASIS}/assets/fotos/{foto_name(b[2])}',
+               'author': {'@type': 'Person', 'name': 'Daniel Braunstein', 'url': f'{BASIS}/ueber-mich'},
+               'publisher': {'@id': UNTERNEHMEN['@id']}},
+              brotkrumen(('Blog', f'{BASIS}/blog'), (d['titel'], url))]}
+        open(f'{OUT}/blog/{slug}.html', 'w').write(seite(titel, beschr, inhalt, 'blog', json_ld(ld)))
 
     # Fotostorys
     for i, s in enumerate(listen['storys']):
@@ -215,8 +250,8 @@ def baue():
         ort = d.get('ort', '')
         def story_bild(n, x):
             if isinstance(x, list):
-                return f'<img src="{x[0]}" alt="{e(x[1])} – Hochzeit {e(d["titel"])}{", " + e(ort) if ort else ""}" loading="lazy">'
-            return f'<img src="{CDN}{x}" alt="Hochzeit {e(d["titel"])}, Bild {n+1}" loading="lazy">'
+                return f'<img src="{x[0]}"{masse(x[0])} alt="{e(x[1])} – Hochzeit {e(d["titel"])}{", " + e(ort) if ort else ""}" loading="lazy">'
+            return f'<img src="{CDN}{x}"{masse(CDN + x)} alt="Hochzeit {e(d["titel"])}, Bild {n+1}" loading="lazy">'
         bilder = '\n'.join(story_bild(n, x) for n, x in enumerate(d['bilder']))
         stimme = f'<blockquote class="paarstimme"><p>„{e(d["stimme"])}“</p><cite class="klein">{e(d["titel"])}</cite></blockquote>' if d.get('stimme') else ''
         weitere = [listen['storys'][(i + k) % len(listen['storys'])] for k in (1, 2, 3)]
@@ -233,7 +268,8 @@ def baue():
   <h2>Weitere Fotostorys</h2>
   <div class="raster raster--storys">{''.join(story_karte(w) for w in weitere)}</div>
 </section>'''
-        open(f'{OUT}/fotostorys/{slug}.html', 'w').write(seite(f"Hochzeit {d['titel']}{' – ' + ort if ort else ''} | Braunstein Photography", f"Fotostory: die Hochzeit von {d['titel']}{' im ' + ort if ort else ''}, festgehalten von Daniel Braunstein, Hochzeitsfotograf aus Lübeck.", inhalt, 'storys', LIGHTBOX))
+        ld = {'@context': 'https://schema.org', '@graph': [brotkrumen(('Fotostorys', f'{BASIS}/fotostorys'), (f"Hochzeit {d['titel']}", f'{BASIS}/fotostorys/{slug}'))]}
+        open(f'{OUT}/fotostorys/{slug}.html', 'w').write(seite(f"Hochzeit {d['titel']}{' – ' + ort if ort else ''} | Braunstein Photography", f"Fotostory: die Hochzeit von {d['titel']}{' im ' + ort if ort else ''}, festgehalten von Daniel Braunstein, Hochzeitsfotograf aus Lübeck.", inhalt, 'storys', LIGHTBOX + '\n' + json_ld(ld)))
 
     # Über mich
     d = json.load(open(f'{SRC}/ueber-mich.json'))
@@ -284,7 +320,7 @@ def baue():
     <input type="hidden" name="access_key" value="{schl}">
     <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Website">
     <input type="hidden" name="from_name" value="Braunstein Photography Website">
-    <input type="hidden" name="redirect" value="https://braunstein-photography.vercel.app/danke">
+    <input type="hidden" name="redirect" value="{BASIS}/danke">
     <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
     <div class="feldgruppe">
       <div class="feld"><label for="f-datum">Wann wollt ihr heiraten?</label><input id="f-datum" name="Hochzeitsdatum" type="date" required></div>
@@ -461,7 +497,13 @@ def baue():
     # Weiterleitungen (alte Adressen, noch nicht umgezogene Artikel)
     weiter = [{'source': '/hochzeitsfotografie', 'destination': '/', 'permanent': True}]
     weiter += [{'source': f'/blog/{b[0]}', 'destination': '/blog', 'permanent': False} for b in listen['blog'] if b[0] not in blog_fertig]
-    json.dump({'cleanUrls': True, 'trailingSlash': False, 'redirects': weiter}, open(f'{OUT}/vercel.json', 'w'), ensure_ascii=False, indent=2)
+    kopfzeilen = [
+        # Die vercel.app-Adresse nie indexieren, nur die Hauptdomain zählt
+        {'source': '/(.*)', 'has': [{'type': 'host', 'value': 'braunstein-photography.vercel.app'}],
+         'headers': [{'key': 'X-Robots-Tag', 'value': 'noindex'}]},
+        # Fotos und Schriften ändern sich nie unter demselben Namen
+        {'source': '/assets/(fotos|schriften)/(.*)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=31536000, immutable'}]}]
+    json.dump({'cleanUrls': True, 'trailingSlash': False, 'redirects': weiter, 'headers': kopfzeilen}, open(f'{OUT}/vercel.json', 'w'), ensure_ascii=False, indent=2)
 
     # Rechtliches
     def rtext(t):

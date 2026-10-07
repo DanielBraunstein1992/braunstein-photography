@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://braunstein-photography.vercel.app/sitemap.xml
+Sitemap: https://www.braunstein-photography.de/sitemap.xml
