@@ -46,8 +46,7 @@
       <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
     </div>
   </div>
-  <form class="formular" id="anfrage" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="HIER-DEN-WEB3FORMS-SCHLUESSEL-EINTRAGEN">
+  <form class="formular" id="anfrage" action="/api/anfrage" method="POST">
     <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Website">
     <input type="hidden" name="from_name" value="Braunstein Photography Website">
     <input type="hidden" name="redirect" value="https://www.braunstein-photography.de/danke">
@@ -79,7 +78,7 @@
     var k=f.querySelector('button'),m=f.querySelector('.meldung');
     k.disabled=true;k.textContent='Wird gesendet …';m.textContent='';
     var d=Object.fromEntries(new FormData(f));delete d.redirect;if(d.Hochzeitsdatum){var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+    fetch('/api/anfrage',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
       .then(function(r){return r.json()})
       .then(function(r){if(r.success){location.href='/danke'}else{throw new Error()}})
       .catch(function(){m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';k.disabled=false;k.textContent='Anfrage absenden'});

@@ -275,8 +275,7 @@
           <a class="knopf wa-knopf" href="{{WA}}" target="_blank" rel="noopener">Per WhatsApp schreiben</a>
         </div>
       </div>
-      <form class="formular" id="anfrage-formular" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="{{SCHLUESSEL}}">
+      <form class="formular" id="anfrage-formular" action="/api/anfrage" method="POST">
         <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Landingpage">
         <input type="hidden" name="from_name" value="Braunstein Photography Website">
         <input type="hidden" name="Quelle" value="Landingpage">
@@ -314,8 +313,7 @@
         <h2>Mein Zeitplan für euren Hochzeitstag.</h2>
         <p>So plane ich einen ganzen Tag mit Standesamt und Kirche, von 8 Uhr bis zum Mitternachtssnack. Dazu meine Tipps aus über 500 Hochzeiten und eine Vorlage für euren eigenen Plan. Kostenlos als PDF, direkt zum Herunterladen.</p>
       </div>
-      <form class="formular" id="vorlage-formular">
-        <input type="hidden" name="access_key" value="{{SCHLUESSEL}}">
+      <form class="formular" id="vorlage-formular" action="/api/anfrage" method="POST">
         <input type="hidden" name="subject" value="Zeitplan-Vorlage angefordert">
         <input type="hidden" name="from_name" value="Braunstein Photography Website">
         <input type="hidden" name="Quelle" value="Landingpage – Zeitplan-Vorlage">
@@ -355,7 +353,7 @@
       var b=f.querySelector('button'),m=f.querySelector('.meldung');
       b.disabled=true;b.textContent='Wird gesendet …';m.textContent='';
       var d=Object.fromEntries(new FormData(f));datum(d);if(!d.Nachricht)d.Nachricht='–';
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+      fetch('/api/anfrage',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
         .then(function(r){return r.json()})
         .then(function(r){if(r.success){location.href=ziel}else{throw new Error()}})
         .catch(function(){if(immerWeiter){location.href=ziel;return}m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';b.disabled=false;b.textContent=text});

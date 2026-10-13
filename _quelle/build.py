@@ -302,7 +302,6 @@ def baue():
     open(f'{OUT}/ueber-mich.html', 'w').write(seite('Über mich | Daniel Braunstein, Hochzeitsfotograf aus Lübeck', 'Was Brautpaare über Daniel Braunstein sagen: Hochzeitsfotograf aus Lübeck, seit 16 Jahren und mit über 500 Paaren.', inhalt, 'ueber'))
 
     # Kontakt
-    schl = json.load(open(f'{SRC}/kontakt.json'))['web3forms_schluessel']
     stunden = ['bis 4 Stunden','6 Stunden','8 Stunden','10 Stunden oder mehr','Wissen wir noch nicht']
     chips = ''.join(f'<label><input type="radio" name="Begleitung" value="{s}"{" required" if i==0 else ""}><span>{s}</span></label>' for i, s in enumerate(stunden))
     inhalt = f"""<section class="kontakt">
@@ -316,8 +315,7 @@ def baue():
       <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
     </div>
   </div>
-  <form class="formular" id="anfrage" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="{schl}">
+  <form class="formular" id="anfrage" action="/api/anfrage" method="POST">
     <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Website">
     <input type="hidden" name="from_name" value="Braunstein Photography Website">
     <input type="hidden" name="redirect" value="{BASIS}/danke">
@@ -349,7 +347,7 @@ def baue():
     var k=f.querySelector('button'),m=f.querySelector('.meldung');
     k.disabled=true;k.textContent='Wird gesendet …';m.textContent='';
     var d=Object.fromEntries(new FormData(f));delete d.redirect;if(d.Hochzeitsdatum){{var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}}
-    fetch('https://api.web3forms.com/submit',{{method:'POST',headers:{{'Content-Type':'application/json',Accept:'application/json'}},body:JSON.stringify(d)}})
+    fetch('/api/anfrage',{{method:'POST',headers:{{'Content-Type':'application/json',Accept:'application/json'}},body:JSON.stringify(d)}})
       .then(function(r){{return r.json()}})
       .then(function(r){{if(r.success){{location.href='/danke'}}else{{throw new Error()}}}})
       .catch(function(){{m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';k.disabled=false;k.textContent='Anfrage absenden'}});
@@ -470,7 +468,7 @@ def baue():
         cap = f'<figcaption>{text}</figcaption>' if text else ''
         tag.append(f'      <figure><img src="{CDN}{datei}" alt="Hochzeit von Silja und Florian auf Fehmarn{": " + text if text else ""}" loading="lazy">{cap}</figure>')
     lp = (open(f'{SRC}/landing.html').read().replace('{{STIL}}', stil).replace('{{FORMULAR_STIL}}', formular_stil)
-          .replace('{{FAQ}}', faq_l).replace('{{SCHLUESSEL}}', schl).replace('{{WA}}', e(wa)).replace('{{TAG}}', '\n'.join(tag)))
+          .replace('{{FAQ}}', faq_l).replace('{{WA}}', e(wa)).replace('{{TAG}}', '\n'.join(tag)))
     assert '{{' not in lp
     open(f'{OUT}/anfrage.html', 'w').write(lp)
 

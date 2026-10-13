@@ -572,8 +572,7 @@
           <a class="knopf wa-knopf" href="https://wa.me/4917614362401?text=Hallo%20Daniel%2C%20wir%20heiraten%20am%20%E2%80%A6%20in%20%E2%80%A6%20und%20w%C3%BCrden%20gern%20wissen%2C%20ob%20du%20an%20dem%20Tag%20noch%20frei%20bist." target="_blank" rel="noopener">Per WhatsApp schreiben</a>
         </div>
       </div>
-      <form class="formular" id="anfrage-formular" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="HIER-DEN-WEB3FORMS-SCHLUESSEL-EINTRAGEN">
+      <form class="formular" id="anfrage-formular" action="/api/anfrage" method="POST">
         <input type="hidden" name="subject" value="Neue Hochzeitsanfrage über die Landingpage">
         <input type="hidden" name="from_name" value="Braunstein Photography Website">
         <input type="hidden" name="Quelle" value="Landingpage">
@@ -619,8 +618,7 @@
         <h2>Mein Zeitplan für euren Hochzeitstag.</h2>
         <p>So plane ich einen ganzen Tag mit Standesamt und Kirche, von 8 Uhr bis zum Mitternachtssnack. Dazu meine Tipps aus über 500 Hochzeiten und eine Vorlage für euren eigenen Plan. Kostenlos als PDF, direkt zum Herunterladen.</p>
       </div>
-      <form class="formular" id="vorlage-formular">
-        <input type="hidden" name="access_key" value="HIER-DEN-WEB3FORMS-SCHLUESSEL-EINTRAGEN">
+      <form class="formular" id="vorlage-formular" action="/api/anfrage" method="POST">
         <input type="hidden" name="subject" value="Zeitplan-Vorlage angefordert">
         <input type="hidden" name="from_name" value="Braunstein Photography Website">
         <input type="hidden" name="Quelle" value="Landingpage – Zeitplan-Vorlage">
@@ -660,7 +658,7 @@
       var b=f.querySelector('button'),m=f.querySelector('.meldung');
       b.disabled=true;b.textContent='Wird gesendet …';m.textContent='';
       var d=Object.fromEntries(new FormData(f));datum(d);if(!d.Nachricht)d.Nachricht='–';
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+      fetch('/api/anfrage',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
         .then(function(r){return r.json()})
         .then(function(r){if(r.success){location.href=ziel}else{throw new Error()}})
         .catch(function(){if(immerWeiter){location.href=ziel;return}m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';b.disabled=false;b.textContent=text});
