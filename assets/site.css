@@ -114,30 +114,23 @@ footer a:hover{color:var(--weiss)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* Über mich */
-.um-kopf{padding:clamp(4rem,10vw,7rem) var(--rand) 1rem;text-align:center;max-width:56rem;margin:0 auto}
-.um-kopf .klein{color:var(--gold-text);display:block;margin-bottom:1rem}
-.um-kopf h1{font-size:clamp(2.4rem,1.5rem + 3.8vw,4.6rem);margin-bottom:.8rem}
-.um-kopf p{font-family:var(--display);font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem);color:var(--schiefer);margin:0}
-.stimmenbild{display:grid;grid-template-columns:1fr minmax(16rem,24rem) 1fr;gap:0 clamp(2rem,4vw,4rem);align-items:center;max-width:84rem;margin:0 auto;padding:clamp(3rem,6vw,5rem) var(--rand) 1.5rem}
-.stimmenbild .spalte{display:flex;flex-direction:column;gap:clamp(1.6rem,3vw,2.6rem)}
-.stimmenbild .links{text-align:right}
-.begriff{position:relative;margin:0}
-.begriff q{display:block;font-family:var(--display);font-size:clamp(1.35rem,1rem + 1vw,1.9rem);line-height:1.2;quotes:"„" "“"}
-.begriff cite{display:block;font-style:normal;margin-top:.35rem;color:var(--schiefer)}
-.begriff::after{content:"";position:absolute;top:.8em;width:clamp(1.4rem,3vw,3rem);height:1px;background:var(--gegenlicht)}
-.begriff::before{content:"";position:absolute;top:calc(.8em - 3px);width:7px;height:7px;border-radius:50%;background:var(--gegenlicht)}
-.links .begriff::after{right:calc(-1 * clamp(1.6rem,3.4vw,3.4rem))}
-.links .begriff::before{right:calc(-1 * clamp(1.6rem,3.4vw,3.4rem) - 4px)}
-.rechts .begriff::after{left:calc(-1 * clamp(1.6rem,3.4vw,3.4rem))}
-.rechts .begriff::before{left:calc(-1 * clamp(1.6rem,3.4vw,3.4rem) - 4px)}
-.links .begriff:nth-child(2),.links .begriff:nth-child(4){transform:translateX(-1.2rem)}
-.links .begriff:nth-child(3){transform:translateX(-2rem)}
-.rechts .begriff:nth-child(2),.rechts .begriff:nth-child(4){transform:translateX(1.2rem)}
-.rechts .begriff:nth-child(3){transform:translateX(2rem)}
-.bogen{position:relative;margin:0;isolation:isolate}
-.bogen::before{content:"";position:absolute;inset:8% -6% -3%;z-index:-1;border-radius:999px 999px 0 0;background:radial-gradient(ellipse 70% 45% at 50% 18%,rgba(194,138,58,.3),transparent 70%),var(--sand)}
-.bogen img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:999px 999px 0 0}
-.herkunft{text-align:center;color:var(--schiefer);padding:0 var(--rand) clamp(4rem,8vw,6rem)}
+.um-held{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--tiefsee);color:var(--weiss);min-height:min(88vh,54rem)}
+.um-bild{margin:0;min-height:100%}
+.um-bild img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.um-stimmen{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,6rem)}
+.um-stimmen h1{font-size:clamp(1.6rem,1.2rem + 1.2vw,2.2rem);font-style:italic;color:var(--sand);margin:0 0 clamp(2rem,4vw,3rem)}
+.wechsel{list-style:none;margin:0;padding:0;display:grid}
+.wechsel li{grid-area:1/1;opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease;visibility:hidden}
+.wechsel li.an{opacity:1;transform:none;visibility:visible}
+.wechsel .wort{font-family:var(--display);font-size:clamp(2.6rem,1.6rem + 3.6vw,5.4rem);line-height:1.05;margin:0 0 1.2rem}
+.wechsel .wer{font-family:var(--klein);font-size:1rem;letter-spacing:.04em;color:var(--gegenlicht)}
+.punkte{display:flex;gap:.3rem;margin-top:clamp(2rem,4vw,3rem)}
+.punkte button{width:1.4rem;height:1.4rem;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.punkte button::after{content:"";position:absolute;inset:50% auto auto 50%;width:.45rem;height:.45rem;margin:-.225rem 0 0 -.225rem;border-radius:50%;background:rgba(217,205,184,.35);transition:background .3s}
+.punkte button[aria-current]::after{background:var(--gegenlicht)}
+.um-herkunft{margin:1rem 0 0}
+.um-herkunft a{color:rgba(217,205,184,.75);text-underline-offset:3px}
+.um-herkunft a:hover{color:var(--sand)}
 .anekdoten{background:var(--weiss);padding:clamp(4rem,9vw,7rem) var(--rand)}
 .anekdoten h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.4rem);max-width:84rem;margin:0 auto 3rem}
 .anekdoten-raster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.4rem,2.5vw,2.5rem);max-width:84rem;margin:0 auto}
@@ -151,11 +144,9 @@ footer a:hover{color:var(--weiss)}
 .fakten-liste li:first-child{border-top:1px solid var(--sand)}
 .fakten-liste strong{font-family:var(--display);font-weight:400;font-size:2.2rem;line-height:1;min-width:5.5rem;color:var(--gold-text)}
 @media (max-width:900px){
-  .stimmenbild{grid-template-columns:1fr;gap:2.2rem}
-  .stimmenbild .bogen{order:-1;max-width:20rem;margin:0 auto 1rem;width:100%}
-  .stimmenbild .links,.stimmenbild .rechts{text-align:left;gap:1.4rem}
-  .begriff,.links .begriff:nth-child(n),.rechts .begriff:nth-child(n){transform:none;padding-left:1.2rem;border-left:1px solid var(--gegenlicht)}
-  .begriff::before,.begriff::after{display:none}
+  .um-held{grid-template-columns:1fr;min-height:0}
+  .um-bild img{height:auto;aspect-ratio:4/5}
+  .um-stimmen{padding:2.6rem var(--rand) 3.2rem}
   .anekdoten-raster{grid-template-columns:1fr 1fr}
   .persoenlich{grid-template-columns:1fr}
 }

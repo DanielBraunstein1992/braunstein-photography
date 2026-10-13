@@ -163,6 +163,18 @@ LIGHTBOX = '''<div class="lightbox" hidden><button class="lb-zu" aria-label="Sch
 })();
 </script>'''
 
+WECHSEL = '''<script>
+(function(){
+  var l=document.querySelectorAll('.wechsel li'),p=document.querySelectorAll('.punkte button'),i=0,t;
+  if(!l.length)return;
+  function zeige(n){l[i].classList.remove('an');p[i].removeAttribute('aria-current');i=(n+l.length)%l.length;l[i].classList.add('an');p[i].setAttribute('aria-current','true');}
+  function los(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;clearInterval(t);t=setInterval(function(){zeige(i+1)},3800);}
+  p.forEach(function(b,n){b.addEventListener('click',function(){zeige(n);los();});});
+  var s=document.querySelector('.um-stimmen');s.addEventListener('mouseenter',function(){clearInterval(t)});s.addEventListener('mouseleave',los);
+  los();
+})();
+</script>'''
+
 def baue():
     os.makedirs(f'{OUT}/blog', exist_ok=True)
     os.makedirs(f'{OUT}/fotostorys', exist_ok=True)
@@ -273,31 +285,24 @@ def baue():
 
     # Über mich
     d = json.load(open(f'{SRC}/ueber-mich.json'))
-    def begriff(b): return f'<figure class="begriff"><q>{e(b[0])}</q><cite class="klein">{e(b[1])}</cite></figure>'
+    stimmen = [x for paar in zip(d['links'], d['rechts']) for x in paar]
+    AN, AKTUELL = ' class="an"', ' aria-current="true"'
+    worte = ''.join(f'<li{AN if i == 0 else ""}><p class="wort">„{e(t)}“</p><span class="wer">{e(n)}</span></li>' for i, (t, n) in enumerate(stimmen))
+    punkte = ''.join(f'<button type="button" aria-label="Begriff {i+1} von {len(stimmen)}"{AKTUELL if i == 0 else ""}></button>' for i in range(len(stimmen)))
     anek = ''.join(f'<figure class="anekdote"><p>„{e(a[0])}“</p><cite class="klein">{e(a[1])}</cite></figure>' for a in d['anekdoten'])
-    zeit = ''.join(f'<li><span class="klein zeit">{e(t[0])}</span><p>{e(t[1])}</p></li>' for t in d['tag'])
-    inhalt = f'''<section class="um-kopf">
-  <span class="klein">Über mich</span>
-  <h1>Man kann viel über sich selbst schreiben.</h1>
-  <p>Ich lasse lieber meine Paare erzählen.</p>
+    inhalt = f'''<section class="um-held">
+  <figure class="um-bild"><img src="{d['bild']}" alt="Daniel Braunstein zeigt lachend zwei Daumen nach oben" width="900" height="1200" fetchpriority="high"></figure>
+  <div class="um-stimmen">
+    <h1>Was meine Paare über mich sagen</h1>
+    <ul class="wechsel" aria-live="polite">{worte}</ul>
+    <div class="punkte">{punkte}</div>
+    <p class="klein um-herkunft"><a href="https://www.google.com/maps/search/?api=1&amp;query=Braunstein+Photography+L%C3%BCbeck" target="_blank" rel="noopener">{e(d['herkunft'])}</a></p>
+  </div>
 </section>
-<section class="stimmenbild" aria-label="Was Paare über Daniel sagen">
-  <div class="spalte links">{''.join(begriff(b) for b in d['links'])}</div>
-  <figure class="bogen"><img src="{d['bild']}" alt="Daniel Braunstein zeigt lachend zwei Daumen nach oben"></figure>
-  <div class="spalte rechts">{''.join(begriff(b) for b in d['rechts'])}</div>
-</section>
-<p class="herkunft klein">{e(d['herkunft'])}</p>
+''' + WECHSEL + f'''
 <section class="anekdoten">
   <h2>Und manchmal auch das.</h2>
   <div class="anekdoten-raster">{anek}</div>
-</section>
-<section class="tagesablauf">
-  <div class="tagesablauf-kopf">
-    <span class="klein">Hinter der Kamera</span>
-    <h2>Ein Hochzeitstag, von der anderen Seite.</h2>
-    <p>So kann ein Tag mit mir aussehen. Jede Hochzeit ist anders, aber ein paar Dinge passieren fast immer.</p>
-  </div>
-  <ol class="zeitleiste">{zeit}</ol>
 </section>'''
     open(f'{OUT}/ueber-mich.html', 'w').write(seite('Über mich | Daniel Braunstein, Hochzeitsfotograf aus Lübeck', 'Was Brautpaare über Daniel Braunstein sagen: Hochzeitsfotograf aus Lübeck, seit 16 Jahren und mit über 500 Paaren.', inhalt, 'ueber'))
 
