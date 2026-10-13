@@ -123,7 +123,9 @@ footer a:hover{color:var(--weiss)}
 .wechsel li{grid-area:1/1;opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease;visibility:hidden}
 .wechsel li.an{opacity:1;transform:none;visibility:visible}
 .wechsel .wort{font-family:var(--display);font-size:clamp(2.6rem,1.6rem + 3.6vw,5.4rem);line-height:1.05;margin:0 0 1.2rem}
-.wechsel .wer{font-family:var(--klein);font-size:1rem;letter-spacing:.04em;color:var(--gegenlicht)}
+.wechsel .wer{display:inline-flex;align-items:center;gap:.9rem;font-family:var(--klein);font-size:1rem;letter-spacing:.04em;color:var(--gegenlicht);text-decoration:none}
+.wechsel .wer img{width:clamp(3.6rem,2.8rem + 1.6vw,4.8rem);height:clamp(3.6rem,2.8rem + 1.6vw,4.8rem);border-radius:50%;object-fit:cover;border:1px solid rgba(217,205,184,.35)}
+.wechsel a.wer:hover span{text-decoration:underline;text-underline-offset:3px}
 .punkte{display:flex;gap:.3rem;margin-top:clamp(2rem,4vw,3rem)}
 .punkte button{width:1.4rem;height:1.4rem;padding:0;border:0;background:none;cursor:pointer;position:relative}
 .punkte button::after{content:"";position:absolute;inset:50% auto auto 50%;width:.45rem;height:.45rem;margin:-.225rem 0 0 -.225rem;border-radius:50%;background:rgba(217,205,184,.35);transition:background .3s}

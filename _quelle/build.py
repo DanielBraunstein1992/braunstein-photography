@@ -287,7 +287,13 @@ def baue():
     d = json.load(open(f'{SRC}/ueber-mich.json'))
     stimmen = [x for paar in zip(d['links'], d['rechts']) for x in paar]
     AN, AKTUELL = ' class="an"', ' aria-current="true"'
-    worte = ''.join(f'<li{AN if i == 0 else ""}><p class="wort">„{e(t)}“</p><span class="wer">{e(n)}</span></li>' for i, (t, n) in enumerate(stimmen))
+    story_zu = {s[1]: s[0] for s in listen['storys']}
+    def wer(n):
+        slug = story_zu.get(n, '')
+        bild = f"bilder/ueber-mich/paar-{slug.replace('hochzeit-', '')}.webp"
+        img = f'<img src="/assets/{bild}" alt="" width="120" height="120">' if slug and os.path.exists(f'{SRC}/{bild}') else ''
+        return f'<a class="wer" href="{story_url(slug)}">{img}<span>{e(n)}</span></a>' if slug else f'<span class="wer">{e(n)}</span>'
+    worte = ''.join(f'<li{AN if i == 0 else ""}><p class="wort">„{e(t)}“</p>{wer(n)}</li>' for i, (t, n) in enumerate(stimmen))
     punkte = ''.join(f'<button type="button" aria-label="Begriff {i+1} von {len(stimmen)}"{AKTUELL if i == 0 else ""}></button>' for i in range(len(stimmen)))
     anek = ''.join(f'<figure class="anekdote"><p>„{e(a[0])}“</p><cite class="klein">{e(a[1])}</cite></figure>' for a in d['anekdoten'])
     inhalt = f'''<section class="um-held">
