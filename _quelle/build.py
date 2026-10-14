@@ -88,6 +88,7 @@ FUSS = '''<section class="cta">
     <li><a href="/fotostorys">Fotostorys</a></li>
     <li><a href="/blog">Blog</a></li>
     <li><a href="/faq">FAQ</a></li>
+    <li><a href="/zeitplan">Zeitplan für euren Hochzeitstag</a></li>
     <li><a href="/hochzeitsfotografie-luebeck">Hochzeitsfotograf Lübeck</a></li>
     <li><a href="/hochzeitsfotografie-hamburg">Hochzeitsfotograf Hamburg</a></li>
     <li><a href="https://www.instagram.com/braunstein_photography/">Instagram</a></li>
@@ -230,6 +231,15 @@ def baue():
             elif typ == 'li': teile.append('<ul>' + ''.join(f'<li>{e(x)}</li>' for x in wert) + '</ul>')
             else: teile.append(f'<p>{e(wert)}</p>')
         weitere = [listen['blog'][(i + k) % len(listen['blog'])] for k in (1, 2, 3)]
+        # Artikel rund um Ablauf und Timing bekommen einen Hinweis auf die Zeitplan-Seite
+        zeitplan_slugs = {'wie-sieht-der-perfekte-hochzeitstag-aus',
+                          'perfekte-tageszeit-fuer-das-brautpaarshooting',
+                          'der-magische-moment-den-perfekten-first-look-einfangen',
+                          'hochzeitsfotografie-beim-standesamt',
+                          'hochzeitsfotografie-bei-eurer-freien-trauung'}
+        zeitplan_hinweis = ('<p class="querverweis">Ihr plant gerade euren Tagesablauf? '
+                            '<a href="/zeitplan">Hier ist mein Zeitplan für den Hochzeitstag</a>, '
+                            'mit Vorlage zum Herunterladen.</p>') if slug in zeitplan_slugs else ''
         inhalt = f'''<article class="artikel-seite">
   <a class="zurueck klein" href="/blog">Zurück zum Blog</a>
   <h1>{e(d['titel'])}</h1>
@@ -237,6 +247,7 @@ def baue():
   <div class="fliesstext">
 {chr(10).join(teile)}
   </div>
+  {zeitplan_hinweis}
 </article>
 <section class="weitere">
   <h2>Weitere Artikel</h2>
@@ -483,6 +494,128 @@ def baue():
     assert '{{' not in lp
     open(f'{OUT}/anfrage.html', 'w').write(lp)
 
+    # Zeitplan: indexierbare Seite. Der Ablauf steht als Text auf der Seite,
+    # damit Google ihn lesen kann; das PDF gibt es über das Formular.
+    tagesplan = [
+        ('8 Uhr', 'Getting Ready', 'Ich komme dazu, wenn Haare und Make-up schon laufen. Kleid, Ringe, Schuhe und die ersten aufgeregten Blicke.'),
+        ('9.50 Uhr', 'First Look, optional', 'Nur ihr zwei. Eure Gäste warten schon im Standesamt oder um die Ecke. Ein ruhiger Moment, bevor es losgeht.'),
+        ('10 Uhr', 'Standesamtliche Trauung', 'Danach können eure Gäste Spalier stehen.'),
+        ('11 Uhr', 'Brautpaarshooting, 30 Minuten', 'Kurz und knackig.'),
+        ('12 Uhr', 'Mittagessen', ''),
+        ('14 Uhr', 'Kirchliche Trauung', 'Danach nehmt ihr draußen die Glückwünsche entgegen. Bei 100 Gästen dauert das etwa 20 Minuten.'),
+        ('15 Uhr', 'Sektempfang', ''),
+        ('15.30 Uhr', 'Gruppenbilder', 'Erst das große Bild mit allen, danach die kleineren Gruppen.'),
+        ('16.30 Uhr', 'Hochzeitstorte', ''),
+        ('16.45 Uhr', 'Brautpaarshooting, 20 bis 30 Minuten', ''),
+        ('19 Uhr', 'Abendessen', 'Plant dafür mindestens 90 Minuten ein.'),
+        ('20.30 Uhr', 'Sonnenuntergangs-Shooting', 'Bis etwa 21 Uhr, das schönste Licht des Tages.'),
+        ('21 Uhr', 'Hochzeitstanz', 'Danach wird nur noch gefeiert.'),
+        ('24 Uhr', 'Mitternachtssnack', ''),
+    ]
+    zeile = ''.join(
+        f'<li><span class="zeit klein">{e(t)}</span><p><strong>{e(w)}</strong>'
+        + (f'<br>{e(x)}' if x else '') + '</p></li>' for t, w, x in tagesplan)
+
+    tipps = [
+        ('Die Torte am Nachmittag', 'Aus Erfahrung passt die Hochzeitstorte am besten um 16.30 Uhr. Den Rest könnt ihr abends noch einmal zum Dessert dazustellen.'),
+        ('Der Hochzeitstanz um 21 Uhr', 'Irgendwann wollen eure Gäste und ihr einfach feiern. Schaut, dass bis dahin alle Programmpunkte erledigt sind.'),
+        ('Spalier und Glückwünsche', 'Nach dem Standesamt können eure Gäste Spalier stehen. Nach der kirchlichen Trauung nehmt ihr die Glückwünsche draußen entgegen — bei 100 Gästen etwa 20 Minuten.'),
+        ('Sagt es euren Gästen', 'Wenn alle wissen, wann die Gruppenbilder stattfinden, wartet niemand und ihr könnt den Tag genießen.'),
+    ]
+    tipp_liste = ''.join(f'<li><div><strong>{e(a)}</strong><span>{e(b)}</span></div></li>' for a, b in tipps)
+
+    eigener = [
+        'Schreibt auf, wann die Trauung stattfindet und wann ihr zu Abend essen wollt. Alles andere ordnet sich dazwischen ein.',
+        'Bedenkt die Anfahrtszeiten zur Trauung und zur Location — und wo eure Gäste parken.',
+        'Plant am Nachmittag Zeitpuffer ein. Eure Gäste haben bestimmt Überraschungen für euch.',
+        'Für das Abendessen braucht ihr mindestens 90 Minuten.',
+        'Schaut nach, wann bei euch die Sonne untergeht, und legt das Paarshooting davor.',
+    ]
+    eigen_liste = ''.join(f'<li>{e(x)}</li>' for x in eigener)
+
+    inhalt = f"""<section class="seitenkopf">
+  <span class="klein">Zeitplan</span>
+  <h1>Der Zeitplan für euren Hochzeitstag.</h1>
+  <p>Wie viel Zeit braucht ihr wirklich für Trauung, Gruppenbilder und Paarfotos? Hier steht der Ablauf, der sich bei mir in über 500 Hochzeiten bewährt hat. Zum Nachlesen — und als Vorlage zum Herunterladen.</p>
+</section>
+
+<section class="tagesablauf">
+  <div class="tagesablauf-kopf">
+    <span class="klein">Ein Tag mit Standesamt und Kirche</span>
+    <h2>Von 8 Uhr bis zum Mitternachtssnack.</h2>
+    <p>Jede Hochzeit ist anders. Aber dieser Ablauf funktioniert immer wieder — und ihr seht daran, wo die Fotografie wirklich Zeit braucht und wo nicht.</p>
+  </div>
+  <ol class="zeitleiste">{zeile}</ol>
+</section>
+
+<section class="artikel-seite">
+  <div class="fliesstext">
+    <h2>Warum ich die Paarbilder aufteile</h2>
+    <p>Ich teile das Brautpaarshooting bewusst in kurze Sequenzen über den Tag. Ihr sollt mit euren Gästen feiern und nicht drei Stunden am Stück mit mir Bilder machen. Zwei- bis dreimal eine halbe Stunde reicht völlig — und ihr bekommt dabei Licht zu ganz unterschiedlichen Tageszeiten, vom Mittag bis zum Sonnenuntergang.</p>
+    <p>Der Nebeneffekt: Ihr seid entspannter. Nach dem ersten kurzen Shooting kennt ihr die Kamera schon, und ab dem zweiten Mal läuft es fast von allein.</p>
+
+    <h2>Meine Tipps aus Erfahrung</h2>
+    <ol class="schritte-danke">{tipp_liste}</ol>
+
+    <h2>So plant ihr euren eigenen Ablauf</h2>
+    <ul>{eigen_liste}</ul>
+
+    <h2>Und wenn ihr freie Trauung feiert?</h2>
+    <p>Dann wird es sogar einfacher: Statt Standesamt am Vormittag und Kirche am Nachmittag habt ihr einen Trauungstermin. Legt ihn so, dass zwischen Trauung und Abendessen genug Luft für Sektempfang, Gruppenbilder und Paarshooting bleibt — etwa drei bis vier Stunden. Den Rest könnt ihr aus dem Plan oben übernehmen.</p>
+  </div>
+</section>
+
+<section class="kontakt">
+  <div class="kontakt-intro">
+    <span class="klein">Vorlage</span>
+    <h2>Nehmt den Plan mit.</h2>
+    <p>Ihr bekommt den kompletten Ablauf als PDF, dazu meine Tipps und eine leere Vorlage, in die ihr euren eigenen Plan eintragen könnt. Kostenlos und ohne Haken.</p>
+    <div class="direkt">
+      <p class="klein">Fragen zu eurem Ablauf?</p>
+      <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
+    </div>
+  </div>
+  <form class="formular" id="vorlage" action="/api/anfrage" method="POST">
+    <input type="hidden" name="subject" value="Zeitplan-Vorlage angefordert">
+    <input type="hidden" name="from_name" value="Braunstein Photography Website">
+    <input type="hidden" name="Quelle" value="Zeitplan-Seite">
+    <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
+    <div class="feldgruppe">
+      <div class="feld"><label for="z-name">Eure Vornamen</label><input id="z-name" name="name" type="text" autocomplete="given-name" required></div>
+      <div class="feld"><label for="z-mail">E-Mail</label><input id="z-mail" name="email" type="email" autocomplete="email" required></div>
+    </div>
+    <div class="feld"><label for="z-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="z-datum" name="Hochzeitsdatum" type="date"></div>
+    <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass Daniel mich zu meiner Hochzeitsfotografie kontaktieren darf. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+    <p class="meldung" role="alert"></p>
+    <button class="knopf" type="submit">Zeitplan herunterladen</button>
+  </form>
+</section>
+<script>""" + """
+(function(){
+  var f=document.getElementById('vorlage');if(!f)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var k=f.querySelector('button'),m=f.querySelector('.meldung');
+    k.disabled=true;k.textContent='Wird gesendet …';m.textContent='';
+    var d=Object.fromEntries(new FormData(f));
+    if(d.Hochzeitsdatum){var t=d.Hochzeitsdatum.split('-');d.Hochzeitsdatum=t[2]+'.'+t[1]+'.'+t[0];}
+    fetch('/api/anfrage',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json()})
+      .then(function(r){if(r.success){location.href='/zeitplan-vorlage'}else{throw new Error()}})
+      .catch(function(){m.textContent='Das hat leider nicht geklappt. Bitte versucht es noch einmal oder ruft mich direkt an: +49 176 14362401';k.disabled=false;k.textContent='Zeitplan herunterladen'});
+  });
+})();
+</script>"""
+    zp_url = f'{BASIS}/zeitplan'
+    zp_ld = {'@context': 'https://schema.org', '@graph': [UNTERNEHMEN,
+             {'@type': 'WebPage', '@id': zp_url, 'url': zp_url, 'inLanguage': 'de-DE',
+              'name': 'Zeitplan für den Hochzeitstag', 'about': {'@id': UNTERNEHMEN['@id']}},
+             brotkrumen(('Zeitplan für den Hochzeitstag', zp_url))]}
+    open(f'{OUT}/zeitplan.html', 'w').write(seite(
+        'Zeitplan Hochzeit: Ablauf & Vorlage zum Download | Braunstein Photography',
+        'Wie viel Zeit braucht ihr für Trauung, Gruppenbilder und Paarfotos? Erprobter Ablauf für euren Hochzeitstag von 8 bis 24 Uhr, plus Vorlage als PDF.',
+        inhalt, extra=json_ld(zp_ld)))
+
     # Zeitplan-Vorlage: Download-Seite nach dem Eintragen
     if os.path.exists(f'{SRC}/downloads'):
         if os.path.exists(f'{OUT}/downloads'): shutil.rmtree(f'{OUT}/downloads')
@@ -500,6 +633,7 @@ def baue():
     <a class="knopf knopf--dunkel" href="/anfrage#anfrage">Ist unser Datum noch frei?</a>
     <a class="knopf knopf--rahmen" href="{e(wa)}" target="_blank" rel="noopener">Per WhatsApp schreiben</a>
   </div>
+  <p class="klein">Oder ruft mich einfach an: <a href="tel:+4917614362401">+49 176 14362401</a></p>
 </section>'''
     open(f'{OUT}/zeitplan-vorlage.html', 'w').write(seite('Eure Zeitplan-Vorlage | Braunstein Photography', 'Zeitplan-Vorlage für euren Hochzeitstag.', inhalt, cta=False).replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1))
 
