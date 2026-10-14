@@ -199,6 +199,8 @@ fieldset.feld{border:0;margin:0;padding:0}
 .schritte-danke span{font-size:1.05rem}
 .schritte-danke span{color:var(--schiefer)}
 .danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
+.danke-knoepfe + h2{margin-top:clamp(3.5rem,7vw,5rem)}
+.danke-knoepfe + .klein{margin-top:1.4rem}
 .knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
 .knopf--dunkel:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
 .knopf--rahmen{color:var(--tiefsee)}
