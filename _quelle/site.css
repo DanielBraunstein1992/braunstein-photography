@@ -162,7 +162,8 @@ footer a:hover{color:var(--weiss)}
 .kontakt-intro .direkt{margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--sand)}
 .kontakt-intro .direkt a{color:var(--tiefsee)}
 .formular{background:var(--weiss);padding:clamp(1.6rem,4vw,3.2rem);display:grid;gap:1.6rem}
-.feldgruppe{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.feldgruppe{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
+.feld-hinweis{margin-top:.1rem;color:var(--schiefer);line-height:1.45}
 .feld{display:flex;flex-direction:column;gap:.5rem;min-width:0}
 .feld label,.feld legend{font-family:var(--klein);font-size:.95rem;letter-spacing:.03em;color:var(--schiefer);padding:0}
 .feld input,.feld textarea{font:inherit;font-size:1.1rem;color:var(--tiefsee);background:transparent;border:0;border-bottom:1px solid var(--sand);padding:.55rem 0;border-radius:0;width:100%}
