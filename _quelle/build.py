@@ -568,8 +568,15 @@ def baue():
 <section class="kontakt">
   <div class="kontakt-intro">
     <span class="klein">Vorlage</span>
-    <h2>Nehmt den Plan mit.</h2>
-    <p>Ihr bekommt den kompletten Ablauf als PDF, dazu meine Tipps und eine leere Vorlage, in die ihr euren eigenen Plan eintragen könnt. Kostenlos und ohne Haken.</p>
+    <h2>Die Arbeitsblätter dazu.</h2>
+    <p>Oben steht mein Ablauf zum Lesen. Das PDF ist zum Ausfüllen — fünf Seiten, die ihr ausdruckt und weitergebt:</p>
+    <ul class="vorlage-liste">
+      <li><strong>Eure Zeitplan-Vorlage</strong> mit Uhrzeit, Programmpunkt, Ort und Notiz</li>
+      <li><strong>Die Gruppenbilder-Liste</strong> zum Ankreuzen, für euren Trauzeugen</li>
+      <li><strong>Eine zweite Variante</strong> für den Tag mit freier Trauung</li>
+      <li><strong>Die Fragen an Location, Trauredner, DJ und Catering</strong></li>
+    </ul>
+    <p>Kostenlos und ohne Haken.</p>
     <div class="direkt">
       <p class="klein">Fragen zu eurem Ablauf?</p>
       <p><a href="tel:+4917614362401">+49 176 14362401</a></p>
@@ -584,7 +591,11 @@ def baue():
       <div class="feld"><label for="z-name">Eure Vornamen</label><input id="z-name" name="name" type="text" autocomplete="given-name" required></div>
       <div class="feld"><label for="z-mail">E-Mail</label><input id="z-mail" name="email" type="email" autocomplete="email" required></div>
     </div>
-    <div class="feld"><label for="z-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="z-datum" name="Hochzeitsdatum" type="date"></div>
+    <div class="feldgruppe">
+      <div class="feld"><label for="z-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="z-datum" name="Hochzeitsdatum" type="date"></div>
+      <div class="feld"><label for="z-tel">Telefon (freiwillig)</label><input id="z-tel" name="Telefon" type="tel" autocomplete="tel"></div>
+    </div>
+    <p class="klein">Wenn ihr lieber telefoniert als schreibt: Lasst mir eure Nummer da, dann melde ich mich kurz bei euch.</p>
     <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass Daniel mich zu meiner Hochzeitsfotografie kontaktieren darf. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
     <p class="meldung" role="alert"></p>
     <button class="knopf" type="submit">Zeitplan herunterladen</button>

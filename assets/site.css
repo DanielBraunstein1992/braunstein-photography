@@ -199,6 +199,10 @@ fieldset.feld{border:0;margin:0;padding:0}
 .schritte-danke span{font-size:1.05rem}
 .schritte-danke span{color:var(--schiefer)}
 .danke-knoepfe{display:flex;flex-wrap:wrap;gap:1rem}
+.vorlage-liste{list-style:none;margin:1.2rem 0;padding:0}
+.vorlage-liste li{position:relative;padding:0 0 .6rem 1.4rem;color:var(--schiefer)}
+.vorlage-liste li::before{content:"";position:absolute;left:0;top:.65em;width:.4rem;height:.4rem;border-radius:50%;background:var(--gegenlicht)}
+.vorlage-liste strong{color:var(--tiefsee);font-weight:400}
 .danke-knoepfe + h2{margin-top:clamp(3.5rem,7vw,5rem)}
 .danke-knoepfe + .klein{margin-top:1.4rem}
 .knopf--dunkel{background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
