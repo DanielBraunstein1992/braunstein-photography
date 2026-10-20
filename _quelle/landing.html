@@ -18,16 +18,6 @@
   .belege strong{font-family:var(--display);font-weight:500;font-size:1.7rem;line-height:1.1;color:var(--gegenlicht)}
   .belege span{font-family:var(--klein);font-size:.92rem;letter-spacing:.03em;color:var(--sand)}
   .belege a{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:.25rem}
-  .preis{max-width:60rem;margin:0 auto;text-align:center}
-  .preis h2{margin-bottom:1.2rem}
-  .preis-karten{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2.5rem 0 2rem;text-align:left}
-  .preis-karte{border:1px solid var(--sand);padding:1.8rem 1.6rem;background:var(--weiss)}
-  .preis-karte .klein{color:var(--gold-text);display:block;margin-bottom:.6rem}
-  .preis-karte strong{display:block;font-family:var(--display);font-weight:500;font-size:clamp(2.2rem,1.6rem + 2vw,3rem);line-height:1;margin-bottom:.8rem}
-  .preis-karte p{margin:0;color:var(--schiefer);font-size:1.08rem}
-  .preis-haeufig{max-width:44rem;margin:0 auto 1.4rem;padding:1.2rem 1.4rem;background:var(--nebel);border-left:2px solid var(--gegenlicht);text-align:left}
-  .preis-haeufig strong{font-weight:400;color:var(--tiefsee)}
-  .preis-fuss{color:var(--schiefer);max-width:40rem;margin:0 auto}
   .anfrage{background:var(--sand);padding:clamp(4rem,9vw,7rem) var(--rand)}
   .anfrage-innen{max-width:84rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,5rem);align-items:start}
   .anfrage h2{margin-bottom:1.4rem}
@@ -71,12 +61,6 @@
   .anfrage-text .direkt a.wa-knopf{display:inline-block;margin-top:1.2rem;font-family:var(--klein);font-size:.95rem;background:var(--tiefsee);color:var(--weiss);border-color:var(--tiefsee)}
   .anfrage-text .direkt a.wa-knopf:hover{background:var(--gold-knopf);border-color:var(--gold-knopf);color:var(--weiss)}
   .unter-knopf{margin:-.6rem 0 0;color:var(--schiefer)}
-  .vorlage{background:var(--tiefsee);color:var(--weiss)}
-  .vorlage-innen{max-width:84rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
-  .vorlage .klein{color:var(--gegenlicht);display:block;margin-bottom:1rem}
-  .vorlage h2{margin-bottom:1.4rem}
-  .vorlage p{color:var(--sand)}
-  .vorlage .formular{color:var(--tiefsee)}
   .fuss-klein ul{list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex-wrap:wrap}
   .klebeknopf{gap:.6rem}
   .klebeknopf .knopf{flex:1}
@@ -89,12 +73,11 @@
     .klebeknopf{display:flex}
     .tag-galerie{column-count:2;column-gap:6px}
     .tag-galerie figure{margin-bottom:6px}
-    .karten-stimmen,.vorlage-innen{grid-template-columns:1fr}
+    .karten-stimmen{grid-template-columns:1fr}
     .enthalten ul{grid-template-columns:1fr}
     .klebeknopf.versteckt{display:none}
   }
   @media (max-width:560px){
-    .preis-karten{grid-template-columns:1fr}
     .feldgruppe{grid-template-columns:1fr}
     .belege strong{font-size:1.45rem}
   }
@@ -252,19 +235,6 @@
     </ol>
   </section>
 
-  <section>
-    <div class="preis">
-      <h2>Womit ihr rechnen könnt.</h2>
-      <p>Jede Hochzeit ist anders, deshalb bekommt ihr nach dem Kennenlernen ein Angebot, das genau zu eurem Tag passt. Zur Orientierung:</p>
-      <div class="preis-karten">
-        <div class="preis-karte"><span class="klein">Standesamt, ab 2 Stunden</span><strong>ab 900 €</strong><p>Für kleine standesamtliche Hochzeiten: Trauung, Glückwünsche und Gruppenbilder. Montags bis freitags.</p></div>
-        <div class="preis-karte"><span class="klein">Hochzeitsreportage, ab 6 Stunden</span><strong>ab 2.250 €</strong><p>Von der Trauung über den Sektempfang bis zu den ersten Highlights eurer Feier.</p></div>
-      </div>
-      <p class="preis-fuss klein">Samstags begleite ich nur Hochzeiten ab 6 Stunden. Dazu kommen nur die Fahrtkosten, die ich euch vorher nenne. Alle gelungenen Bilder bekommt ihr bearbeitet und in voller Auflösung.</p>
-      <p class="preis-haeufig">Damit ihr eine Hausnummer habt: Die meisten Paare buchen bei mir eine <strong>Samstagshochzeit mit 10 Stunden Begleitung — 3.040 €</strong>. Damit bin ich vom Getting Ready bis zum Hochzeitstanz dabei.</p>
-    </div>
-  </section>
-
   <section class="anfrage" id="anfrage">
     <div class="anfrage-innen">
       <div class="anfrage-text">
@@ -309,30 +279,6 @@
     </div>
   </section>
 
-  <section class="vorlage" id="vorlage">
-    <div class="vorlage-innen">
-      <div>
-        <span class="klein">Noch mitten in der Planung?</span>
-        <h2>Mein Zeitplan für euren Hochzeitstag.</h2>
-        <p>So plane ich einen ganzen Tag mit Standesamt und Kirche, von 8 Uhr bis zum Mitternachtssnack. Dazu meine Tipps aus über 500 Hochzeiten und eine Vorlage für euren eigenen Plan. Kostenlos als PDF, direkt zum Herunterladen.</p>
-      </div>
-      <form class="formular" id="vorlage-formular" action="/api/anfrage" method="POST">
-        <input type="hidden" name="subject" value="Zeitplan-Vorlage angefordert">
-        <input type="hidden" name="from_name" value="Braunstein Photography Website">
-        <input type="hidden" name="Quelle" value="Landingpage – Zeitplan-Vorlage">
-        <input type="hidden" name="Kampagne" value="">
-        <input type="checkbox" name="botcheck" class="unsichtbar" tabindex="-1" autocomplete="off">
-        <div class="feldgruppe">
-          <div class="feld"><label for="v-name">Eure Vornamen</label><input id="v-name" name="name" type="text" autocomplete="given-name" required></div>
-          <div class="feld"><label for="v-mail">E-Mail</label><input id="v-mail" name="email" type="email" autocomplete="email" required></div>
-        </div>
-        <div class="feld"><label for="v-datum">Euer Hochzeitsdatum (falls schon bekannt)</label><input id="v-datum" name="Hochzeitsdatum" type="date"></div>
-        <label class="zustimmung"><input type="checkbox" name="Datenschutz" value="zugestimmt" required><span>Ich bin einverstanden, dass Daniel mich zu meiner Hochzeitsfotografie kontaktieren darf. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
-        <p class="meldung" role="alert"></p>
-        <button class="knopf" type="submit">Zeitplan herunterladen</button>
-      </form>
-    </div>
-  </section>
 </main>
 
 <footer class="fuss-klein">
@@ -363,8 +309,7 @@
     });
   }
   senden(document.getElementById('anfrage-formular'),'/danke','Termin prüfen lassen',false);
-  senden(document.getElementById('vorlage-formular'),'/zeitplan-vorlage','Zeitplan herunterladen',true);
-  var kk=document.querySelector('.klebeknopf'),ziele=[document.querySelector('.hero'),document.getElementById('anfrage'),document.getElementById('vorlage')].filter(Boolean);
+  var kk=document.querySelector('.klebeknopf'),ziele=[document.querySelector('.hero'),document.getElementById('anfrage')].filter(Boolean);
   if(kk&&'IntersectionObserver' in window){
     var sicht=new Map();kk.classList.add('versteckt');
     var io=new IntersectionObserver(function(es){es.forEach(function(x){sicht.set(x.target,x.isIntersecting)});var an=false;sicht.forEach(function(v){if(v)an=true});kk.classList.toggle('versteckt',an)},{threshold:.05});
